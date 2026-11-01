@@ -19,7 +19,7 @@ const headerVariants: Variants = {
 const notifications = [
   { app: "Messages", title: "Mama", body: "Undangan wisudanya sudah dibagikan?", time: "9:41" },
   { app: "Mail", title: "Kotak Masuk", body: "2 pesan baru", time: "9:38" },
-  { app: "Calendar", title: "Wisuda", body: "Prosesi dimulai pukul 08.00", time: "9:30" },
+  { app: "Calendar", title: "Wisuda", body: "Prosesi dimulai pukul 11.00 WIB", time: "9:30" },
 ];
 
 export default function NotificationsStack() {

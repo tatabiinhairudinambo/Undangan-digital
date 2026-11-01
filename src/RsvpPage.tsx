@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { openLink } from "../lib/link";
+import { getGuestName } from "../lib/guest";
 import {
   CREAM,
   GOLD,
@@ -26,10 +27,6 @@ interface RsvpData {
 }
 
 // Nama tamu bisa dipersonalisasi lewat URL: undangan.html?to=Budi%20Santoso
-function initialName() {
-  if (typeof window === "undefined") return "";
-  return new URLSearchParams(window.location.search).get("to")?.trim() ?? "";
-}
 
 function Divider() {
   return (
@@ -79,7 +76,7 @@ const PinIcon = () => (
 );
 
 export default function RsvpPage() {
-  const [name, setName] = useState(initialName);
+  const [name, setName] = useState(getGuestName);
   const [attendance, setAttendance] = useState<Attendance>("hadir");
   const [guests, setGuests] = useState(1);
   const [message, setMessage] = useState("");
@@ -117,7 +114,7 @@ export default function RsvpPage() {
         `Halo, saya ${submitted.name}.`,
         submitted.attendance === "hadir"
           ? `InsyaAllah saya akan hadir di wisuda Raka${submitted.guests > 1 ? ` (${submitted.guests} orang)` : ""}.`
-          : "Mohon maaf, saya belum bisa memastikan kehadiran.",
+          : "Mohon maaf, saya tidak dapat hadir di wisuda Raka.",
         submitted.message ? `Ucapan & doa: ${submitted.message}` : "",
       ]
         .filter(Boolean)
@@ -137,7 +134,7 @@ export default function RsvpPage() {
         <section
           className="relative overflow-hidden rounded-[24px] px-6 pb-8 pt-9 text-center"
           style={{
-            background: `linear-gradient(165deg, #123F30 0%, ${GREEN} 55%, ${GREEN_DARK} 100%)`,
+            background: `linear-gradient(165deg, #163D6A 0%, ${GREEN} 55%, ${GREEN_DARK} 100%)`,
             boxShadow: "0 20px 45px -24px rgba(11,43,32,0.65)",
           }}
         >
@@ -234,7 +231,7 @@ export default function RsvpPage() {
                 Hari &amp; tanggal
               </p>
               <p className="text-[15px] font-semibold" style={{ color: INK }}>
-                Sabtu, 21 November 2026
+                Rabu, 11 November 2026
               </p>
             </div>
           </div>
@@ -248,7 +245,7 @@ export default function RsvpPage() {
                 Waktu
               </p>
               <p className="text-[15px] font-semibold" style={{ color: INK }}>
-                08.00 – 12.30 WIB
+                11.00 WIB – selesai
               </p>
             </div>
           </div>

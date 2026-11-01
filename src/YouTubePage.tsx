@@ -82,7 +82,7 @@ export default function YouTubePage() {
           <div className="mt-4 flex gap-3">
             <Stat value="1,2 rb" label="Suka" />
             <Stat value="24 rb" label="Tayangan" />
-            <Stat value="2026" label="21 Nov" />
+            <Stat value="2026" label="11 Nov" />
           </div>
 
           {/* Hashtag chips */}

@@ -1,4 +1,5 @@
 import { MAPS_URL, openMaps } from "../lib/maps";
+import { getGuestName } from "../lib/guest";
 import {
   CREAM,
   GOLD,
@@ -77,7 +78,7 @@ export default function NotesPage() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(11,43,32,0.16) 0%, rgba(11,43,32,0.34) 42%, rgba(11,43,32,0.94) 100%)",
+                "linear-gradient(to bottom, rgba(16,42,76,0.16) 0%, rgba(16,42,76,0.34) 42%, rgba(16,42,76,0.94) 100%)",
             }}
           />
           <div
@@ -115,6 +116,12 @@ export default function NotesPage() {
           </div>
         </div>
 
+        <section className="mt-5 rounded-[18px] px-5 py-6 text-center" style={{ background: GREEN, color: CREAM }}>
+          <p className="text-xs" style={{ color: GOLD_LIGHT }}>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+          <h2 className="mt-2 break-words text-2xl" style={{ fontFamily: SERIF }}>{getGuestName() || "Tamu Undangan"}</h2>
+          <p className="mt-3 text-sm leading-relaxed">Dengan penuh rasa syukur, kami mengundang Anda untuk merayakan kelulusan Raka Dwi Pratama bersama keluarga dan orang-orang terkasih.</p>
+        </section>
+
         {/* Save the date */}
         <div
           className="mt-6 overflow-hidden rounded-[18px] bg-white"
@@ -129,7 +136,7 @@ export default function NotesPage() {
                 Hari
               </p>
               <p className="mt-1 text-[15px]" style={{ fontFamily: SERIF, color: INK }}>
-                Sabtu
+                Rabu
               </p>
             </div>
 
@@ -140,7 +147,7 @@ export default function NotesPage() {
                 className="text-[30px] leading-none"
                 style={{ fontFamily: SERIF, color: GREEN }}
               >
-                21
+                11
               </p>
               <p
                 className="mt-1 text-[9px] font-semibold uppercase"
@@ -160,7 +167,7 @@ export default function NotesPage() {
                 Waktu
               </p>
               <p className="mt-1 text-[15px]" style={{ fontFamily: SERIF, color: INK }}>
-                08.00
+                11.00 WIB
               </p>
             </div>
           </div>
@@ -192,7 +199,7 @@ export default function NotesPage() {
             <button
               type="button"
               onClick={() => openMaps(MAPS_URL)}
-              className="text-[13px] font-semibold underline-offset-4 active:opacity-60"
+              className="min-h-11 text-[13px] font-semibold underline-offset-4 active:opacity-60"
               style={{ color: GREEN, textDecoration: "underline" }}
             >
               Buka lokasi di Google Maps

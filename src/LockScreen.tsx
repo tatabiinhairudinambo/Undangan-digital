@@ -1,56 +1,64 @@
-import { motion, useTransform, type MotionValue } from "framer-motion";
+import { motion, useReducedMotion, useTransform, type MotionValue } from "framer-motion";
+import { GraduationCap, LockKeyhole } from "lucide-react";
+import { getGuestName } from "../lib/guest";
 import { Clock } from "../components/Clock";
-import { MusicWidget } from "../components/MusicWidget";
+import FloralCardFrame from "./FloralCardFrame";
+import { useNotificationSound } from "./useNotificationSound";
 
 interface LockScreenProps {
   y: MotionValue<number>;
   onUnlock: () => void;
+  ready: boolean;
 }
 
-export default function LockScreen({ y, onUnlock }: LockScreenProps) {
+export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
   const radius = useTransform(y, [-150, 0], [48, 0], { clamp: true });
+  const reduceMotion = useReducedMotion();
+  const notificationDelay = reduceMotion ? 0 : 0.5;
+  useNotificationSound(ready, notificationDelay);
 
   return (
     <motion.div
       style={{
         borderBottomLeftRadius: radius,
         borderBottomRightRadius: radius,
-        backgroundImage: "url('/wallpaper-lock.jpeg')",
+        backgroundImage: "linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.2) 35%, rgba(0,0,0,.65)), url('/wallpaper-lock.jpeg')",
+        color: "#fff",
       }}
-      onClick={onUnlock}
-      className="relative w-full h-full font-sans bg-cover bg-center bg-no-repeat overflow-hidden cursor-pointer"
+      className="relative w-full h-full font-sans bg-cover bg-center bg-no-repeat overflow-y-auto"
     >
-      <div className="absolute inset-0 bg-black/20" />
-
-      <div className="relative h-full flex flex-col justify-between items-center pt-16 pb-12">
-        <div className="pointer-events-none">
-          <Clock />
+      <div className="relative flex min-h-full flex-col items-center px-6 pb-10 pt-6 text-center">
+        <LockKeyhole size={22} strokeWidth={2.5} aria-hidden="true" />
+        <Clock showDate />
+        <div className="mt-3 flex items-center gap-2 rounded-full bg-black/30 px-4 py-2 text-xs font-medium backdrop-blur-xl">
+          <GraduationCap size={16} aria-hidden="true" /> Wisuda &amp; Syukuran
         </div>
-
-        <div className="flex flex-col items-center gap-8">
-          <MusicWidget onPlay={() => setTimeout(onUnlock, 660)} />
-
-          <div className="flex items-center gap-[180px]">
-            <button
-              type="button"
-              onClick={(e) => e.stopPropagation()}
-              aria-label="Senter"
-              className="w-12 h-12 rounded-full bg-white/15 backdrop-blur-xl grid place-items-center"
-              style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)" }}
-            >
-              <img src="/icons/lock-flashlight.svg" alt="" className="w-[10px] h-[24px]" />
-            </button>
-            <button
-              type="button"
-              onClick={(e) => e.stopPropagation()}
-              aria-label="Kamera"
-              className="w-12 h-12 rounded-full bg-white/15 backdrop-blur-xl grid place-items-center"
-              style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)" }}
-            >
-              <img src="/icons/lock-camera.svg" alt="" className="w-[20px] h-[16px]" />
-            </button>
+        <motion.button
+          type="button"
+          onClick={onUnlock}
+          aria-label="Buka undangan wisuda"
+          initial={{ opacity: 0, y: -180 }}
+          animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: reduceMotion ? 0 : -180 }}
+          transition={{ delay: ready ? notificationDelay : 0, duration: reduceMotion ? 0 : 1.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative mt-6 w-full cursor-pointer rounded-[26px] border border-white/70 bg-white/55 px-8 py-7 text-left text-[#1c1c1e] shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_12px_32px_rgba(0,0,0,0.15)] backdrop-blur-[6px] backdrop-saturate-125 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          <FloralCardFrame />
+          <div className="relative">
+          <div className="flex items-center justify-center gap-2">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#007aff] text-white"><GraduationCap size={21} aria-hidden="true" /></span>
+            <p className="text-xs font-semibold uppercase tracking-wide text-[#48484a]">Undangan Wisuda</p>
           </div>
-        </div>
+          <h1 className="mt-3 text-center text-xl font-semibold tracking-tight">Raka Dwi Pratama, S.Kom.</h1>
+          <p className="mt-1 text-sm leading-relaxed text-[#48484a]">Sistem Informasi · Universitas Cakrawala Nusantara</p>
+          <div className="my-4 h-px bg-black/10" />
+          <p className="text-center text-xs text-[#48484a]">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+          <p className="mt-1 break-words text-center text-lg font-semibold">{getGuestName() || "Tamu Undangan"}</p>
+          <p className="mt-2 text-sm leading-relaxed">Kami mengundang Anda untuk merayakan hari kelulusan bersama.</p>
+          <p className="mt-3 text-center text-xs font-medium text-[#48484a]">11 November 2026 · 11.00 WIB<br />Gedung Serbaguna Melati</p>
+          </div>
+        </motion.button>
+        <div className="min-h-4 flex-1" />
+        <p className="mt-3 text-xs text-white/90">Ketuk kartu notifikasi untuk melihat undangan Anda</p>
       </div>
 
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-white/20" />

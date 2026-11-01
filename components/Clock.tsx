@@ -3,31 +3,35 @@ import { useEffect, useState } from "react";
 interface ClockProps {
   time?: string;
   fontSize?: number | string;
+  showDate?: boolean;
 }
 
-function formatNow() {
-  const d = new Date();
-  const hh = d.getHours().toString().padStart(2, "0");
-  const mm = d.getMinutes().toString().padStart(2, "0");
-  return `${hh}:${mm}`;
-}
+const timeFormatter = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+});
+const dateFormatter = new Intl.DateTimeFormat("id-ID", {
+  timeZone: "Asia/Jakarta", weekday: "long", day: "numeric", month: "long", year: "numeric",
+});
 
 export function Clock({
   time,
   fontSize = "clamp(80px, 22cqw, 312px)",
+  showDate = false,
 }: ClockProps) {
-  const [now, setNow] = useState(time ?? formatNow());
+  const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
-    if (time) return;
-    const id = setInterval(() => setNow(formatNow()), 1000);
+    if (time && !showDate) return;
+    const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
-  }, [time]);
+  }, [time, showDate]);
 
-  const value = time ?? now;
+  const value = time ?? timeFormatter.format(now);
 
   return (
-    <div
+    <div className="text-center">
+      {showDate && <p className="mt-4 text-lg font-medium text-white">{dateFormatter.format(now)}</p>}
+      <div
       className="inline-block"
       style={{
         fontFamily: "Inter, -apple-system, system-ui, sans-serif",
@@ -41,6 +45,7 @@ export function Clock({
       }}
     >
       {value}
+      </div>
     </div>
   );
 }

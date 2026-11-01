@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import AppFolder, { type FolderChild } from "./AppFolder";
 import { isAppEntry } from "./app-folder/types";
 import PhotosPage from "./PhotosPage";
@@ -19,6 +19,7 @@ import { RsvpWidget } from "../components/RsvpWidget";
 import Dock, { DOCK_APPS } from "../components/Dock";
 import { AppNavProvider, useAppOpener, type AppDef } from "./app-nav";
 import { MAPS_URL } from "../lib/maps";
+import { getGuestName } from "../lib/guest";
 import { ScrollReveal } from "./scroll-reveal/ScrollReveal";
 import { ScrollRevealProvider } from "./scroll-reveal/ScrollRevealProvider";
 
@@ -90,10 +91,10 @@ const BG_OFFSET_Y = 72;
 // Aplikasi dekoratif (Kalkulator, Pengaturan) tetap bisa dibuka lewat tap,
 // tetapi tidak ikut tur agar alurnya tetap fokus.
 const SCROLL_ORDER = [
-  "photos",
   "notes",
   "calendar",
   "map",
+  "photos",
   "youtube",
   "Messages",
   "wallet",
@@ -164,13 +165,43 @@ function RsvpWidgetButton() {
   );
 }
 
-export default function IosAppFolder() {
+function GuestWelcome({ openInvitation }: { openInvitation: boolean }) {
+  const openApp = useAppOpener();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const opened = useRef(false);
+
+  useEffect(() => {
+    if (!openInvitation) {
+      opened.current = false;
+      return;
+    }
+    if (opened.current || !buttonRef.current) return;
+    const app = FOLDER_APPS.find((candidate) => candidate.key === "notes");
+    if (app) {
+      opened.current = true;
+      openApp({ ...app, hideIcon: true }, buttonRef.current);
+    }
+  }, [openInvitation, openApp]);
+  return (
+    <section className="col-span-4 rounded-3xl border border-white/40 bg-white/85 p-5 text-[#1c1c1e] shadow-lg backdrop-blur-2xl">
+      <p className="text-xs font-semibold uppercase tracking-[.12em] text-[#005bbf]">Wisuda &amp; Syukuran</p>
+      <h2 className="mt-2 break-words text-lg font-semibold">Selamat datang, {getGuestName() || "Tamu Undangan"}</h2>
+      <p className="mt-2 text-sm leading-relaxed text-[#48484a]">Detail acara, lokasi, dan konfirmasi kehadiran dalam satu undangan.</p>
+      <button ref={buttonRef} type="button" className="mt-4 min-h-11 w-full cursor-pointer rounded-xl bg-[#0066d6] px-4 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#005bbf]" onClick={(event) => {
+        const app = FOLDER_APPS.find((candidate) => candidate.key === "notes");
+        if (app) openApp({ ...app, hideIcon: true }, event.currentTarget);
+      }}>Lihat Undangan</button>
+    </section>
+  );
+}
+
+export default function IosAppFolder({ openInvitation = false }: { openInvitation?: boolean }) {
   const extra = Math.abs(BG_OFFSET_Y) * 2;
   return (
     <ScrollRevealProvider apps={SCROLL_APPS} stopAtKey="rsvp">
       <AppNavProvider>
         <ScrollReveal />
-        <div className="fixed inset-0 font-sans overflow-hidden" data-scroll-reveal-root>
+        <div className="fixed inset-0 overflow-y-auto font-sans" data-scroll-reveal-root>
           <div
             className="absolute left-0 right-0 bg-cover bg-no-repeat"
             style={{
@@ -182,13 +213,14 @@ export default function IosAppFolder() {
             }}
           />
           <div
-            className="relative mx-auto grid pt-12"
+            className="relative mx-auto grid pt-12 pb-32"
             style={{
               gridTemplateColumns: "repeat(4, 71px)",
               gap: "16px",
               width: "fit-content",
             }}
           >
+            <GuestWelcome openInvitation={openInvitation} />
             <div className="col-span-2 row-span-2">
               <CalendarWidgetButton />
             </div>
@@ -196,7 +228,7 @@ export default function IosAppFolder() {
               <LocationWidget href={MAPS_URL} />
             </div>
             <div className="col-span-2 row-span-2">
-              <AppFolder title="Aplikasi" items={ITEMS} />
+              <AppFolder title="Undangan Wisuda" items={ITEMS} />
             </div>
             <div className="col-span-2 row-span-2">
               <RsvpWidgetButton />

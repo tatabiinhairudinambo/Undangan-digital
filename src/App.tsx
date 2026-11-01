@@ -28,24 +28,18 @@ export default function App() {
 
   return (
     <MusicProvider>
-      <IosAppFolder />
+      <div inert={isLocked || booting}>
+        <IosAppFolder openInvitation={!isLocked} />
+      </div>
       {/* <NotificationsStack /> */}
 
-      {/* Always-mounted lock-screen layer. Drag-up to unlock when locked. */}
+      {/* Sampul undangan; tombol Buka Undangan membuka layar utama. */}
       <motion.div
-        className="fixed inset-0 z-[20000] touch-none"
+        className="fixed inset-0 z-[20000]"
+        inert={!isLocked}
         style={{ y, pointerEvents: isLocked ? "auto" : "none" }}
-        drag={isLocked ? "y" : false}
-        dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={{ top: 0.6, bottom: 0 }}
-        dragMomentum={false}
-        onDragEnd={(_, info) => {
-          if (info.offset.y < -120 || info.velocity.y < -500) {
-            setIsLocked(false);
-          }
-        }}
       >
-        <LockScreen y={y} onUnlock={() => setIsLocked(false)} />
+        <LockScreen y={y} ready={!booting} onUnlock={() => setIsLocked(false)} />
       </motion.div>
 
       {/* Top-edge handle: pan to pull the lock screen down in real-time. */}
