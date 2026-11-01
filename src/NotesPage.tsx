@@ -69,28 +69,35 @@ export default function NotesPage() {
       >
         {/* Foto & kop undangan */}
         <div
-          className="relative overflow-hidden rounded-[22px]"
+          className="relative h-[436px] overflow-hidden rounded-[22px]"
           style={{ boxShadow: "0 18px 36px -28px rgba(11,43,32,0.65)" }}
         >
           <img
             src="/graduation-photo.jpg"
             alt="Foto ilustrasi wisuda: tangan mengangkat topi toga hitam dengan rumbai emas"
-            className="h-[320px] w-full object-cover"
-            style={{ objectPosition: "center 42%" }}
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: "center 38%" }}
             draggable={false}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(16,42,76,0.16) 0%, rgba(16,42,76,0.34) 42%, rgba(16,42,76,0.94) 100%)",
+                "linear-gradient(to bottom, rgba(16,42,76,0.22) 0%, rgba(16,42,76,0.30) 32%, rgba(16,42,76,0.62) 58%, rgba(16,42,76,0.94) 76%, #102A4C 100%)",
             }}
+          />
+          <img
+            src="/graduate-woman.webp"
+            alt="Ilustrasi wisudawati mengenakan toga dan memegang ijazah"
+            className="pointer-events-none absolute bottom-[84px] right-[-20px] h-[338px] w-auto object-contain"
+            style={{ filter: "drop-shadow(0 16px 26px rgba(5,16,32,0.5))" }}
+            draggable={false}
           />
           <div
             className="pointer-events-none absolute inset-[9px] rounded-[17px]"
             style={{ border: "1px solid rgba(231,211,163,0.30)" }}
           />
-          <div className="absolute inset-x-0 bottom-0 px-5 pb-5 text-center">
+          <div className="absolute inset-x-0 bottom-0 px-5 pb-5 pt-7 text-center">
             <p
               className="text-[10px] font-medium uppercase"
               style={{ color: GOLD_LIGHT, letterSpacing: "0.34em" }}
@@ -101,7 +108,7 @@ export default function NotesPage() {
               <Divider />
             </div>
             <h1
-              className="mt-3 text-[28px] leading-[1.15]"
+              className="mt-3 text-[27px] leading-[1.15]"
               style={{ fontFamily: SERIF, color: "#FBF6EA" }}
             >
               Raka Dwi Pratama

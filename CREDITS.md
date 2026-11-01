@@ -34,6 +34,8 @@ Semua foto contoh berasal dari [Unsplash](https://unsplash.com) dengan [Unsplash
 
 `public/graduation-photo.jpg` merupakan foto stok ilustrasi wisuda dari [Unsplash (sumber gambar)](https://images.unsplash.com/photo-1627556704302-624286467c65?w=1400&q=80&fm=jpg), digunakan dengan [Unsplash License](https://unsplash.com/license). Nama fotografer belum terverifikasi. Foto menampilkan tangan mengangkat topi toga, bukan potret pribadi Raka.
 
+`public/graduate-woman.webp` adalah potret wisudawati dari [Pexels](https://www.pexels.com/photo/young-woman-celebrating-graduation-outdoors-39180024/) oleh [D-C Trung](https://www.pexels.com/@d-c-trung-1464611371/), digunakan dengan [Pexels License](https://www.pexels.com/license/). Latar belakang foto dihapus (cutout) agar bisa ditempel di kartu undangan. Foto ini ilustrasi, bukan foto pribadi pemilik undangan.
+
 ## Musik
 
 Setiap trek dikonversi ke MP3 128 kbps dan dinormalisasi loudness-nya. Selain itu tidak ada yang diubah.
