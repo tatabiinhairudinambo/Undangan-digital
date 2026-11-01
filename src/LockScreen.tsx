@@ -30,9 +30,6 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
       <div className="relative flex min-h-full flex-col items-center px-6 pb-10 pt-6 text-center">
         <LockKeyhole size={22} strokeWidth={2.5} aria-hidden="true" />
         <Clock showDate />
-        <div className="mt-3 flex items-center gap-2 rounded-full bg-black/30 px-4 py-2 text-xs font-medium backdrop-blur-xl">
-          <GraduationCap size={16} aria-hidden="true" /> Wisuda &amp; Syukuran
-        </div>
         <motion.button
           type="button"
           onClick={onUnlock}
@@ -58,6 +55,16 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
           </div>
         </motion.button>
         <div className="min-h-4 flex-1" />
+        <motion.button
+          type="button"
+          onClick={onUnlock}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: ready ? 1 : 0 }}
+          transition={{ delay: ready && !reduceMotion ? notificationDelay + 0.6 : 0, duration: reduceMotion ? 0 : 0.6 }}
+          className="mt-3 flex min-h-11 cursor-pointer items-center justify-center gap-1 rounded-full border border-white/50 bg-white/65 px-4 py-2 text-xs font-semibold text-black shadow-sm backdrop-blur-xl transition-colors hover:bg-white/90 active:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          Lihat Selengkapnya
+        </motion.button>
         <p className="mt-3 text-xs text-white/90">Ketuk kartu notifikasi untuk melihat undangan Anda</p>
       </div>
 

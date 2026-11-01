@@ -1,5 +1,6 @@
 import { MAPS_URL, openMaps } from "../lib/maps";
 import { getGuestName } from "../lib/guest";
+import FloralCardFrame from "./FloralCardFrame";
 import {
   CREAM,
   GOLD,
@@ -54,12 +55,16 @@ const CapIcon = () => (
 
 export default function NotesPage() {
   return (
+    <div className="relative h-full w-full overflow-hidden" style={{ background: CREAM }}>
+      <div className="pointer-events-none absolute inset-0 z-10">
+        <FloralCardFrame graduation />
+      </div>
     <div
       className="h-full w-full overflow-y-auto"
       style={{ background: CREAM, fontFamily: SF_STACK }}
     >
       <div
-        className="mx-auto w-full max-w-[420px] px-4 pb-10"
+        className="mx-auto w-full max-w-[420px] px-7 pb-14"
         style={{ paddingTop: "calc(var(--safe-top) + 28px)" }}
       >
         {/* Foto & kop undangan */}
@@ -301,6 +306,7 @@ export default function NotesPage() {
           </span>
         </div>
       </div>
+    </div>
     </div>
   );
 }

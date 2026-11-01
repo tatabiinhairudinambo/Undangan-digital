@@ -1,8 +1,9 @@
 /** Ornamen dekoratif kartu; tidak menutupi teks atau menangkap sentuhan. */
-export default function FloralCardFrame() {
+export default function FloralCardFrame({ graduation = false }: { graduation?: boolean }) {
   return (
     <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-[26px]" aria-hidden="true">
-      <span className="absolute inset-[7px] rounded-[20px] border border-white/50" />
+      <span className={`absolute inset-[7px] rounded-[20px] border ${graduation ? "border-[#AD3447]/50" : "border-white/50"}`} />
+      {graduation && <span className="absolute inset-[11px] rounded-[17px] border border-[#C6A36A]/40" />}
       {[
         "-left-2 -top-2",
         "-right-2 -top-2 rotate-90",
@@ -15,14 +16,14 @@ export default function FloralCardFrame() {
           <path d="M16 100C26 97 32 88 30 80C18 83 15 92 16 100ZM37 49C24 44 21 32 26 26C38 28 42 38 37 49" fill="#92A78A" fillOpacity=".65" />
           <g transform="translate(30 29)">
             {[0, 72, 144, 216, 288].map((angle) => (
-              <ellipse key={angle} cx="0" cy="-9" rx="6.5" ry="10" transform={`rotate(${angle})`} fill="#FFF9ED" fillOpacity=".92" stroke="#D7BE92" strokeWidth=".6" />
+              <ellipse key={angle} cx="0" cy="-9" rx="6.5" ry="10" transform={`rotate(${angle})`} fill={graduation ? "#AF233D" : "#FFF9ED"} fillOpacity=".92" stroke={graduation ? "#E38B94" : "#D7BE92"} strokeWidth=".6" />
             ))}
             <circle r="4.5" fill="#C6A36A" />
             <circle r="2" fill="#F7E4B9" />
           </g>
           <g transform="translate(17 60)">
             {[0, 72, 144, 216, 288].map((angle) => (
-              <ellipse key={angle} cx="0" cy="-5.5" rx="4" ry="6" transform={`rotate(${angle})`} fill="#FFFDF6" stroke="#DDCDAE" strokeWidth=".5" />
+              <ellipse key={angle} cx="0" cy="-5.5" rx="4" ry="6" transform={`rotate(${angle})`} fill={graduation ? "#D84B5B" : "#FFFDF6"} stroke={graduation ? "#F2B1AE" : "#DDCDAE"} strokeWidth=".5" />
             ))}
             <circle r="2.8" fill="#C6A36A" />
           </g>
@@ -30,6 +31,15 @@ export default function FloralCardFrame() {
           <circle cx="14" cy="91" r="2" fill="#F5E3BE" />
         </svg>
       ))}
+      {graduation && (
+        <span className="absolute left-1/2 top-1 -translate-x-1/2 rounded-full bg-[#F2F2F7] px-3 py-1">
+          <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+            <path d="M2 8L14 2L26 8L14 14L2 8Z" fill="#8F2034" stroke="#C6A36A" />
+            <path d="M7 11V16C11 20 17 20 21 16V11" stroke="#8F2034" strokeWidth="2" />
+            <path d="M26 8V17M24.5 19L26 16L27.5 19" stroke="#C6A36A" strokeWidth="1.5" />
+          </svg>
+        </span>
+      )}
     </span>
   );
 }
