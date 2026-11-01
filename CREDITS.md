@@ -64,6 +64,8 @@ Baris atribusi, siap ditempel:
 
 ## Kode
 
+[`src/components/Lanyard/`](src/components/Lanyard/) diadaptasi dari komponen [Lanyard by React Bits](https://reactbits.dev/components/lanyard), sesuai lisensi MIT + Commons Clause yang sama dengan komponen React Bits lain di repo ini. Komponen 3D menggunakan [Three.js](https://threejs.org/) (MIT).
+
 [`components/GlassSurface.tsx`](components/GlassSurface.tsx) dan [`components/Masonry.tsx`](components/Masonry.tsx) diadaptasi dari [React Bits](https://reactbits.dev) di bawah lisensi MIT + Commons Clause:
 
 > MIT + Commons Clause License Condition v1.0

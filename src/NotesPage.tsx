@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { MAPS_URL, openMaps } from "../lib/maps";
 import { getGuestName } from "../lib/guest";
 import FloralCardFrame from "./FloralCardFrame";
@@ -22,6 +23,8 @@ function Divider() {
     </div>
   );
 }
+
+const Lanyard = lazy(() => import("./components/Lanyard/Lanyard"));
 
 const PinIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -67,66 +70,53 @@ export default function NotesPage() {
         className="mx-auto w-full max-w-[420px] px-7 pb-14"
         style={{ paddingTop: "calc(var(--safe-top) + 28px)" }}
       >
-        {/* Foto & kop undangan */}
-        <div
-          className="relative h-[436px] overflow-hidden rounded-[22px]"
-          style={{ boxShadow: "0 18px 36px -28px rgba(11,43,32,0.65)" }}
-        >
-          <img
-            src="/graduation-photo.jpg"
-            alt="Foto ilustrasi wisuda: tangan mengangkat topi toga hitam dengan rumbai emas"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ objectPosition: "center 38%" }}
-            draggable={false}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, rgba(16,42,76,0.22) 0%, rgba(16,42,76,0.30) 32%, rgba(16,42,76,0.62) 58%, rgba(16,42,76,0.94) 76%, #102A4C 100%)",
-            }}
-          />
-          <img
-            src="/graduate-woman.webp"
-            alt="Ilustrasi wisudawati mengenakan toga dan memegang ijazah"
-            className="pointer-events-none absolute bottom-[84px] right-[-20px] h-[338px] w-auto object-contain"
-            style={{ filter: "drop-shadow(0 16px 26px rgba(5,16,32,0.5))" }}
-            draggable={false}
-          />
-          <div
-            className="pointer-events-none absolute inset-[9px] rounded-[17px]"
-            style={{ border: "1px solid rgba(231,211,163,0.30)" }}
-          />
-          <div className="absolute inset-x-0 bottom-0 px-5 pb-5 pt-7 text-center">
-            <p
-              className="text-[10px] font-medium uppercase"
-              style={{ color: GOLD_LIGHT, letterSpacing: "0.34em" }}
-            >
-              Undangan Wisuda
-            </p>
-            <div className="mt-2.5">
-              <Divider />
-            </div>
-            <h1
-              className="mt-3 text-[27px] leading-[1.15]"
-              style={{ fontFamily: SERIF, color: "#FBF6EA" }}
-            >
-              Raka Dwi Pratama
-            </h1>
-            <p
-              className="mt-1.5 text-[10px] uppercase"
-              style={{ color: "rgba(231,211,163,0.9)", letterSpacing: "0.22em" }}
-            >
-              S.Kom · Sistem Informasi
-            </p>
-            <p
-              className="mt-0.5 text-[10px] uppercase"
-              style={{ color: "rgba(255,255,255,0.55)", letterSpacing: "0.14em" }}
-            >
-              Universitas Cakrawala Nusantara
-            </p>
+        {/* Kartu wisudawan */}
+        <div className="text-center">
+          <p
+            className="text-[10px] font-medium uppercase"
+            style={{ color: GOLD, letterSpacing: "0.34em" }}
+          >
+            Undangan Wisuda
+          </p>
+          <div className="mt-2.5">
+            <Divider />
           </div>
         </div>
+
+        <div className="-mx-3 mt-1 h-[500px]">
+          <Suspense
+            fallback={
+              <div className="flex h-full items-center justify-center">
+                <img
+                  src="/lanyard-front.jpg"
+                  alt="Kartu wisudawan Raka Dwi Pratama"
+                  className="h-[335px] rounded-[12px]"
+                  style={{ boxShadow: "0 26px 40px -30px rgba(11,26,48,0.85)" }}
+                  draggable={false}
+                />
+              </div>
+            }
+          >
+            <Lanyard
+              frontImage="/lanyard-front.jpg"
+              backImage="/lanyard-back.jpg"
+              strapImage="/lanyard-strap.jpg"
+              strapColor="#102A4C"
+              metal="gold"
+              finish="glossy"
+              cornerRadius={0.17}
+              size={0.62}
+              strapLength={0.5}
+              damping={0.6}
+              elasticity={0.55}
+              breeze={0}
+            />
+          </Suspense>
+        </div>
+
+        <p className="mt-1 text-center text-[11px]" style={{ color: MUTED }}>
+          Geser atau ketuk kartu untuk melihat detail
+        </p>
 
         <section className="mt-5 rounded-[18px] px-5 py-6 text-center" style={{ background: GREEN, color: CREAM }}>
           <p className="text-xs" style={{ color: GOLD_LIGHT }}>Kepada Yth. Bapak/Ibu/Saudara/i</p>
