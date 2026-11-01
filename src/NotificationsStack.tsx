@@ -17,9 +17,9 @@ const headerVariants: Variants = {
 };
 
 const notifications = [
-  { app: "Messages", title: "Như", body: "Gặp em lúc 7 giờ nhé?", time: "9:41" },
-  { app: "Mail", title: "Hộp thư", body: "2 tin nhắn mới", time: "9:38" },
-  { app: "Calendar", title: "Cuộc họp", body: "Họp nhanh sau 10 phút", time: "9:30" },
+  { app: "Messages", title: "Mama", body: "Undangan wisudanya sudah dibagikan?", time: "9:41" },
+  { app: "Mail", title: "Kotak Masuk", body: "2 pesan baru", time: "9:38" },
+  { app: "Calendar", title: "Wisuda", body: "Prosesi dimulai pukul 08.00", time: "9:30" },
 ];
 
 export default function NotificationsStack() {
@@ -89,21 +89,21 @@ function Header({
       variants={headerVariants}
       transition={{ type: "spring", stiffness: 600, damping: 50, delay: isOpen ? 0.2 : 0 }}
     >
-      <motion.h2 style={titleStyle}>Thông báo</motion.h2>
+      <motion.h2 style={titleStyle}>Notifikasi</motion.h2>
       <div style={btnRowStyle}>
         <motion.button
           style={collapseBtnStyle}
           whileHover={{ backgroundColor: "rgba(255,255,255,0.25)" }}
           onClick={onClear}
         >
-          Xóa tất cả
+          Hapus Semua
         </motion.button>
         <motion.button
           style={collapseBtnStyle}
           whileHover={{ backgroundColor: "rgba(255,255,255,0.25)" }}
           onClick={onCollapse}
         >
-          Thu gọn
+          Ringkas
         </motion.button>
       </div>
     </motion.div>

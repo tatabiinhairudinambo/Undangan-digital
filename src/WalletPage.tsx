@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 
 const SF_STACK =
   '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, sans-serif';
-// Rounded face for the playful, sến copy on the pass.
+// Rounded face for the playful copy on the pass.
 const SF_ROUNDED =
   'ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif';
 
 // Cheesy one-liners that crossfade under the QR. Pure decoration.
 const SWEET_LINES = [
-  "Quẹt nhẹ thôi, tình mình đậm sâu",
-  "Tiền mừng nhỏ nhỏ, thương nhau to to",
-  "Một chút yêu thương gửi cô dâu chú rể",
-  "Mừng cưới đôi trẻ, trăm năm hạnh phúc",
-  "Cảm ơn vì đã thương tụi mình",
+  "Tanda kasih untuk wisudawan",
+  "Terima kasih atas doa dan dukungannya",
+  "Kehadiran Anda sudah menjadi hadiah",
+  "Sedikit tanda sayang dari kami",
+  "Semoga kebaikan Anda dibalas berlipat",
 ];
 
 // A few hearts drift up across the dark backdrop. Positions/speeds are fixed so
@@ -99,17 +99,17 @@ export default function WalletPage() {
             {/* Header: pass label + couple. */}
             <div className="relative px-6 pt-6">
               <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/85">
-                Ví · Mừng cưới
+                Dompet · Hadiah Wisuda
               </span>
 
               <h1
                 className="mt-3 text-[34px] font-bold leading-none text-white"
                 style={{ fontFamily: SF_ROUNDED, textShadow: "0 1px 8px rgba(0,0,0,0.12)" }}
               >
-                Trí <span className="opacity-90">&amp;</span> Như
+                Raka Pratama
               </h1>
               <p className="mt-1.5 text-[13px] font-semibold text-white/90">
-                14.06.2026 · Hộp lì xì hạnh phúc
+                21.11.2026 · Tanda kasih
               </p>
             </div>
 
@@ -136,16 +136,16 @@ export default function WalletPage() {
               >
                 <img
                   src="/gift-qr.png"
-                  alt="Mã QR mừng cưới"
+                  alt="QR hadiah wisuda"
                   className="block h-[210px] w-[210px] rounded-[12px] object-contain"
                 />
               </div>
 
               <p className="mt-4 text-center text-[14px] font-bold text-white">
-                Quét mã để mừng cưới đôi trẻ
+                Pindai kode untuk memberi hadiah
               </p>
 
-              {/* Crossfading sến caption. */}
+              {/* Crossfading sweet caption. */}
               <div className="mt-1 flex h-[20px] items-center justify-center">
                 <span
                   key={line}
@@ -160,7 +160,7 @@ export default function WalletPage() {
 
           {/* Little caption under the card. */}
           <p className="mt-5 text-center text-[12px] font-medium text-white/55">
-            Sự hiện diện của bạn đã là món quà quý nhất
+            Kehadiran Anda sudah menjadi hadiah terindah
           </p>
         </div>
       </div>

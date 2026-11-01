@@ -1,23 +1,23 @@
 /**
- * Google Apps Script — tạo Google Form RSVP cho Tiệc Cưới Trí & Như.
+ * Google Apps Script — membuat Google Form RSVP untuk Resepsi Pernikahan Raka & Sinta.
  *
- * Cách dùng:
- *   1. https://script.google.com → New project → paste file này vào Code.gs
- *   2. Chạy createWeddingForm() — accept quyền Forms/Drive
- *   3. Xem Execution log để lấy link form
- *   4. (Tùy chọn) Sửa danh sách GUESTS rồi chạy generatePrefillUrls()
+ * Cara pakai:
+ *   1. https://script.google.com → New project → tempel file ini ke Code.gs
+ *   2. Jalankan createWeddingForm() — setujui izin Forms/Drive
+ *   3. Lihat Execution log untuk mendapatkan link formulir
+ *   4. (Opsional) Ubah daftar GUESTS lalu jalankan generatePrefillUrls()
  */
 
-const VENUE = 'AZ Luxury Garden, 123 Tôn Đức Thắng, La Gi, Lâm Đồng';
-const MAPS_URL = 'https://www.google.com/maps?cid=9565425146171843812';
-const DATE_LABEL = 'Chủ nhật, 14/06/2026';
-const CEREMONY_TIME = '17h30';
-const BUS_DEPART = '14h30';
+const VENUE = 'Gedung Serbaguna Melati, Jl. Jend. Sudirman No. 123, Jakarta Selatan';
+const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Gedung+Serbaguna+Melati+Jakarta+Selatan';
+const DATE_LABEL = 'Minggu, 14/06/2026';
+const CEREMONY_TIME = '17.30';
+const BUS_DEPART = '14.30';
 Calendar;
-const CONTACT = 'Trí - 0900 000 000';
+const CONTACT = 'Raka - 0812 0000 0000';
 
 function createWeddingForm() {
-  const form = FormApp.create('Tiệc Cưới — Trí & Như')
+  const form = FormApp.create('Resepsi Pernikahan — Raka & Sinta')
     .setDescription(
       '📅 ' +
         DATE_LABEL +
@@ -30,102 +30,102 @@ function createWeddingForm() {
         '🗺️ ' +
         MAPS_URL +
         '\n' +
-        '☎️ Liên hệ: ' +
+        '☎️ Kontak: ' +
         CONTACT +
         '\n\n' +
-        'Vợ chồng em trân trọng kính mời anh/chị tới chung vui. Nhờ anh/chị dành chút thời gian xác nhận thông tin giúp em ạ ❤️',
+        'Kami dengan hormat mengundang Bapak/Ibu/Saudara untuk hadir dan berbagi kebahagiaan. Mohon luangkan sedikit waktu untuk mengonfirmasi kehadiran ❤️',
     )
     .setAllowResponseEdits(true)
     .setCollectEmail(false)
     .setConfirmationMessage(
-      'Em đã ghi nhận thông tin, cảm ơn anh/chị ạ. Nếu cần thay đổi, anh/chị mở lại link form là chỉnh sửa được. Mọi vấn đề xin liên hệ ' +
+      'Data Anda sudah kami terima, terima kasih banyak. Jika perlu mengubah, buka kembali link formulirnya untuk mengedit. Untuk pertanyaan lain, silakan hubungi ' +
         CONTACT +
         '.',
     );
 
-  // ----- Section 1: Thông tin khách -----
-  const nameItem = form.addTextItem().setTitle('Họ và tên').setRequired(true);
+  // ----- Bagian 1: Data tamu -----
+  const nameItem = form.addTextItem().setTitle('Nama lengkap').setRequired(true);
 
-  // ----- Section 2: Xác nhận tham dự -----
-  form.addPageBreakItem().setTitle('Xác nhận tham dự');
+  // ----- Bagian 2: Konfirmasi kehadiran -----
+  form.addPageBreakItem().setTitle('Konfirmasi kehadiran');
   const attendItem = form
     .addMultipleChoiceItem()
-    .setTitle('Anh/chị có thể tham dự không ạ?')
+    .setTitle('Apakah Bapak/Ibu/Saudara dapat hadir?')
     .setRequired(true);
 
-  // ----- Section 3: Dự tiệc -----
-  const sectionFeast = form.addPageBreakItem().setTitle('Thông tin dự tiệc');
+  // ----- Bagian 3: Informasi kehadiran -----
+  const sectionFeast = form.addPageBreakItem().setTitle('Informasi kehadiran');
   form
     .addTextItem()
-    .setTitle('Số người tham dự tiệc (gồm cả trẻ em)')
+    .setTitle('Jumlah tamu yang hadir (termasuk anak-anak)')
     .setRequired(true)
     .setValidation(intAtLeast(1));
   const busOptItem = form
     .addMultipleChoiceItem()
-    .setTitle('Anh/chị có đăng ký đi xe đưa đón không ạ?')
+    .setTitle('Apakah Anda ingin ikut shuttle bus?')
     .setHelpText(
-      'Xe khởi hành lúc ' +
+      'Bus berangkat pukul ' +
         BUS_DEPART +
-        ', có 2 điểm đón tại Quận 1 và Tân Phú.',
+        ', tersedia 2 titik penjemputan.',
     )
     .setRequired(true);
 
-  // ----- Section 4: Xe đưa đón -----
-  const sectionBus = form.addPageBreakItem().setTitle('Xe đưa đón');
+  // ----- Bagian 4: Shuttle bus -----
+  const sectionBus = form.addPageBreakItem().setTitle('Shuttle bus');
   form
     .addMultipleChoiceItem()
-    .setTitle('Điểm đón (xe đón ở đâu sẽ trả về đó)')
-    .setChoiceValues(['Quận 1', 'Tân Phú'])
+    .setTitle('Titik penjemputan (bus akan mengantar kembali ke titik yang sama)')
+    .setChoiceValues(['Titik 1', 'Titik 2'])
     .setRequired(true);
   form
     .addMultipleChoiceItem()
-    .setTitle('Chiều đi (' + BUS_DEPART + ' xuất phát)')
-    .setChoiceValues(['Có đi chiều đi', 'Không đi chiều đi'])
+    .setTitle('Berangkat (pukul ' + BUS_DEPART + ')')
+    .setChoiceValues(['Ikut berangkat', 'Tidak ikut berangkat'])
     .setRequired(true);
   form
     .addTextItem()
-    .setTitle('Số người đi chiều đi')
-    .setHelpText('Nếu không đi, để trống')
+    .setTitle('Jumlah orang yang berangkat')
+    .setHelpText('Kosongkan jika tidak ikut')
     .setValidation(intAtLeast(0));
   form
     .addMultipleChoiceItem()
-    .setTitle('Chiều về (sau tiệc)')
-    .setChoiceValues(['Có đi chiều về', 'Không đi chiều về'])
+    .setTitle('Pulang (setelah acara)')
+    .setChoiceValues(['Ikut pulang', 'Tidak ikut pulang'])
     .setRequired(true);
   form
     .addTextItem()
-    .setTitle('Số người đi chiều về')
-    .setHelpText('Nếu không đi, để trống')
+    .setTitle('Jumlah orang yang pulang')
+    .setHelpText('Kosongkan jika tidak ikut')
     .setValidation(intAtLeast(0));
   form
     .addParagraphTextItem()
-    .setTitle('Danh sách hành khách đi xe (họ tên + năm sinh)')
+    .setTitle('Daftar penumpang bus (nama + tahun lahir)')
     .setHelpText(
-      'Dạ do phía nhà xe cần danh sách hành khách để làm thủ tục, kính mong anh/chị thông cảm điền giúp em ạ.\n' +
-        'Mỗi người 1 dòng, format: Họ tên - Năm sinh\n' +
-        'VD: Nguyễn Văn A - 1990',
+      'Pihak bus memerlukan daftar penumpang untuk keperluan administrasi, mohon dibantu mengisinya.\n' +
+        'Satu orang per baris, format: Nama - Tahun lahir\n' +
+        'Contoh: Budi Santoso - 1990',
     )
     .setRequired(true);
 
-  // ----- Section 5: Ghi chú khác (chỉ cho khách có tham dự) -----
-  const sectionOtherNotes = form.addPageBreakItem().setTitle('Ghi chú khác');
+  // ----- Bagian 5: Catatan lain (hanya untuk tamu yang hadir) -----
+  const sectionOtherNotes = form.addPageBreakItem().setTitle('Catatan lain');
   form
     .addParagraphTextItem()
-    .setTitle('Ghi chú khác')
-    .setHelpText('Bất cứ điều gì anh/chị muốn lưu ý');
+    .setTitle('Catatan lain')
+    .setHelpText('Apa pun yang ingin Anda sampaikan');
 
-  // ----- Section 6: Lời chúc -----
-  const sectionWishes = form.addPageBreakItem().setTitle('Lời chúc');
-  form.addParagraphTextItem().setTitle('Lời chúc gửi cô dâu & chú rể ❤️');
+  // ----- Bagian 6: Ucapan -----
+  const sectionWishes = form.addPageBreakItem().setTitle('Ucapan');
+  form.addParagraphTextItem().setTitle('Ucapan untuk kedua mempelai ❤️');
 
-  // ----- Branching: set sau khi mọi section đã tồn tại -----
+  // ----- Percabangan: diatur setelah semua bagian dibuat -----
   attendItem.setChoices([
-    attendItem.createChoice('Có, sẽ tham dự ạ', sectionFeast),
-    attendItem.createChoice('Rất tiếc, không tham dự được ạ', sectionWishes),
+    attendItem.createChoice('Ya, saya akan hadir', sectionFeast),
+    attendItem.createChoice('Maaf, tidak bisa hadir', sectionWishes),
   ]);
   busOptItem.setChoices([
-    busOptItem.createChoice('Có, đăng ký xe ạ', sectionBus),
-    busOptItem.createChoice('Không, tự di chuyển', sectionOtherNotes),
+    busOptItem.createChoice('Ya, saya ikut bus', sectionBus),
+    busOptItem.createChoice('Tidak, saya datang sendiri', sectionOtherNotes),
   ]);
 
   const meta = {
@@ -139,34 +139,34 @@ function createWeddingForm() {
     JSON.stringify(meta),
   );
 
-  Logger.log('✅ Form tạo xong');
+  Logger.log('✅ Formulir selesai dibuat');
   Logger.log('📝 Edit:   ' + meta.editUrl);
-  Logger.log('🔗 Public: ' + meta.publishedUrl);
+  Logger.log('🔗 Publik: ' + meta.publishedUrl);
   return meta;
 }
 
 function intAtLeast(min) {
   return FormApp.createTextValidation()
     .requireNumberGreaterThanOrEqualTo(min)
-    .setHelpText('Vui lòng nhập 1 số nguyên ≥ ' + min)
+    .setHelpText('Silakan masukkan bilangan bulat ≥ ' + min)
     .build();
 }
 
 /**
- * Tạo URL pre-fill cho từng khách. Sửa GUESTS bên dưới rồi chạy.
+ * Membuat URL pre-fill untuk setiap tamu. Ubah GUESTS di bawah lalu jalankan.
  */
 function generatePrefillUrls() {
-  const GUESTS = ['Nguyễn Văn A', 'Trần Thị B'];
+  const GUESTS = ['Budi Santoso', 'Siti Aminah'];
 
   const metaRaw =
     PropertiesService.getScriptProperties().getProperty('WEDDING_FORM_META');
   if (!metaRaw)
-    throw new Error('Chưa tạo form — chạy createWeddingForm() trước.');
+    throw new Error('Formulir belum dibuat — jalankan createWeddingForm() dulu.');
   const meta = JSON.parse(metaRaw);
   const form = FormApp.openById(meta.formId);
   const nameItem = form.getItemById(meta.nameId).asTextItem();
 
-  const rows = [['Tên', 'URL']];
+  const rows = [['Nama', 'URL']];
   GUESTS.forEach(function (name) {
     const url = form
       .createResponse()
@@ -174,7 +174,7 @@ function generatePrefillUrls() {
       .toPrefilledUrl();
     rows.push([name, url]);
   });
-  Logger.log('Paste TSV dưới đây vào Google Sheet:');
+  Logger.log('Tempel TSV di bawah ini ke Google Sheets:');
   Logger.log(
     rows
       .map(function (r) {

@@ -1,8 +1,8 @@
 {
-  "name": "iPhone Wedding Invitation — Trí & Như",
-  "short_name": "Trí & Như",
-  "description": "A wedding invitation disguised as an iPhone.",
-  "lang": "vi",
+  "name": "Undangan Wisuda iPhone — Raka Dwi Pratama",
+  "short_name": "Wisuda Raka",
+  "description": "Undangan wisuda yang menyamar sebagai iPhone.",
+  "lang": "id",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

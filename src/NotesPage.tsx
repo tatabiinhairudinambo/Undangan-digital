@@ -1,337 +1,299 @@
-import { type ReactNode } from "react";
-import { useAppNav } from "./app-nav";
 import { MAPS_URL, openMaps } from "../lib/maps";
-import { openLink } from "../lib/link";
-import { HOME } from "./SafariPage";
+import {
+  CREAM,
+  GOLD,
+  GOLD_LIGHT,
+  GREEN,
+  HAIRLINE,
+  INK,
+  MUTED,
+  SERIF,
+  SF_STACK,
+} from "./invitationTheme";
 
-// iOS link blue for tappable map / phone / Safari hints.
-const LINK = "#007AFF";
-
-const SF_STACK =
-  '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, sans-serif';
-
-// iOS Notes paper — a warm near-white, not pure #fff.
-const PAPER = "#FBFAF8";
-// Dark glyph color on the white chrome pills (iOS label, slightly soft).
-const GLYPH = "#3A3A3C";
-
-// White "glass" pill that floats over the paper. iOS uses a thin material with a
-// soft, low shadow — on the light paper it reads as a clean white capsule.
-function Pill({
-  children,
-  onClick,
-  className = "",
-  "aria-label": ariaLabel,
-}: {
-  children: ReactNode;
-  onClick?: () => void;
-  className?: string;
-  "aria-label"?: string;
-}) {
+function Divider() {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={ariaLabel}
-      className={
-        "flex items-center justify-center rounded-full bg-white transition-transform active:scale-[0.96] " +
-        className
-      }
-      style={{ boxShadow: "0 4px 14px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06)" }}
-    >
-      {children}
-    </button>
+    <div className="flex items-center justify-center gap-2">
+      <span className="h-px w-10" style={{ background: "rgba(200,169,106,0.5)" }} />
+      <span className="h-1.5 w-1.5 rotate-45" style={{ background: GOLD }} />
+      <span className="h-px w-10" style={{ background: "rgba(200,169,106,0.5)" }} />
+    </div>
   );
 }
 
-// Chevron back (iOS bold, rounded joins).
-function ChevronLeftIcon() {
-  return (
-    <svg width="13" height="22" viewBox="0 0 13 22" fill="none">
-      <path
-        d="M11 2L3 11l8 9"
-        stroke={GLYPH}
-        strokeWidth="2.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const PinIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <path
+      d="M12 21s6.5-5.4 6.5-10.3A6.5 6.5 0 0 0 5.5 10.7C5.5 15.6 12 21 12 21Z"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinejoin="round"
+    />
+    <circle cx="12" cy="10.5" r="2.3" stroke="currentColor" strokeWidth="1.7" />
+  </svg>
+);
 
-// Undo — counter-clockwise arrow curling back to the left.
-function UndoIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M4 9h11a5 5 0 0 1 0 10H9"
-        stroke={GLYPH}
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M7.5 5.5L4 9l3.5 3.5"
-        stroke={GLYPH}
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-// Share — iOS box with an up-arrow rising out of the top.
-function ShareIcon() {
-  return (
-    <svg width="21" height="22" viewBox="0 0 24 26" fill="none">
-      <path
-        d="M12 2.5v13"
-        stroke={GLYPH}
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8 6l4-4 4 4"
-        stroke={GLYPH}
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M7 10.5H5.5A1.5 1.5 0 0 0 4 12v9a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 21v-9a1.5 1.5 0 0 0-1.5-1.5H17"
-        stroke={GLYPH}
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-// More — three filled dots.
-function MoreIcon() {
-  return (
-    <svg width="22" height="6" viewBox="0 0 22 6" fill="none">
-      <circle cx="3" cy="3" r="2.4" fill={GLYPH} />
-      <circle cx="11" cy="3" r="2.4" fill={GLYPH} />
-      <circle cx="19" cy="3" r="2.4" fill={GLYPH} />
-    </svg>
-  );
-}
-
-// Checklist — a checked row over an empty row (iOS toggle list).
-function ChecklistIcon() {
-  return (
-    <svg width="24" height="20" viewBox="0 0 24 20" fill="none">
-      <circle cx="4" cy="4" r="3.4" stroke={GLYPH} strokeWidth="1.8" />
-      <path
-        d="M2.4 4l1.1 1.1L5.6 2.8"
-        stroke={GLYPH}
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M10 4h12" stroke={GLYPH} strokeWidth="2" strokeLinecap="round" />
-      <circle cx="4" cy="15" r="3.4" stroke={GLYPH} strokeWidth="1.8" />
-      <path d="M10 15h12" stroke={GLYPH} strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-// Paperclip.
-function PaperclipIcon() {
-  return (
-    <svg width="20" height="22" viewBox="0 0 20 24" fill="none">
-      <path
-        d="M16 7.5l-7.4 7.4a2.5 2.5 0 0 1-3.5-3.5l7.7-7.7a4.2 4.2 0 0 1 5.9 5.9l-7.8 7.8a6 6 0 0 1-8.5-8.5L9 2"
-        stroke={GLYPH}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-// Markup — a fountain-pen nib inside a circle (iOS annotate).
-function MarkupIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="10.2" stroke={GLYPH} strokeWidth="1.8" />
-      <path
-        d="M12 4.5l3 7.2-3 6-3-6 3-7.2z"
-        stroke={GLYPH}
-        strokeWidth="1.7"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="13" r="1.1" fill={GLYPH} />
-    </svg>
-  );
-}
-
-// Compose — a square with a pencil (new note).
-function ComposeIcon() {
-  return (
-    <svg width="23" height="23" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M11 4H6a2.5 2.5 0 0 0-2.5 2.5v11A2.5 2.5 0 0 0 6 20h11a2.5 2.5 0 0 0 2.5-2.5v-5"
-        stroke={GLYPH}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M17.5 3.2l3.3 3.3-8 8-3.6.3.3-3.6 8-8z"
-        stroke={GLYPH}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const CapIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <path
+      d="M2.5 9.5L12 5l9.5 4.5L12 14 2.5 9.5Z"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M6.5 11.5v4.2c0 1.3 2.5 2.6 5.5 2.6s5.5-1.3 5.5-2.6v-4.2"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+    <path d="M21.5 9.5v4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+  </svg>
+);
 
 export default function NotesPage() {
-  const { close } = useAppNav();
-
   return (
     <div
-      className="relative flex h-full w-full flex-col overflow-hidden"
-      style={{ backgroundColor: PAPER, fontFamily: SF_STACK }}
+      className="h-full w-full overflow-y-auto"
+      style={{ background: CREAM, fontFamily: SF_STACK }}
     >
-      {/* Top chrome — back on the left, undo + share/more on the right. */}
-      <header
-        className="flex items-center justify-between px-4"
-        style={{ paddingTop: "calc(var(--safe-top) + 10px)" }}
+      <div
+        className="mx-auto w-full max-w-[420px] px-4 pb-10"
+        style={{ paddingTop: "calc(var(--safe-top) + 28px)" }}
       >
-        <Pill onClick={close} aria-label="Quay lại" className="h-[52px] w-[52px] pr-0.5">
-          <ChevronLeftIcon />
-        </Pill>
-
-        <div className="flex items-center gap-3">
-          <Pill aria-label="Hoàn tác" className="h-[52px] w-[52px]">
-            <UndoIcon />
-          </Pill>
+        {/* Foto & kop undangan */}
+        <div
+          className="relative overflow-hidden rounded-[22px]"
+          style={{ boxShadow: "0 18px 36px -28px rgba(11,43,32,0.65)" }}
+        >
+          <img
+            src="/graduation-photo.jpg"
+            alt="Foto ilustrasi wisuda: tangan mengangkat topi toga hitam dengan rumbai emas"
+            className="h-[320px] w-full object-cover"
+            style={{ objectPosition: "center 42%" }}
+            draggable={false}
+          />
           <div
-            className="flex h-[52px] items-center gap-6 rounded-full bg-white px-6"
+            className="absolute inset-0"
             style={{
-              boxShadow:
-                "0 4px 14px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06)",
+              background:
+                "linear-gradient(to bottom, rgba(11,43,32,0.16) 0%, rgba(11,43,32,0.34) 42%, rgba(11,43,32,0.94) 100%)",
             }}
-          >
-            <button
-              type="button"
-              aria-label="Chia sẻ"
-              className="flex items-center transition-transform active:scale-[0.92]"
+          />
+          <div
+            className="pointer-events-none absolute inset-[9px] rounded-[17px]"
+            style={{ border: "1px solid rgba(231,211,163,0.30)" }}
+          />
+          <div className="absolute inset-x-0 bottom-0 px-5 pb-5 text-center">
+            <p
+              className="text-[10px] font-medium uppercase"
+              style={{ color: GOLD_LIGHT, letterSpacing: "0.34em" }}
             >
-              <ShareIcon />
-            </button>
-            <button
-              type="button"
-              aria-label="Thêm"
-              className="flex items-center transition-transform active:scale-[0.92]"
+              Undangan Wisuda
+            </p>
+            <div className="mt-2.5">
+              <Divider />
+            </div>
+            <h1
+              className="mt-3 text-[28px] leading-[1.15]"
+              style={{ fontFamily: SERIF, color: "#FBF6EA" }}
             >
-              <MoreIcon />
-            </button>
+              Raka Dwi Pratama
+            </h1>
+            <p
+              className="mt-1.5 text-[10px] uppercase"
+              style={{ color: "rgba(231,211,163,0.9)", letterSpacing: "0.22em" }}
+            >
+              S.Kom · Sistem Informasi
+            </p>
+            <p
+              className="mt-0.5 text-[10px] uppercase"
+              style={{ color: "rgba(255,255,255,0.55)", letterSpacing: "0.14em" }}
+            >
+              Universitas Cakrawala Nusantara
+            </p>
           </div>
         </div>
-      </header>
 
-      {/* Note body — wedding invite compiled for guests. */}
-      <div
-        className="flex-1 overflow-y-auto px-5 pb-8 pt-6 text-[17px] leading-[1.55]"
-        style={{ color: GLYPH }}
-      >
-        <h1 className="text-[28px] font-bold leading-tight tracking-tight">
-          Lễ Tân Hôn — Trí &amp; Như
-        </h1>
+        {/* Save the date */}
+        <div
+          className="mt-6 overflow-hidden rounded-[18px] bg-white"
+          style={{ boxShadow: "0 12px 28px -24px rgba(31,42,36,0.5)" }}
+        >
+          <div className="flex items-center justify-center gap-5 py-5">
+            <div className="text-center">
+              <p
+                className="text-[9px] font-semibold uppercase"
+                style={{ color: GOLD, letterSpacing: "0.2em" }}
+              >
+                Hari
+              </p>
+              <p className="mt-1 text-[15px]" style={{ fontFamily: SERIF, color: INK }}>
+                Sabtu
+              </p>
+            </div>
 
-        <div className="mt-4 space-y-1.5">
-          <p>📅 Chủ nhật, 14/06/2026 — 🕠 17h30</p>
-          <p>📍 AZ Luxury Garden, 123 Tôn Đức Thắng, La Gi, Lâm Đồng</p>
-          <p>
-            🗺️{" "}
+            <span className="h-10 w-px" style={{ background: "rgba(176,141,87,0.3)" }} />
+
+            <div className="text-center">
+              <p
+                className="text-[30px] leading-none"
+                style={{ fontFamily: SERIF, color: GREEN }}
+              >
+                21
+              </p>
+              <p
+                className="mt-1 text-[9px] font-semibold uppercase"
+                style={{ color: GOLD, letterSpacing: "0.2em" }}
+              >
+                Nov 2026
+              </p>
+            </div>
+
+            <span className="h-10 w-px" style={{ background: "rgba(176,141,87,0.3)" }} />
+
+            <div className="text-center">
+              <p
+                className="text-[9px] font-semibold uppercase"
+                style={{ color: GOLD, letterSpacing: "0.2em" }}
+              >
+                Waktu
+              </p>
+              <p className="mt-1 text-[15px]" style={{ fontFamily: SERIF, color: INK }}>
+                08.00
+              </p>
+            </div>
+          </div>
+
+          <div
+            className="flex items-start gap-3 px-4 py-3.5"
+            style={{ borderTop: `1px solid ${HAIRLINE}` }}
+          >
+            <span
+              className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
+              style={{ background: "rgba(176,141,87,0.12)", color: GREEN }}
+            >
+              <PinIcon />
+            </span>
+            <div>
+              <p className="text-[15px] font-semibold" style={{ color: INK }}>
+                Gedung Serbaguna Melati
+              </p>
+              <p className="mt-0.5 text-[12px] leading-snug" style={{ color: MUTED }}>
+                Jl. Jend. Sudirman No. 123, Jakarta Selatan
+              </p>
+            </div>
+          </div>
+
+          <div
+            className="px-4 pb-4 text-center"
+            style={{ borderTop: `1px solid ${HAIRLINE}`, paddingTop: 10 }}
+          >
             <button
               type="button"
               onClick={() => openMaps(MAPS_URL)}
-              className="underline-offset-2 active:opacity-60"
-              style={{ color: LINK }}
+              className="text-[13px] font-semibold underline-offset-4 active:opacity-60"
+              style={{ color: GREEN, textDecoration: "underline" }}
             >
-              Xem trên Google Maps
+              Buka lokasi di Google Maps
             </button>
-          </p>
-          {/* <p>
-            ☎️ Liên hệ: Trí —{" "}
-            <a
-              href="tel:093••••••"
-              className="underline-offset-2 active:opacity-60"
-              style={{ color: LINK }}
-            >
-              093 ••• ••••
-            </a>
-          </p> */}
+          </div>
         </div>
 
-        <p className="mt-5">
-          Vợ chồng em trân trọng kính mời anh/chị tới chung vui. Nhờ anh/chị
-          dành chút thời gian xác nhận thông tin giúp em ạ ❤️
-        </p>
-
-        <p className="mt-5">
-          👉 Anh chị {" "}
-          <button
-            type="button"
-            onClick={() => openLink(HOME)}
-            className="underline-offset-2 active:opacity-60"
-            style={{ color: LINK }}
-          >
-            Xác nhận tham dự
-          </button>
-          {" "}
-          để tụi em có thể đặt xe và chuẩn bị chu đáo hơn nhé! Cảm ơn anh/chị nhiều lắm ạ!
-        </p>
-      </div>
-
-      {/* Bottom toolbar — checklist / attach / markup, and compose. */}
-      <footer
-        className="flex items-center justify-between px-4 pt-2"
-        style={{ paddingBottom: "calc(var(--safe-bottom) + 12px)" }}
-      >
+        {/* Isi undangan */}
         <div
-          className="flex h-[54px] items-center gap-8 rounded-full bg-white px-7"
-          style={{
-            boxShadow: "0 4px 14px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06)",
-          }}
+          className="mt-4 rounded-[18px] bg-white px-5 py-6"
+          style={{ boxShadow: "0 12px 28px -24px rgba(31,42,36,0.5)" }}
         >
-          <button
-            type="button"
-            aria-label="Danh sách kiểm"
-            className="flex items-center transition-transform active:scale-[0.92]"
+          <p
+            className="text-center text-[15px] leading-[1.7]"
+            style={{ fontFamily: SERIF, color: INK }}
           >
-            <ChecklistIcon />
-          </button>
-          <button
-            type="button"
-            aria-label="Đính kèm"
-            className="flex items-center transition-transform active:scale-[0.92]"
-          >
-            <PaperclipIcon />
-          </button>
-          <button
-            type="button"
-            aria-label="Đánh dấu"
-            className="flex items-center transition-transform active:scale-[0.92]"
-          >
-            <MarkupIcon />
-          </button>
+            Dengan memohon rahmat Tuhan Yang Maha Esa, kami mengundang
+            Bapak/Ibu/Saudara/i untuk menghadiri acara Wisuda dan Syukuran
+            kelulusan putra kami.
+          </p>
+
+          <div className="my-5">
+            <Divider />
+          </div>
+
+          <p className="text-center text-[13px] leading-relaxed" style={{ color: MUTED }}>
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+            Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu bagi
+            kelancaran acara ini.
+          </p>
         </div>
 
-        <Pill aria-label="Ghi chú mới" className="h-[54px] w-[54px]">
-          <ComposeIcon />
-        </Pill>
-      </footer>
+        {/* Dress code & kontak */}
+        <div
+          className="mt-4 rounded-[18px] bg-white px-5 py-4"
+          style={{ boxShadow: "0 12px 28px -24px rgba(31,42,36,0.5)" }}
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p
+                className="text-[9px] font-semibold uppercase"
+                style={{ color: GOLD, letterSpacing: "0.2em" }}
+              >
+                Dress code
+              </p>
+              <p className="mt-1 text-[14px] font-semibold" style={{ color: INK }}>
+                Batik / pakaian formal
+              </p>
+            </div>
+            <span
+              className="flex h-9 w-9 items-center justify-center rounded-full"
+              style={{ background: "rgba(176,141,87,0.12)", color: GOLD }}
+              aria-hidden
+            >
+              <CapIcon />
+            </span>
+          </div>
+
+          <div
+            className="mt-3 flex items-center justify-between pt-3"
+            style={{ borderTop: `1px solid ${HAIRLINE}` }}
+          >
+            <div>
+              <p
+                className="text-[9px] font-semibold uppercase"
+                style={{ color: GOLD, letterSpacing: "0.2em" }}
+              >
+                Kontak
+              </p>
+              <a
+                href="tel:085712345678"
+                className="mt-1 block text-[14px] font-semibold active:opacity-60"
+                style={{ color: GREEN }}
+              >
+                Mama · 0857-1234-5678
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <p
+          className="mt-6 px-3 text-center text-[12px] italic leading-relaxed"
+          style={{ fontFamily: SERIF, color: "#8A968D" }}
+        >
+          Terima kasih atas perhatian dan doa restu Bapak/Ibu/Saudara/i. Sampai
+          jumpa di hari wisuda.
+        </p>
+
+        <div className="mt-4 flex justify-center">
+          <span
+            className="flex h-9 w-9 items-center justify-center rounded-full text-[15px]"
+            style={{
+              border: "1px solid rgba(176,141,87,0.55)",
+              color: GOLD,
+              fontFamily: SERIF,
+            }}
+          >
+            R
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

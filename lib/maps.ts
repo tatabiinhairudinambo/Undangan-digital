@@ -1,15 +1,13 @@
 /**
- * Universal Google Maps link for the AZ Luxury Garden place.
+ * Link Google Maps universal untuk lokasi acara (Gedung Serbaguna Melati).
  *
- * Uses the place's CID (Google's canonical place id) so Maps opens the named
- * place card — not a raw coordinate pin. The CID was resolved from the
- * original `maps.app.goo.gl` short link (its ftid `…:0x84bf377d9b2964e4`,
- * decimal below), so it points at exactly that place. As a universal link it
- * auto-opens the Google Maps app on mobile if installed.
+ * Memakai penelusuran nama tempat sehingga Maps membuka kartu tempat yang benar,
+ * bukan pin koordinat mentah. Sebagai universal link, link ini otomatis membuka
+ * aplikasi Google Maps di ponsel bila terpasang.
  * https://developers.google.com/maps/documentation/urls/get-started
  */
 export const MAPS_URL =
-  "https://www.google.com/maps?cid=9565425146171843812";
+  "https://www.google.com/maps/search/?api=1&query=Gedung+Serbaguna+Melati+Jakarta+Selatan";
 
 function isMobile(): boolean {
   if (typeof navigator === "undefined") return false;

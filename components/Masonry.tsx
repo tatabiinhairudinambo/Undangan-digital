@@ -128,7 +128,8 @@ const Masonry: React.FC<MasonryProps> = ({
   useLayoutEffect(() => {
     if (!width) return;
     grid.forEach(item => {
-      const selector = `[data-key="${item.id}"]`;
+      const selector = containerRef.current?.querySelector(`[data-key="${item.id}"]`);
+      if (!selector) return;
       const pos = { x: item.x, y: item.y, width: item.w, height: item.h };
       if (placedIds.current.has(item.id)) {
         gsap.to(selector, { ...pos, duration, ease, overwrite: 'auto' });
@@ -137,7 +138,7 @@ const Masonry: React.FC<MasonryProps> = ({
         placedIds.current.add(item.id);
       }
     });
-  }, [grid, width, duration, ease]);
+  }, [grid, width, duration, ease, containerRef]);
 
   // Reveal pass: fade/scale each image in PLACE once it loads. Touches only the
   // inner image's opacity/transform (composite-only — no paint) so it can't
@@ -149,14 +150,15 @@ const Masonry: React.FC<MasonryProps> = ({
     let revealCount = 0;
     grid.forEach(item => {
       if (!loadedIds.has(item.id) || revealedIds.current.has(item.id)) return;
-      const selector = `[data-key="${item.id}"] .masonry-img`;
+      const selector = containerRef.current?.querySelector(`[data-key="${item.id}"] .masonry-img`);
+      if (!selector) return;
       gsap.fromTo(
         selector,
         { opacity: 0, ...(blurToFocus && { scale: 1.06 }) },
         {
           opacity: 1,
           ...(blurToFocus && { scale: 1 }),
-          duration: 0.6,
+          duration,
           ease: 'power3.out',
           delay: Math.min(revealCount, 8) * stagger
         }
@@ -164,7 +166,15 @@ const Masonry: React.FC<MasonryProps> = ({
       revealCount++;
       revealedIds.current.add(item.id);
     });
-  }, [loadedIds, grid, width, stagger, blurToFocus]);
+  }, [loadedIds, grid, width, stagger, blurToFocus, duration, containerRef]);
+
+  // Cancel work for an outgoing gallery before another instance is mounted.
+  useLayoutEffect(() => {
+    const root = containerRef.current;
+    return () => {
+      if (root) gsap.killTweensOf(root.querySelectorAll('[data-key], .masonry-img'));
+    };
+  }, [containerRef]);
 
   const handleMouseEnter = (id: string, element: HTMLElement) => {
     if (scaleOnHover) {

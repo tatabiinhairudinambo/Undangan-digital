@@ -1,15 +1,15 @@
-# Credits
+# Kredit
 
-The code in this repo is MIT (see [LICENSE](LICENSE)). Everything below comes from someone else and keeps its own license.
+Kode di repo ini berlisensi MIT (lihat [LICENSE](LICENSE)). Semua yang tercantum di bawah berasal dari pihak lain dan tetap memakai lisensinya masing-masing.
 
-## Photos
+## Foto
 
-All sample photos are from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license). They were cropped and resized for the web.
+Semua foto contoh berasal dari [Unsplash](https://unsplash.com) dengan [Unsplash License](https://unsplash.com/license). Foto telah dipotong dan diubah ukurannya untuk web.
 
-| File | Photographer | Photo |
+| File | Fotografer | Foto |
 | --- | --- | --- |
 | `public/wallpaper-lock.jpeg` | [Bin Thieu](https://unsplash.com/@binthieu) | [Unsplash](https://unsplash.com/photos/groom-and-bride-standing-on-green-grass-field-while-cuddling-and-with-mountain-and-trees-at-the-distance-during-daytime-owjuDIIzUbQ) |
-| `public/wallpaper-home.jpeg` (and `og-image.jpg`) | [Bin Thieu](https://unsplash.com/@binthieu) | [Unsplash](https://unsplash.com/photos/groom-and-bride-near-tree-gbJEgT6bp5w) |
+| `public/wallpaper-home.jpeg` (dan `og-image.jpg`) | [Bin Thieu](https://unsplash.com/@binthieu) | [Unsplash](https://unsplash.com/photos/groom-and-bride-near-tree-gbJEgT6bp5w) |
 | `public/profile.jpeg` | [Ngọc Hằng](https://unsplash.com/@kimtaetae) | [Unsplash](https://unsplash.com/photos/wedding-couple-posting-for-photo-shoot-near-tree-YC3NpThx1pQ) |
 | `public/reading-list.jpeg` | [Lofosyos](https://unsplash.com/@lofosyos) | [Unsplash](https://unsplash.com/photos/bride-in-white-lace-dress-holding-a-bouquet-ec3udlghQFk) |
 | `public/message.jpeg` | [Duong Ngan](https://unsplash.com/@nganduong93) | [Unsplash](https://unsplash.com/photos/a-wedding-cake-topper-with-cats-on-it-IQp2GckxXQc) |
@@ -30,22 +30,26 @@ All sample photos are from [Unsplash](https://unsplash.com) under the [Unsplash 
 | `public/photos/15.jpeg` | [Pat Rindone](https://unsplash.com/@patslens) | [Unsplash](https://unsplash.com/photos/white-wooden-house-near-trees-during-daytime-8qh5FsjzE24) |
 | `public/photos/16.jpeg` | [Fuu J](https://unsplash.com/@fuuj) | [Unsplash](https://unsplash.com/photos/woman-wearing-white-lace-wedding-veil--ZDE_YBahpY) |
 
-## Music
+### Foto header undangan
 
-Every track was transcoded to 128 kbps MP3 and loudness-normalised. Nothing else was changed.
+`public/graduation-photo.jpg` merupakan foto stok ilustrasi wisuda dari [Unsplash (sumber gambar)](https://images.unsplash.com/photo-1627556704302-624286467c65?w=1400&q=80&fm=jpg), digunakan dengan [Unsplash License](https://unsplash.com/license). Nama fotografer belum terverifikasi. Foto menampilkan tangan mengangkat topi toga, bukan potret pribadi Raka.
 
-| File | Track | License | Source |
+## Musik
+
+Setiap trek dikonversi ke MP3 128 kbps dan dinormalisasi loudness-nya. Selain itu tidak ada yang diubah.
+
+| File | Trek | Lisensi | Sumber |
 | --- | --- | --- | --- |
-| `public/music/canon-in-d.mp3` | Canon in D Major, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [link](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100301) |
-| `public/music/there-is-romance.mp3` | There is Romance, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [link](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100044) |
-| `public/music/clear-air.mp3` | Clear Air, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [link](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100626) |
-| `public/music/air-on-the-g-string.mp3` | Air on the G String, U.S. Air Force Strings | [Public Domain](https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Air_Force) | [link](https://commons.wikimedia.org/wiki/File:Air_-_Air_Force_Strings_-_United_States_Air_Force_Band.mp3) |
-| `public/music/clair-de-lune.mp3` | Clair de Lune, Laurens Goedhart | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) | [link](https://commons.wikimedia.org/wiki/File:Clair_de_lune_(Claude_Debussy)_Suite_bergamasque.ogg) |
-| `public/music/windswept.mp3` | Windswept, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [link](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100757) |
-| `public/music/jesu-joy-of-mans-desiring.mp3` | Jesu, Joy of Man's Desiring, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [link](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100189) |
-| `public/music/gymnopedie-no-1.mp3` | Gymnopedie No. 1, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [link](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100787) |
+| `public/music/canon-in-d.mp3` | Canon in D Major, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [tautan](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100301) |
+| `public/music/there-is-romance.mp3` | There is Romance, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [tautan](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100044) |
+| `public/music/clear-air.mp3` | Clear Air, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [tautan](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100626) |
+| `public/music/air-on-the-g-string.mp3` | Air on the G String, U.S. Air Force Strings | [Public Domain](https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Air_Force) | [tautan](https://commons.wikimedia.org/wiki/File:Air_-_Air_Force_Strings_-_United_States_Air_Force_Band.mp3) |
+| `public/music/clair-de-lune.mp3` | Clair de Lune, Laurens Goedhart | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) | [tautan](https://commons.wikimedia.org/wiki/File:Clair_de_lune_(Claude_Debussy)_Suite_bergamasque.ogg) |
+| `public/music/windswept.mp3` | Windswept, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [tautan](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100757) |
+| `public/music/jesu-joy-of-mans-desiring.mp3` | Jesu, Joy of Man's Desiring, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [tautan](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100189) |
+| `public/music/gymnopedie-no-1.mp3` | Gymnopedie No. 1, Kevin MacLeod | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [tautan](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100787) |
 
-Attribution lines, ready to paste:
+Baris atribusi, siap ditempel:
 
 - "Canon in D Major" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, http://creativecommons.org/licenses/by/4.0/ (transcoded to MP3, loudness-normalised)
 - "There is Romance" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, http://creativecommons.org/licenses/by/4.0/ (transcoded to MP3, loudness-normalised)
@@ -56,9 +60,9 @@ Attribution lines, ready to paste:
 - "Jesu, Joy of Man's Desiring" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, http://creativecommons.org/licenses/by/4.0/ (transcoded to MP3, loudness-normalised)
 - "Gymnopedie No. 1" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0 License, http://creativecommons.org/licenses/by/4.0/ (transcoded to MP3, loudness-normalised)
 
-## Code
+## Kode
 
-[`components/GlassSurface.tsx`](components/GlassSurface.tsx) and [`components/Masonry.tsx`](components/Masonry.tsx) are adapted from [React Bits](https://reactbits.dev) under its MIT + Commons Clause license:
+[`components/GlassSurface.tsx`](components/GlassSurface.tsx) dan [`components/Masonry.tsx`](components/Masonry.tsx) diadaptasi dari [React Bits](https://reactbits.dev) di bawah lisensi MIT + Commons Clause:
 
 > MIT + Commons Clause License Condition v1.0
 >
@@ -72,8 +76,10 @@ Attribution lines, ready to paste:
 >
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-## Trademarks and embeds
+> Teks lisensi di atas sengaja dibiarkan dalam bahasa aslinya agar kekuatan hukumnya tidak berubah.
 
-- Apple, iPhone, iOS, Safari, SF Pro and the app icons in `public/icons/` belong to Apple Inc. SF Pro itself isn't bundled. This project isn't affiliated with or endorsed by Apple.
-- The YouTube app embeds ["Lễ Đường" by Kai Đinh](https://www.youtube.com/watch?v=XqgyD0yadH0) with YouTube's standard player. The video isn't hosted here.
-- The map tile (`public/map-tile.svg`), the heart favicon and the placeholder gift QR (`public/gift-qr.png`) were made for this repo and are MIT.
+## Merek dagang dan embed
+
+- Apple, iPhone, iOS, Safari, SF Pro dan ikon aplikasi di `public/icons/` milik Apple Inc. Font SF Pro tidak dibundel. Proyek ini tidak berafiliasi dengan dan tidak didukung oleh Apple.
+- Aplikasi YouTube menyematkan video musik contoh dari [YouTube](https://www.youtube.com/watch?v=XqgyD0yadH0) melalui pemutar standar YouTube. Video tidak di-host di repo ini. Ganti `VIDEO_ID` di [`src/YouTubePage.tsx`](src/YouTubePage.tsx) dengan video Anda sendiri.
+- Tile peta (`public/map-tile.svg`), favicon hati dan QR hadiah contoh (`public/gift-qr.png`) dibuat untuk repo ini dan berlisensi MIT.

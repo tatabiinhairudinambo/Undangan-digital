@@ -7,7 +7,6 @@ import {
   useTransform,
   type PanInfo,
 } from "framer-motion";
-import { X } from "lucide-react";
 
 export interface LightboxPhoto {
   id: string;
@@ -177,19 +176,11 @@ export default function PhotoLightbox({ photos, index, onClose }: Props) {
         ))}
       </motion.div>
 
-      {/* Close button + counter, fade with the background. */}
+      {/* Counter */}
       <motion.div
-        className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between px-4"
+        className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-end px-4"
         style={{ paddingTop: "calc(var(--safe-top) + 12px)", opacity: bgOpacity }}
       >
-        <button
-          type="button"
-          onClick={onClose}
-          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-white/30 text-white backdrop-blur-xl transition-transform hover:bg-white/40 active:scale-[0.97]"
-          aria-label="Đóng"
-        >
-          <X size={20} strokeWidth={2.5} />
-        </button>
         <span className="rounded-full bg-white/15 px-3 py-1 text-[13px] font-semibold text-white backdrop-blur-md">
           {page + 1} / {photos.length}
         </span>

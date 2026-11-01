@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useReducer, useState, type ReactNode } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, useReducedMotion } from "framer-motion";
 import { AppModal } from "../app-modal/AppModal";
 import {
   buildModalFrame,
@@ -65,6 +65,7 @@ export function AppNavProvider({
   motion,
   env = realEnv,
 }: AppNavProviderProps) {
+  const reducedMotion = useReducedMotion();
   const spring = motion?.spring ?? DEFAULT_MODAL_SPRING;
   const appOpenDelayMs = motion?.appOpenDelayMs ?? DEFAULT_APP_OPEN_DELAY_MS;
 
@@ -108,7 +109,8 @@ export function AppNavProvider({
           state.origin,
           viewport,
           spring,
-          state.phase === "open"
+          state.phase === "open",
+          Boolean(reducedMotion)
         )
       : null;
 

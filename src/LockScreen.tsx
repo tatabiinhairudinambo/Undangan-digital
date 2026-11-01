@@ -34,7 +34,7 @@ export default function LockScreen({ y, onUnlock }: LockScreenProps) {
             <button
               type="button"
               onClick={(e) => e.stopPropagation()}
-              aria-label="Đèn pin"
+              aria-label="Senter"
               className="w-12 h-12 rounded-full bg-white/15 backdrop-blur-xl grid place-items-center"
               style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)" }}
             >
@@ -43,7 +43,7 @@ export default function LockScreen({ y, onUnlock }: LockScreenProps) {
             <button
               type="button"
               onClick={(e) => e.stopPropagation()}
-              aria-label="Camera"
+              aria-label="Kamera"
               className="w-12 h-12 rounded-full bg-white/15 backdrop-blur-xl grid place-items-center"
               style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)" }}
             >

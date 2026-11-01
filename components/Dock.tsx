@@ -1,25 +1,26 @@
 import GlassSurface from "./GlassSurface";
 import MessagesPage from "../src/MessagesPage";
 import PhonePage from "../src/PhonePage";
-import SafariPage from "../src/SafariPage";
+import RsvpPage from "../src/RsvpPage";
 import PhotosPage from "../src/PhotosPage";
 import { useAppIcon, type AppDef } from "../src/app-nav";
 
 // Full-page apps bring their own chrome (default: no title, floating close).
-const DOCK_APPS: AppDef[] = [
+// eslint-disable-next-line react-refresh/only-export-components -- data, dipakai juga oleh mode scroll.
+export const DOCK_APPS: AppDef[] = [
   { key: "Phone", iconSrc: "/icons/phone.png", render: () => <PhonePage /> },
   { key: "Messages", iconSrc: "/icons/mess.png", render: () => <MessagesPage /> },
-  // Toolbar back = iframe history; floating close exits the app.
-  { key: "Safari", iconSrc: "/icons/safari.png", render: () => <SafariPage /> },
+  // Form konfirmasi kehadiran — native, tanpa layanan eksternal.
+  { key: "rsvp", iconSrc: "/icons/rsvp.svg", render: () => <RsvpPage /> },
   { key: "Photos", iconSrc: "/icons/photos.svg", render: () => <PhotosPage /> },
 ];
 
-// Vietnamese accessible names for the dock apps (keys stay as internal ids).
+// Indonesian accessible names for the dock apps (keys stay as internal ids).
 const DOCK_LABELS: Record<string, string> = {
-  Phone: "Điện thoại",
-  Messages: "Tin nhắn",
-  Safari: "Safari",
-  Photos: "Ảnh",
+  Phone: "Telepon",
+  Messages: "Pesan",
+  rsvp: "RSVP",
+  Photos: "Foto",
 };
 
 function DockIcon({ app }: { app: AppDef }) {

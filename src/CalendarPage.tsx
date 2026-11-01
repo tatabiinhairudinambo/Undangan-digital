@@ -1,9 +1,6 @@
 import { type ReactNode } from "react";
-import { motion } from "framer-motion";
-import { useAppNav } from "./app-nav";
 import {
   CALENDAR_DATE,
-  CALENDAR_BACK_LABEL,
   CALENDAR_NAME,
   type CalendarEvent,
 } from "../components/calendarData";
@@ -17,26 +14,7 @@ const SELECTOR = "#C4C4C6"; // up/down chevron tint
 const SF =
   '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, sans-serif';
 
-const tap = {
-  whileTap: { scale: 0.96 },
-  transition: { duration: 0.12, ease: [0.4, 0, 0.2, 1] as const },
-};
-
 /* ── icons ────────────────────────────────────────────────────────── */
-function ChevronLeftIcon() {
-  return (
-    <svg width="11" height="19" viewBox="0 0 11 19" fill="none" aria-hidden>
-      <path
-        d="M9.5 2L2.5 9.5l7 7.5"
-        stroke={LABEL}
-        strokeWidth="2.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 // Up/down chevron pair used by iOS for tappable pickers.
 function SelectorIcon() {
   return (
@@ -60,36 +38,6 @@ function SelectorIcon() {
 }
 
 /* ── pieces ───────────────────────────────────────────────────────── */
-// Floating white capsule used for the header buttons (chevron-back, Sửa).
-function Pill({
-  children,
-  onClick,
-  className = "",
-  "aria-label": ariaLabel,
-}: {
-  children: ReactNode;
-  onClick?: () => void;
-  className?: string;
-  "aria-label"?: string;
-}) {
-  return (
-    <motion.button
-      type="button"
-      onClick={onClick}
-      aria-label={ariaLabel}
-      className={
-        "flex items-center justify-center rounded-full bg-white " + className
-      }
-      style={{
-        boxShadow: "0 4px 14px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05)",
-      }}
-      {...tap}
-    >
-      {children}
-    </motion.button>
-  );
-}
-
 // A grouped-list row card (white, large radius) with a left label and a
 // right-aligned value + optional trailing chevron picker.
 function Row({
@@ -117,7 +65,6 @@ function Row({
 
 /* ── page ─────────────────────────────────────────────────────────── */
 export default function CalendarPage({ event }: { event: CalendarEvent }) {
-  const { close } = useAppNav();
   const startTime = event.time.split("–")[0]; // detail shows the start time
 
   return (
@@ -125,36 +72,12 @@ export default function CalendarPage({ event }: { event: CalendarEvent }) {
       className="relative h-full w-full overflow-hidden"
       style={{ background: BG, fontFamily: SF }}
     >
-      {/* header */}
-      <div
-        className="absolute inset-x-0 top-0 z-20 px-4"
-        style={{ paddingTop: "calc(var(--safe-top) + 8px)" }}
-      >
-        <div className="flex items-center justify-between">
-          <Pill
-            onClick={close}
-            aria-label="Quay lại"
-            className="h-[46px] gap-1 pl-3 pr-4"
-          >
-            <ChevronLeftIcon />
-            <span className="text-[19px] font-normal" style={{ color: LABEL }}>
-              {CALENDAR_BACK_LABEL}
-            </span>
-          </Pill>
-          <Pill aria-label="Sửa" className="h-[46px] px-5">
-            <span className="text-[19px] font-normal" style={{ color: LABEL }}>
-              Sửa
-            </span>
-          </Pill>
-        </div>
-      </div>
-
       {/* scroll body */}
       <div
         className="absolute inset-0 overflow-y-auto px-4"
         style={{
-          paddingTop: "calc(var(--safe-top) + 76px)",
-          paddingBottom: "calc(var(--safe-bottom) + 110px)",
+          paddingTop: "calc(var(--safe-top) + 28px)",
+          paddingBottom: "calc(var(--safe-bottom) + 40px)",
         }}
       >
         {/* event heading */}
@@ -183,7 +106,7 @@ export default function CalendarPage({ event }: { event: CalendarEvent }) {
 
         {/* grouped rows */}
         <div className="mt-7 flex flex-col gap-4">
-          <Row label="Lịch">
+          <Row label="Kalender">
             <span
               className="h-[15px] w-[15px] rounded-full"
               style={{ background: event.indicatorColor }}
@@ -193,9 +116,9 @@ export default function CalendarPage({ event }: { event: CalendarEvent }) {
             </span>
             <SelectorIcon />
           </Row>
-          <Row label="Thông báo">
+          <Row label="Notifikasi">
             <span className="text-[19px]" style={{ color: SECONDARY }}>
-              30 phút trước
+              30 menit sebelumnya
             </span>
             <SelectorIcon />
           </Row>

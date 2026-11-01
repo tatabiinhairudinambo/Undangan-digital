@@ -22,59 +22,59 @@ export const SCENES = {
   // ── featured in the main video ────────────────────────────────────────
   lock: {
     start: 'lock',
-    label: 'Lock Screen',
-    title: 'It all starts on the lock screen',
-    sub: 'Hit play and the wedding playlist starts. The phone unlocks on its own.',
+    label: 'Layar Kunci',
+    title: 'Semuanya dimulai dari layar kunci',
+    sub: 'Tekan putar dan playlist pernikahan mulai berbunyi. Ponsel terbuka sendiri.',
     async run(h) {
       await h.wait(2300);
-      await h.tap({ label: 'Phát' });
+      await h.tap({ label: 'Putar' });
       await h.wait(1500);
     },
   },
   home: {
     start: 'home',
-    label: 'Home Screen',
-    title: 'Everything you need, at a glance',
-    sub: 'Widgets for the schedule, the venue and the RSVP form.',
+    label: 'Layar Utama',
+    title: 'Semua yang Anda butuhkan, sekilas pandang',
+    sub: 'Widget jadwal, lokasi acara dan formulir RSVP.',
     async run(h) {
       await h.wait(2300);
     },
   },
   calendar: {
     start: 'home',
-    label: 'Calendar',
-    title: 'The plan for the day',
-    sub: 'Tap an event to see when and where.',
+    label: 'Kalender',
+    title: 'Rencana untuk hari itu',
+    sub: 'Ketuk acara untuk melihat waktu dan tempatnya.',
     async run(h) {
       await h.wait(700);
-      await h.tap({ text: 'Tiệc Cưới' });
+      await h.tap({ text: 'Resepsi' });
       await h.wait(2300);
-      await h.tap({ label: 'Quay lại' });
+      await h.tap({ label: 'Kembali' });
       await h.wait(900);
     },
   },
   notes: {
     start: 'home',
-    label: 'Notes',
-    title: 'The invite, written as a note',
-    sub: 'A few words from us, plus the time, the place and how to get there.',
+    label: 'Catatan',
+    title: 'Undangan, ditulis sebagai catatan',
+    sub: 'Beberapa kata dari kami, plus waktu, tempat dan cara menuju ke sana.',
     async run(h) {
       await h.wait(600);
-      await openFromFolder(h, 'Ghi chú');
+      await openFromFolder(h, 'Catatan');
       await h.wait(2800);
-      await h.tap({ label: 'Quay lại' });
+      await h.tap({ label: 'Kembali' });
       await h.wait(800);
       await closeFolder(h);
     },
   },
   photos: {
     start: 'home',
-    label: 'Photos',
-    title: 'The wedding album',
-    sub: 'Tap a photo to open it, swipe to see the next one.',
+    label: 'Foto',
+    title: 'Album pernikahan',
+    sub: 'Ketuk foto untuk membukanya, geser untuk melihat foto berikutnya.',
     async run(h) {
       await h.wait(500);
-      await h.tap({ label: 'Ảnh' });
+      await h.tap({ label: 'Foto' });
       await h.wait(1200);
       await h.scroll(640, 1300);
       await h.wait(250);
@@ -82,35 +82,35 @@ export const SCENES = {
       await h.wait(1150);
       await h.drag([330, 480], [90, 470], 260);
       await h.wait(1150);
-      await h.tap({ label: 'Đóng' });
+      await h.tap({ label: 'Tutup' });
       await h.wait(800);
-      await h.tap({ label: 'Đóng' });
+      await h.tap({ label: 'Tutup' });
       await h.wait(900);
     },
   },
   messages: {
     start: 'home',
-    label: 'Messages',
-    title: 'A peek at the couple’s texts',
-    sub: 'A sample thread. Rewrite it with your own.',
+    label: 'Pesan',
+    title: 'Intip obrolan kedua mempelai',
+    sub: 'Contoh percakapan. Ganti dengan cerita Anda sendiri.',
     async run(h) {
       await h.wait(500);
-      await h.tap({ label: 'Tin nhắn' });
+      await h.tap({ label: 'Pesan' });
       await h.wait(2800);
-      await h.tap({ label: 'Đóng' });
+      await h.tap({ label: 'Tutup' });
       await h.wait(900);
     },
   },
   wallet: {
     start: 'home',
-    label: 'Wallet',
-    title: 'Gifts, one scan away',
-    sub: 'A Wallet pass for your bank QR code.',
+    label: 'Dompet',
+    title: 'Hadiah, cukup satu pindai',
+    sub: 'Kartu dompet untuk kode QR bank Anda.',
     async run(h) {
       await h.wait(600);
-      await openFromFolder(h, 'Ví');
+      await openFromFolder(h, 'Dompet');
       await h.wait(3400);
-      await h.tap({ label: 'Đóng' });
+      await h.tap({ label: 'Tutup' });
       await h.wait(800);
       await closeFolder(h);
     },
@@ -119,15 +119,15 @@ export const SCENES = {
   // ── the rest of the phone ─────────────────────────────────────────────
   music: {
     start: 'lock',
-    label: 'Music',
-    title: 'A wedding playlist',
-    sub: 'Royalty-free tracks, ready to play. Skip or scrub right from the lock screen.',
+    label: 'Musik',
+    title: 'Playlist pernikahan',
+    sub: 'Lagu bebas royalti, siap diputar. Lewati atau geser langsung dari layar kunci.',
     async run(h) {
       await h.wait(1200);
-      await h.tap({ label: 'Bài tiếp' });
+      await h.tap({ label: 'Berikutnya' });
       await h.settle(400); // let the new track's metadata (duration) load
       await h.wait(1500);
-      await h.tap({ label: 'Bài tiếp' });
+      await h.tap({ label: 'Berikutnya' });
       await h.settle(400);
       await h.wait(1500);
       await h.tap({ selector: 'div.cursor-pointer.h-2' }); // seek to the middle
@@ -138,22 +138,22 @@ export const SCENES = {
   },
   phone: {
     start: 'home',
-    label: 'Phone',
-    title: 'The call log tells the story',
-    sub: 'Every call sorted out one more thing: the menu, the outfits, the photographer, the car.',
+    label: 'Telepon',
+    title: 'Riwayat panggilan ikut bercerita',
+    sub: 'Setiap panggilan menyelesaikan satu hal: menu, busana, fotografer, mobil.',
     async run(h) {
       await h.wait(500);
-      await h.tap({ label: 'Điện thoại' });
+      await h.tap({ label: 'Telepon' });
       await h.wait(3600);
-      await h.tap({ label: 'Đóng' });
+      await h.tap({ label: 'Tutup' });
       await h.wait(900);
     },
   },
   youtube: {
     start: 'home',
     label: 'YouTube',
-    title: 'A wedding MV, built right in',
-    sub: '“Lễ Đường” by Kai Đinh, on a YouTube page that looks the part.',
+    title: 'Video musik pernikahan, langsung di dalam',
+    sub: 'Lagu pernikahan pilihan, di halaman YouTube yang tampil rapi.',
     async run(h) {
       await h.wait(500);
       await openFromFolder(h, 'YouTube');
@@ -162,44 +162,44 @@ export const SCENES = {
       await h.wait(1900);
       await h.scroll(280, 1100, [220, 760]);
       await h.wait(1000);
-      await h.tap({ label: 'Đóng' });
+      await h.tap({ label: 'Tutup' });
       await h.wait(800);
       await closeFolder(h);
     },
   },
   settings: {
     start: 'home',
-    label: 'Settings',
-    title: 'Even Settings got some love',
-    sub: 'The groom’s account, a Wi‑Fi called “lemdeptry”, and toggles that actually toggle.',
+    label: 'Pengaturan',
+    title: 'Bahkan Pengaturan ikut dirapikan',
+    sub: 'Akun mempelai, Wi-Fi bernama “lemdeptry”, dan tombol yang benar-benar berfungsi.',
     async run(h) {
       await h.wait(500);
-      await openFromFolder(h, 'Cài đặt');
+      await openFromFolder(h, 'Pengaturan');
       await h.wait(1500);
       await h.tap({ selector: 'button[aria-pressed]', first: true });
       await h.wait(1000);
       await h.scroll(330, 1100);
       await h.wait(900);
-      await h.tap({ label: 'Đóng' });
+      await h.tap({ label: 'Tutup' });
       await h.wait(800);
       await closeFolder(h);
     },
   },
   calculator: {
     start: 'home',
-    label: 'Calculator',
-    title: 'Yes, the calculator works',
-    sub: '50 × 2 = 100. Here’s to a hundred happy years.',
+    label: 'Kalkulator',
+    title: 'Ya, kalkulatornya benar-benar berfungsi',
+    sub: '50 × 2 = 100. Untuk seratus tahun bahagia.',
     async run(h) {
       await h.wait(500);
-      await openFromFolder(h, 'Máy tính');
+      await openFromFolder(h, 'Kalkulator');
       await h.wait(1000);
       for (const key of ['5', '0', '×', '2', '=']) {
         await h.tap({ label: key }, { hold: 90 });
         await h.wait(260);
       }
       await h.wait(1500);
-      await h.tap({ label: 'Đóng' });
+      await h.tap({ label: 'Tutup' });
       await h.wait(800);
       await closeFolder(h);
     },
@@ -208,9 +208,9 @@ export const SCENES = {
 
 export const OUTRO = {
   n: 0,
-  label: 'Open source',
-  title: 'Thank you for coming.',
-  sub: 'Make it yours: github.com/nguyenhuugiatri/iphone-wedding-invitation',
+  label: 'Sumber terbuka',
+  title: 'Terima kasih sudah datang.',
+  sub: 'Jadikan milik Anda: github.com/nguyenhuugiatri/iphone-wedding-invitation',
 };
 
 /** Numbered caption for a scene inside a multi-scene video. */

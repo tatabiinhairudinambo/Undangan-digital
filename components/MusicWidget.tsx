@@ -76,7 +76,7 @@ export function MusicWidget({ onPlay }: MusicWidgetProps = {}) {
         <button
           type="button"
           className="w-9 h-9 grid place-items-center text-white/90"
-          aria-label="Yêu thích"
+          aria-label="Favorit"
         >
           <img src="/icons/music-star.svg" alt="" className="w-[22px] h-[21px]" />
         </button>
@@ -85,7 +85,7 @@ export function MusicWidget({ onPlay }: MusicWidgetProps = {}) {
           <motion.button
             type="button"
             onClick={prev}
-            aria-label="Bài trước"
+            aria-label="Sebelumnya"
             className="grid place-items-center"
             whileTap={{ scale: 0.88 }}
             transition={{ type: "spring", stiffness: 700, damping: 22 }}
@@ -95,7 +95,7 @@ export function MusicWidget({ onPlay }: MusicWidgetProps = {}) {
           <motion.button
             type="button"
             onClick={handleTogglePlay}
-            aria-label={playing ? "Tạm dừng" : "Phát"}
+            aria-label={playing ? "Jeda" : "Putar"}
             className="relative grid place-items-center w-8 h-8"
             whileTap={{ scale: 0.88 }}
             transition={{ type: "spring", stiffness: 700, damping: 22 }}
@@ -124,7 +124,7 @@ export function MusicWidget({ onPlay }: MusicWidgetProps = {}) {
           <motion.button
             type="button"
             onClick={next}
-            aria-label="Bài tiếp"
+            aria-label="Berikutnya"
             className="grid place-items-center"
             whileTap={{ scale: 0.88 }}
             transition={{ type: "spring", stiffness: 700, damping: 22 }}

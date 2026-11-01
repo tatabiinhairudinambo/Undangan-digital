@@ -10,8 +10,8 @@ interface LocationWidgetProps {
 }
 
 export function LocationWidget({
-  street = "AZ Luxury Garden",
-  address = "123, Tôn Đức Thắng, La Gi",
+  street = "Gedung Serbaguna Melati",
+  address = "Jl. Jend. Sudirman No. 123, Jakarta Selatan",
   photoSrc = "/profile.jpeg",
   mapSrc = "/map-tile.svg",
   href,
@@ -22,7 +22,7 @@ export function LocationWidget({
         href ? () => openMaps(href) : undefined
       }
       role={href ? "button" : undefined}
-      aria-label={href ? `Mở ${street} trong Maps` : undefined}
+      aria-label={href ? `Buka ${street} di Maps` : undefined}
       className={
         "relative h-[158px] w-[158px] overflow-hidden" +
         (href

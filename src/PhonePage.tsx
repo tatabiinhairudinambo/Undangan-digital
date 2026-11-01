@@ -24,20 +24,20 @@ type Recent = {
   action: "phone" | "video";
 };
 const RECENTS: Recent[] = [
-  { name: "Trí", phone: "093••••••", note: "Chốt menu nhà hàng", time: "9:22", action: "phone" },
+  { name: "Mama", phone: "0857••••••", note: "Konfirmasi jumlah tamu", time: "9:22", action: "phone" },
   {
-    name: "Như", phone: "076••••••", missed: true, unread: true,
-    note: "Chốt áo dài & vest", time: "9:21", action: "phone",
+    name: "Panitia Wisuda", phone: "0812••••••", missed: true, unread: true,
+    note: "Jadwal gladi bersih", time: "9:21", action: "phone",
   },
-  { name: "Như", phone: "076••••••", subtitle: "FaceTime Video", time: "8:15", action: "video" },
+  { name: "Dimas", phone: "0812••••••", subtitle: "FaceTime Video", time: "8:15", action: "video" },
   {
-    name: "Trí", phone: "093••••••", missed: true, unread: true,
-    note: "Chốt thợ ảnh cưới", time: "Hôm qua", action: "phone",
+    name: "Pak Budi", phone: "0812••••••", missed: true, unread: true,
+    note: "Surat keterangan lulus", time: "Kemarin", action: "phone",
   },
-  { name: "Trí", phone: "093••••••", subtitle: "FaceTime Video", time: "Hôm qua", action: "video" },
-  { name: "Như", phone: "076••••••", note: "Chốt xe hoa", time: "Hôm qua", action: "phone" },
-  { name: "Như", phone: "076••••••", note: "Chốt thiệp mời", time: "Hôm qua", action: "phone" },
-  { name: "Trí", phone: "093••••••", subtitle: "093 ••• ••••", time: "Hôm qua", action: "phone" },
+  { name: "Nadia", phone: "0857••••••", subtitle: "FaceTime Video", time: "Kemarin", action: "video" },
+  { name: "Kampus", phone: "0857••••••", note: "Validasi undangan tamu", time: "Kemarin", action: "phone" },
+  { name: "Mama", phone: "0857••••••", note: "Pesan katering syukuran", time: "Kemarin", action: "phone" },
+  { name: "Dimas", phone: "0812••••••", subtitle: "0812 •••• ••••", time: "Kemarin", action: "phone" },
 ];
 
 /* ── icons (inline so we control fill / match SF Symbols) ─────────── */
@@ -133,7 +133,7 @@ function ActionButton({ action, onPress }: { action: "phone" | "video"; onPress:
       className="flex h-[41px] w-[41px] shrink-0 items-center justify-center rounded-full"
       style={{ background: isVideo ? BLUE : BTN_GRAY }}
       {...tap}
-      aria-label={isVideo ? "FaceTime" : "Gọi"}
+      aria-label={isVideo ? "FaceTime" : "Telepon"}
     >
       {isVideo ? <VideoFill size={20} color="#fff" /> : <PhoneFill size={20} color={BLUE} />}
     </motion.button>
@@ -236,22 +236,22 @@ function TabBar() {
             {/* active: Calls */}
             <motion.button type="button" className="relative flex h-[49px] w-[79px] flex-col items-center justify-center gap-[2px] rounded-[24px] bg-white shadow-sm" {...tap}>
               <ClockIcon size={20} />
-              <span className="text-[10px] font-semibold leading-none" style={{ color: BLUE }}>Cuộc gọi</span>
+              <span className="text-[10px] font-semibold leading-none" style={{ color: BLUE }}>Panggilan</span>
               <span className="absolute -right-[2px] top-[2px] flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-bold text-white" style={{ background: "#FF3B30" }}>2</span>
             </motion.button>
             <motion.button type="button" className="flex flex-1 flex-col items-center justify-center gap-[3px]" {...tap}>
               <ContactsIcon size={21} />
-              <span className="text-[9px] font-semibold leading-none text-[#333]">Danh bạ</span>
+              <span className="text-[9px] font-semibold leading-none text-[#333]">Kontak</span>
             </motion.button>
             <motion.button type="button" className="flex flex-1 flex-col items-center justify-center gap-[4px]" {...tap}>
               <KeypadIcon size={19} />
-              <span className="text-[9px] font-semibold leading-none text-[#333]">Bàn phím</span>
+              <span className="text-[9px] font-semibold leading-none text-[#333]">Tombol Angka</span>
             </motion.button>
           </div>
         </Glass>
         {/* search */}
         <Glass w={55} h={55} radius={27.5}>
-          <motion.button type="button" className="flex h-full w-full items-center justify-center" {...tap} aria-label="Tìm kiếm">
+          <motion.button type="button" className="flex h-full w-full items-center justify-center" {...tap} aria-label="Cari">
             <SearchIcon />
           </motion.button>
         </Glass>
@@ -270,8 +270,8 @@ export default function PhonePage() {
         style={{ paddingTop: "calc(var(--safe-top) + 10px)", paddingBottom: 8 }}
       >
         <div className="relative flex h-11 items-center justify-end">
-          <span className="absolute left-1/2 -translate-x-1/2 text-[17px] font-semibold text-black">Cuộc gọi</span>
-          <motion.button type="button" className="relative h-9 w-9" {...tap} aria-label="Bộ lọc">
+          <span className="absolute left-1/2 -translate-x-1/2 text-[17px] font-semibold text-black">Panggilan</span>
+          <motion.button type="button" className="relative h-9 w-9" {...tap} aria-label="Filter">
             <Glass w={36} h={36} radius={18}>
               <FilterIcon />
             </Glass>
@@ -289,7 +289,7 @@ export default function PhonePage() {
         }}
       >
         {/* recents */}
-        <h2 className="mb-1 text-[22px] font-bold text-black">Gần đây</h2>
+        <h2 className="mb-1 text-[22px] font-bold text-black">Terbaru</h2>
         <div>
           {RECENTS.map((r, i) => (
             <RecentRow key={i} r={r} last={i === RECENTS.length - 1} />

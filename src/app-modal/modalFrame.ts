@@ -92,8 +92,34 @@ const MODAL_HEADER: MotionProps = {
 function modalShell(
   origin: ModalOrigin,
   viewport: { w: number; h: number },
-  modalSpring: Transition
+  modalSpring: Transition,
+  transformOnly: boolean,
+  reducedMotion: boolean
 ): MotionProps {
+  // Keep the content at its final size during scroll/widget opens. Animating
+  // width/height repeatedly relaid out the gallery and restarted its tweens.
+  if (transformOnly || reducedMotion) {
+    const fullSize = { top: 0, left: 0, width: viewport.w, height: viewport.h };
+    const collapsed = reducedMotion
+      ? { x: 0, y: 0, scaleX: 1, scaleY: 1, opacity: 0 }
+      : {
+          x: origin.x - viewport.w / 2,
+          y: origin.y - viewport.h / 2,
+          scaleX: origin.w / Math.max(1, viewport.w),
+          scaleY: origin.h / Math.max(1, viewport.h),
+          opacity: 0,
+        };
+    return {
+      initial: { ...fullSize, ...collapsed },
+      animate: { ...fullSize, x: 0, y: 0, scaleX: 1, scaleY: 1, opacity: 1 },
+      exit: {
+        ...collapsed,
+        transition: { duration: reducedMotion ? 0 : 0.16, ease: "easeIn" },
+      },
+      transition: { duration: reducedMotion ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] },
+    };
+  }
+
   const collapsed = {
     top: origin.y - origin.h / 2,
     left: origin.x - origin.w / 2,
@@ -131,18 +157,24 @@ export function buildModalFrame(
   origin: ModalOrigin,
   viewport: { w: number; h: number },
   modalSpring: Transition,
-  appReady: boolean
+  appReady: boolean,
+  reducedMotion = false
 ): ModalFrame {
+  const immediate = Boolean(payload.hideIcon) || reducedMotion;
   return {
     key: payload.key,
     iconSrc: payload.iconSrc,
     content: payload.content,
     chrome: payload.chrome,
-    appReady,
-    shell: modalShell(origin, viewport, modalSpring),
-    backplate: MODAL_BACKPLATE,
+    appReady: immediate || appReady,
+    shell: modalShell(origin, viewport, modalSpring, immediate, reducedMotion),
+    backplate: immediate
+      ? { initial: { opacity: 1 }, animate: { opacity: 1 }, exit: { opacity: 1 } }
+      : MODAL_BACKPLATE,
     iconCrossfade: payload.hideIcon ? MODAL_ICON_HIDDEN : MODAL_ICON_CROSSFADE,
     header: MODAL_HEADER,
-    body: modalBody(appReady),
+    body: immediate
+      ? { initial: { opacity: 1 }, animate: { opacity: 1 }, exit: { opacity: 1 } }
+      : modalBody(appReady),
   };
 }

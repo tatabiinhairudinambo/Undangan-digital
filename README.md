@@ -1,149 +1,143 @@
-# iPhone Wedding Invitation
+# Undangan Pernikahan iPhone
 
-**A wedding invitation website disguised as an iPhone.**
+**Undangan pernikahan online yang menyamar sebagai iPhone.**
 
-We (Trí & Như) got married in June 2026. Instead of sending a PDF card, we sent our guests a link. It opens on a lock screen with a photo and a wedding playlist ready to play. Unlock it and you get a home screen full of apps that actually open.
+Kami (Raka & Sinta) menikah dan mengirim undangan bukan sebagai kartu PDF, melainkan sebuah tautan. Tautan itu terbuka di layar kunci dengan foto dan playlist pernikahan yang siap diputar. Setelah dibuka, tamu masuk ke layar utama berisi aplikasi-aplikasi yang benar-benar bisa dibuka.
 
-Under the fun, it does the usual invitation jobs: tells people when and where, shows off the photos, and gets everyone to RSVP. This repo is that invitation as a free, open-source template. Our photos and texts are swapped for samples, so you can drop in your own and have your digital wedding invitation live on Vercel in a few minutes.
+Di balik keseruannya, undangan ini tetap menjalankan tugas utamanya: memberi tahu kapan dan di mana acaranya, menampilkan foto-foto, dan mengumpulkan konfirmasi kehadiran (RSVP). Repo ini adalah undangan tersebut sebagai templat gratis dan open source. Foto serta teks asli sudah diganti dengan contoh, jadi Anda bisa memasukkan data sendiri dan undangan digital Anda bisa online di Vercel dalam beberapa menit. Seluruh antarmuka sudah berbahasa Indonesia.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnguyenhuugiatri%2Fiphone-wedding-invitation&project-name=iphone-wedding-invitation&repository-name=iphone-wedding-invitation)
+[![Deploy dengan Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnguyenhuugiatri%2Fiphone-wedding-invitation&project-name=iphone-wedding-invitation&repository-name=iphone-wedding-invitation)
 
-**Live demo:** [iphone-wedding-invitation.vercel.app](https://iphone-wedding-invitation.vercel.app)
+**Demo langsung:** [iphone-wedding-invitation.vercel.app](https://iphone-wedding-invitation.vercel.app)
 
 <p align="center">
   <a href="docs/demo/demo.mp4">
-    <img src="docs/demo/poster.png" alt="iPhone wedding invitation demo: an iPhone home screen with wedding widgets" width="860">
+    <img src="docs/demo/poster.png" alt="Demo undangan pernikahan iPhone: layar utama iPhone dengan widget pernikahan" width="860">
   </a>
   <br>
 </p>
 
 https://github.com/user-attachments/assets/7df48880-b32b-4f9e-b8db-c819a7d22c68
 
-## Tiếng Việt
+## Untuk apa undangan ini
 
-**Thiệp cưới online giao diện iPhone**, mã nguồn mở và miễn phí. Khách mở link thiệp là thấy màn hình khoá với ảnh cưới và playlist nhạc cưới. Mở khoá ra là màn hình chính với các app bấm vào được: xác nhận tham dự qua Google Form trong Safari, ngày giờ trong Lịch, chỉ đường trong Bản đồ, album ảnh cưới trong Ảnh và mã QR mừng cưới trong Ví.
+Tamu memang hampir selalu membuka tautan undangan dari ponsel, jadi undangan ini pura-pura menjadi ponsel itu sendiri. Tidak ada instruksi yang diperlukan. Geser, ketuk, dan semuanya terbuka.
 
-Muốn làm thiệp cưới điện tử cho đám cưới của mình: fork repo, thay ảnh và thông tin trong vài file (xem [Make it yours](#make-it-yours)), rồi deploy miễn phí lên Vercel bằng nút ở trên. Giao diện đã sẵn tiếng Việt.
+Ada tiga tugas utama:
 
-## What it's for
+1. **Mengumpulkan RSVP.** Google Form menanyakan apakah tamu datang, berapa orang yang dibawa, dan apakah ingin ikut shuttle bus. Formulir ini bisa diakses dari widget Daftar Bacaan, dari Safari di dock, dan dari undangan di aplikasi Catatan.
+2. **Menunjukkan waktu dan tempat.** Widget Kalender berisi kedua acara, widget peta yang membuka Google Maps, dan undangan lengkap yang ditulis di Catatan.
+3. **Menampilkan foto.** Album bergaya aplikasi Foto dengan grid masonry dan penampil layar penuh yang bisa digeser.
 
-Most guests open a wedding link on their phone anyway, so the invite pretends to be one. Nobody needs instructions. You swipe, you tap, things open.
+Ada juga pelengkap yang tidak kami tahan untuk tidak dibuat: obrolan antara kedua mempelai, riwayat panggilan selama masa persiapan, kode QR hadiah di Dompet, dan kalkulator yang benar-benar berfungsi.
 
-It has three jobs:
-
-1. **Collect RSVPs.** A Google Form asks whether you're coming, how many people you're bringing, and whether you want a seat on the shuttle bus. Guests find it in the Reading List widget, in Safari on the dock, and in the invite inside Notes.
-2. **Show the when and where.** A Calendar widget with both events, a map widget that opens Google Maps, and the full invitation written up in Notes.
-3. **Show the photos.** A Photos-style album with a masonry grid and a viewer you can swipe through.
-
-Then there are the extras we couldn't resist: a chat between the couple, the call log from the planning weeks, a gift QR in Wallet, and a calculator that works.
-
-## Take the tour
+## Tur singkat
 
 <table>
   <tr>
-    <td align="center"><img src="docs/demo/demo.gif" width="240" alt="Lock screen, home screen, Calendar, Notes and Photos"><br><sub>Lock screen → Calendar → Notes → Photos</sub></td>
-    <td align="center"><img src="docs/demo/apps/music.gif" width="240" alt="Music widget on the lock screen"><br><sub>Music</sub></td>
-    <td align="center"><img src="docs/demo/apps/phone.gif" width="240" alt="Phone app call log"><br><sub>Phone</sub></td>
+    <td align="center"><img src="docs/demo/demo.gif" width="240" alt="Layar kunci, layar utama, Kalender, Catatan dan Foto"><br><sub>Layar kunci → Kalender → Catatan → Foto</sub></td>
+    <td align="center"><img src="docs/demo/apps/music.gif" width="240" alt="Widget Musik di layar kunci"><br><sub>Musik</sub></td>
+    <td align="center"><img src="docs/demo/apps/phone.gif" width="240" alt="Riwayat panggilan di aplikasi Telepon"><br><sub>Telepon</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/demo/apps/youtube.gif" width="240" alt="YouTube app with an embedded music video"><br><sub>YouTube</sub></td>
-    <td align="center"><img src="docs/demo/apps/settings.gif" width="240" alt="Settings app"><br><sub>Settings</sub></td>
-    <td align="center"><img src="docs/demo/apps/calculator.gif" width="240" alt="Calculator app"><br><sub>Calculator</sub></td>
+    <td align="center"><img src="docs/demo/apps/youtube.gif" width="240" alt="Aplikasi YouTube dengan video musik tersemat"><br><sub>YouTube</sub></td>
+    <td align="center"><img src="docs/demo/apps/settings.gif" width="240" alt="Aplikasi Pengaturan"><br><sub>Pengaturan</sub></td>
+    <td align="center"><img src="docs/demo/apps/calculator.gif" width="240" alt="Aplikasi Kalkulator"><br><sub>Kalkulator</sub></td>
   </tr>
 </table>
 
-### Every app, and what it's for
+### Daftar aplikasi dan fungsinya
 
-| App | What guests get |
+| Aplikasi | Yang didapat tamu |
 | --- | --- |
-| Lock screen | A photo, the clock and a music widget. Tap play and the phone unlocks itself. |
-| Home screen | Calendar, Maps and Reading List widgets, an app folder and the dock. |
-| Calendar | The ceremony (14:30–15:00) and the reception (17:30–20:30), with the venue. |
-| Maps | Opens the venue in Google Maps. |
-| Notes | The invitation itself, with a directions link and an RSVP link. |
-| Safari | The RSVP form, right inside the phone. |
-| Photos | The wedding album: a masonry grid and a swipeable full-screen viewer. |
-| Music | A royalty-free wedding playlist. Skip and scrub from the lock screen. |
-| Messages | A short chat between the bride and groom. |
-| Phone | The call log from planning: the menu, the outfits, the photographer, the car. |
-| Wallet | A gift pass with a bank QR code. |
-| YouTube | The "Lễ Đường" music video by Kai Đinh (a YouTube embed). |
-| Settings, Calculator | Easter eggs. The toggles toggle and the math is right. |
+| Layar kunci | Foto, jam dan widget musik. Ketuk putar, ponsel terbuka sendiri. |
+| Layar utama | Widget Kalender, Peta dan Daftar Bacaan, satu folder aplikasi dan dock. |
+| Kalender | Upacara pernikahan (14.30–15.00) dan resepsi (17.30–20.30), lengkap dengan lokasi. |
+| Peta | Membuka lokasi acara di Google Maps. |
+| Catatan | Undangan itu sendiri, dengan tautan petunjuk arah dan tautan RSVP. |
+| Safari | Formulir RSVP, langsung di dalam ponsel. |
+| Foto | Album pernikahan: grid masonry dan penampil layar penuh yang bisa digeser. |
+| Musik | Playlist pernikahan bebas royalti. Bisa dilewati dan digeser dari layar kunci. |
+| Pesan | Obrolan singkat antara kedua mempelai. |
+| Telepon | Riwayat panggilan masa persiapan: menu, busana, fotografer, mobil. |
+| Dompet | Kartu hadiah dengan kode QR bank. |
+| YouTube | Video musik pernikahan (embed YouTube). |
+| Pengaturan, Kalkulator | Easter egg. Tombolnya benar-benar berfungsi dan hitungannya benar. |
 
-The UI text is in Vietnamese, because our guests were. Everything is plain strings in the components, so translating it is a find-and-replace job.
+Seluruh teks antarmuka berbahasa Indonesia dan disimpan sebagai string biasa di dalam komponen, jadi menggantinya cukup dengan cari dan ganti.
 
-## Make it yours
+## Jadikan milik Anda
 
 ```bash
 pnpm install
 pnpm dev        # http://localhost:5173
 ```
 
-Everything personal lives in a handful of files:
+Semua data pribadi ada di beberapa file saja:
 
-| What | Where |
+| Apa | Di mana |
 | --- | --- |
-| Names, date, event times | [`components/calendarData.ts`](components/calendarData.ts), [`src/NotesPage.tsx`](src/NotesPage.tsx), [`src/WalletPage.tsx`](src/WalletPage.tsx), [`index.html`](index.html) (title, share tags and the short intro shown beside the phone on wide screens) |
-| Venue and map link | [`lib/maps.ts`](lib/maps.ts), [`components/calendarData.ts`](components/calendarData.ts) |
-| Wallpapers | `public/wallpaper-lock.jpeg` (lock screen), `public/wallpaper-home.jpeg` (home screen) |
-| Widget photos | `public/profile.jpeg` (Maps widget), `public/reading-list.jpeg` (Reading List widget) |
-| Photos | `public/photos/`, plus the list in [`src/PhotosPage.tsx`](src/PhotosPage.tsx) |
-| Playlist | `public/music/`, plus `PLAYLIST` in [`src/music/MusicProvider.tsx`](src/music/MusicProvider.tsx) |
-| RSVP form | [`scripts/wedding-form.gs`](scripts/wedding-form.gs), `HOME` in [`src/SafariPage.tsx`](src/SafariPage.tsx) |
-| Gift QR | `public/gift-qr.png` (the sample just links to this repo) |
-| Chat and call log | [`src/MessagesPage.tsx`](src/MessagesPage.tsx), [`src/PhonePage.tsx`](src/PhonePage.tsx) |
-| Share image and icons | `pnpm gen:meta` rebuilds `og-image.jpg` from the home wallpaper (replacing the demo's designed one), and the favicons from `public/favicon.svg` |
+| Nama, tanggal, waktu acara | [`components/calendarData.ts`](components/calendarData.ts), [`src/NotesPage.tsx`](src/NotesPage.tsx), [`src/WalletPage.tsx`](src/WalletPage.tsx), [`index.html`](index.html) (judul, tag berbagi dan intro singkat di samping ponsel pada layar lebar) |
+| Lokasi acara dan tautan peta | [`lib/maps.ts`](lib/maps.ts), [`components/calendarData.ts`](components/calendarData.ts) |
+| Wallpaper | `public/wallpaper-lock.jpeg` (layar kunci), `public/wallpaper-home.jpeg` (layar utama) |
+| Foto widget | `public/profile.jpeg` (widget Peta), `public/reading-list.jpeg` (widget Daftar Bacaan) |
+| Foto | `public/photos/`, plus daftarnya di [`src/PhotosPage.tsx`](src/PhotosPage.tsx) |
+| Playlist | `public/music/`, plus `PLAYLIST` di [`src/music/MusicProvider.tsx`](src/music/MusicProvider.tsx) |
+| Formulir RSVP | [`scripts/wedding-form.gs`](scripts/wedding-form.gs), `HOME` di [`src/SafariPage.tsx`](src/SafariPage.tsx) |
+| QR hadiah | `public/gift-qr.png` (contohnya hanya mengarah ke repo ini) |
+| Obrolan dan riwayat panggilan | [`src/MessagesPage.tsx`](src/MessagesPage.tsx), [`src/PhonePage.tsx`](src/PhonePage.tsx) |
+| Gambar berbagi dan ikon | `pnpm gen:meta` membangun ulang `og-image.jpg` dari wallpaper layar utama (menggantikan versi desain demo), juga favicon dari `public/favicon.svg` |
 
-Keep photos around 1600 px on the long edge. Nothing resizes them for you, and guests are on mobile data.
+Jaga ukuran foto sekitar 1600 px pada sisi terpanjang. Tidak ada yang mengubah ukurannya otomatis, dan tamu membuka undangan lewat data seluler.
 
-## How the RSVP works
+## Cara kerja RSVP
 
-The form is plain Google Forms, generated by [`scripts/wedding-form.gs`](scripts/wedding-form.gs) (Google Apps Script). There's no backend to run: answers collect in Google Forms, and you can link a Sheet if you'd rather work in a spreadsheet.
+Formulirnya Google Forms biasa, dibuat oleh [`scripts/wedding-form.gs`](scripts/wedding-form.gs) (Google Apps Script). Tidak ada backend yang perlu dijalankan: jawaban terkumpul di Google Forms, dan Anda bisa menautkannya ke Spreadsheet bila lebih nyaman bekerja dengan tabel.
 
-The questions branch based on the answers:
+Pertanyaannya bercabang sesuai jawaban:
 
-- Name
-- Coming? If no, skip straight to leaving a message.
-- How many people, kids included.
-- Shuttle bus? If yes: pickup point, whether you're taking the ride there and/or back, and how many seats each way, plus a passenger list (name and birth year).
-- Anything else the couple should know, and a message for them.
+- Nama.
+- Apakah hadir? Jika tidak, langsung ke bagian ucapan.
+- Berapa orang yang hadir, termasuk anak-anak.
+- Ikut shuttle bus? Jika ya: titik penjemputan, ikut berangkat dan/atau pulang, jumlah kursi masing-masing arah, plus daftar penumpang (nama dan tahun lahir).
+- Catatan lain untuk mempelai, dan ucapan untuk mereka.
 
-Guests can come back and edit their answers. `generatePrefillUrls()` builds a personal link for each guest with their name already filled in, and prints the list as TSV you can paste into a Sheet.
+Tamu bisa kembali dan mengubah jawabannya. `generatePrefillUrls()` membuat tautan pribadi untuk setiap tamu dengan nama yang sudah terisi, lalu mencetak daftarnya sebagai TSV yang bisa ditempel ke Spreadsheet.
 
-To set it up: paste the script into [script.google.com](https://script.google.com), run `createWeddingForm()`, then put the form URL in `HOME` in [`src/SafariPage.tsx`](src/SafariPage.tsx).
+Cara menyiapkannya: tempel skrip ke [script.google.com](https://script.google.com), jalankan `createWeddingForm()`, lalu masukkan URL formulir ke `HOME` di [`src/SafariPage.tsx`](src/SafariPage.tsx).
 
-> Our wedding is over, so the form in the demo is closed. Safari shows Google's "no longer accepting responses" page until you plug in your own.
+> Undangan demo ini sudah selesai, jadi formulirnya ditutup. Safari akan menampilkan halaman "tidak lagi menerima jawaban" dari Google sampai Anda memasang formulir sendiri.
 
-## Deploying
+## Deploy
 
-It's a static Vite site, so any static host works. The simplest is Vercel:
+Ini situs Vite statis, jadi host statis apa pun bisa dipakai. Paling mudah Vercel:
 
-- **One click:** use the **Deploy with Vercel** button above. It forks the repo and deploys it.
-- **From your own fork:** import it at [vercel.com/new](https://vercel.com/new). The Vite preset is detected automatically and every push redeploys.
+- **Sekali klik:** gunakan tombol **Deploy dengan Vercel** di atas. Repo akan di-fork dan langsung di-deploy.
+- **Dari fork Anda sendiri:** impor di [vercel.com/new](https://vercel.com/new). Preset Vite terdeteksi otomatis dan setiap push akan deploy ulang.
 
-[`vercel.json`](vercel.json) only adds long-lived caching for the hashed files in `/assets`. If you use your own domain, update the URLs in `index.html`, `public/robots.txt` and `public/sitemap.xml`.
+[`vercel.json`](vercel.json) hanya menambahkan cache jangka panjang untuk file ber-hash di `/assets`. Jika memakai domain sendiri, perbarui URL di `index.html`, `public/robots.txt` dan `public/sitemap.xml`.
 
-## Built with
+## Dibangun dengan
 
-React 19 and TypeScript on Vite 8, Tailwind CSS 4, Framer Motion for all the iOS-style springs, and GSAP for the photo grid.
+React 19 dan TypeScript di Vite 8, Tailwind CSS 4, Framer Motion untuk semua animasi pegas bergaya iOS, dan GSAP untuk grid foto.
 
-Spacing, type and motion follow Apple's Human Interface Guidelines. On a desktop the app sits inside a 440×956 iPhone frame; on a phone it goes full screen. SF Pro isn't bundled (its license doesn't allow it): Apple devices render it natively, and everything else falls back to the system font.
+Spasi, tipografi dan gerak mengikuti Apple Human Interface Guidelines. Di desktop, aplikasi tampil di dalam bingkai iPhone 440×956; di ponsel menjadi layar penuh. SF Pro tidak dibundel (lisensinya tidak mengizinkan): perangkat Apple merendernya secara native, perangkat lain memakai font sistem.
 
-## Recording the demo videos
+## Merekam video demo
 
-Everything in `docs/demo/` is recorded from the real app. Nothing is edited by hand. These takes come from our actual invitation, before the photos, chat and playlist were swapped for the samples in this repo, so re-recording gives you your own content. [`scripts/promo-video/`](scripts/promo-video) drives headless Chrome on a frozen clock and advances it exactly 1/60 s per frame, so every animation comes out smooth however slow the machine is.
+Semua isi `docs/demo/` direkam dari aplikasi asli. Tidak ada yang diedit manual. Rekaman ini berasal dari undangan kami yang sebenarnya, sebelum foto, obrolan dan playlist diganti dengan contoh di repo ini, jadi merekam ulang akan menghasilkan konten Anda sendiri. [`scripts/promo-video/`](scripts/promo-video) mengendalikan Chrome headless dengan jam yang dibekukan dan memajukannya tepat 1/60 detik per frame, sehingga setiap animasi tetap mulus seberapa pun lambat mesinnya.
 
 ```bash
-pnpm add -D puppeteer-core    # also needs Google Chrome and ffmpeg
+pnpm add -D puppeteer-core    # juga butuh Google Chrome dan ffmpeg
 pnpm exec vite --config scripts/promo-video/vite.config.mjs --port 5199
 
 node scripts/promo-video/main.mjs                  # docs/demo/demo.mp4
-node scripts/promo-video/apps.mjs                  # docs/demo/apps/* and apps.mp4
-node scripts/promo-video/apps.mjs --only=music     # a single clip (add --preview for a fast 30 fps pass)
+node scripts/promo-video/apps.mjs                  # docs/demo/apps/* dan apps.mp4
+node scripts/promo-video/apps.mjs --only=music     # satu klip saja (tambahkan --preview untuk render cepat 30 fps)
 ```
 
-Captions and the script for each scene are in [`scripts/promo-video/scenes.mjs`](scripts/promo-video/scenes.mjs).
+Teks caption dan skrip setiap adegan ada di [`scripts/promo-video/scenes.mjs`](scripts/promo-video/scenes.mjs).
 
-## License
+## Lisensi
 
-The code is [MIT](LICENSE). The sample photos (Unsplash), the music (royalty-free, attribution in [CREDITS.md](CREDITS.md)) and two components adapted from React Bits have their own licenses, listed in [CREDITS.md](CREDITS.md). Apple, iPhone, iOS and the app icons belong to Apple, and YouTube belongs to Google. This project isn't affiliated with either.
+Kodenya [MIT](LICENSE). Foto contoh (Unsplash), musik (bebas royalti, atribusi di [CREDITS.md](CREDITS.md)) dan dua komponen yang diadaptasi dari React Bits memiliki lisensinya masing-masing, tercantum di [CREDITS.md](CREDITS.md). Apple, iPhone, iOS dan ikon aplikasi milik Apple, sedangkan YouTube milik Google. Proyek ini tidak berafiliasi dengan keduanya.

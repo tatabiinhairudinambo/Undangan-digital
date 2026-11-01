@@ -63,7 +63,7 @@ export function AppModal({
                 type="button"
                 onClick={onClose}
                 className="w-11 h-11 shrink-0 rounded-full bg-white/30 backdrop-blur-xl text-white flex items-center justify-center hover:bg-white/40"
-                aria-label="Đóng"
+                aria-label="Tutup"
               >
                 <X size={20} strokeWidth={2.5} />
               </button>
@@ -78,7 +78,7 @@ export function AppModal({
           onClick={onClose}
           className="absolute z-30 transition-transform active:scale-[0.97]"
           style={{ top: "var(--safe-top)", left: 14, width: 51, height: 51 }}
-          aria-label="Đóng"
+          aria-label="Tutup"
           {...frame.header}
         >
           <div className="relative h-full w-full">
