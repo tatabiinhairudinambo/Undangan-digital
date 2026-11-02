@@ -2,16 +2,9 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { MusicContext } from "./context";
 import type { MusicTrack } from "./types";
 
-// Royalty-free (CC BY / public domain) — attribution lives in CREDITS.md.
+// Audio uploaded for this invitation.
 const PLAYLIST: MusicTrack[] = [
-  { file: "canon-in-d", title: "Canon in D Major", artist: "Kevin MacLeod" },
-  { file: "there-is-romance", title: "There is Romance", artist: "Kevin MacLeod" },
-  { file: "clear-air", title: "Clear Air", artist: "Kevin MacLeod" },
-  { file: "air-on-the-g-string", title: "Air on the G String", artist: "U.S. Air Force Strings" },
-  { file: "clair-de-lune", title: "Clair de Lune", artist: "Laurens Goedhart" },
-  { file: "windswept", title: "Windswept", artist: "Kevin MacLeod" },
-  { file: "jesu-joy-of-mans-desiring", title: "Jesu, Joy of Man's Desiring", artist: "Kevin MacLeod" },
-  { file: "gymnopedie-no-1", title: "Gymnopedie No. 1", artist: "Kevin MacLeod" },
+  { file: "ssstik.io_1793610599459", title: "Musik Undangan", artist: "Audio pilihan" },
 ];
 
 const srcFor = (track: MusicTrack) => `/music/${track.file}.mp3`;
@@ -44,6 +37,10 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   // truth; changing it swaps the <audio> src on the next render.
   const playIndex = (i: number) => {
     const idx = ((i % PLAYLIST.length) + PLAYLIST.length) % PLAYLIST.length;
+    if (idx === indexRef.current && audioRef.current) {
+      audioRef.current.currentTime = 0;
+      void audioRef.current.play().catch(() => setPlaying(false));
+    }
     indexRef.current = idx;
     setCurrentIndex(idx);
     setCurrentTime(0);
@@ -58,7 +55,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       a.pause();
       setPlaying(false);
     } else {
-      a.play().catch(() => {});
+      a.play().catch(() => setPlaying(false));
       setPlaying(true);
     }
   };
@@ -84,6 +81,9 @@ export function MusicProvider({ children }: { children: ReactNode }) {
         ref={audioRef}
         src={srcFor(PLAYLIST[currentIndex])}
         preload="metadata"
+        loop={PLAYLIST.length === 1}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
         onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
         onLoadedMetadata={(e) => setDuration(e.currentTarget.duration || 0)}
         onEnded={() => playIndex(indexRef.current + 1)}

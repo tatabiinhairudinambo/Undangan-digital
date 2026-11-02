@@ -769,7 +769,7 @@ const Lanyard = ({
       const fallback = document.createElement('img');
       fallback.className = 'lanyard-fallback';
       fallback.src = '/lanyard-front.jpg';
-      fallback.alt = 'Kartu wisudawan Raka Dwi Pratama';
+      fallback.alt = 'Kartu wisudawan — ini hanyalah demo';
       container.appendChild(fallback);
       return undefined;
     }
@@ -824,11 +824,17 @@ const Lanyard = ({
 
     const frontMaterial = new THREE.MeshPhysicalMaterial({
       map: frontTexture,
+      polygonOffset: true,
+      polygonOffsetFactor: -1,
+      polygonOffsetUnits: -1,
       normalMap: grain,
       normalScale: new THREE.Vector2(0.06, 0.06)
     });
     const backMaterial = new THREE.MeshPhysicalMaterial({
       map: backTexture,
+      polygonOffset: true,
+      polygonOffsetFactor: -1,
+      polygonOffsetUnits: -1,
       normalMap: grain,
       normalScale: new THREE.Vector2(0.06, 0.06)
     });
@@ -996,9 +1002,18 @@ const Lanyard = ({
       if (faceKey !== applied.faceKey) paintFaces();
       if (s.strapColor !== applied.strapColor) repaintStrap();
 
-      const finish = FINISHES[s.finish] || FINISHES.glossy;
+      const flat = s.finish === 'flat';
+      const finish = flat ? FINISHES.matte : FINISHES[s.finish] || FINISHES.glossy;
       const card = parseColor(s.cardColor, [1, 1, 1]);
       [frontMaterial, backMaterial].forEach(material => {
+        // Unlit photo colors: emission replaces diffuse and specular lighting.
+        material.color.set(flat ? 0x000000 : 0xffffff);
+        material.emissive.set(flat ? 0xffffff : 0x000000);
+        material.emissiveMap = material.map;
+        material.specularIntensity = flat ? 0 : 1;
+        material.normalScale.setScalar(flat ? 0 : 0.06);
+        material.toneMapped = !flat;
+        material.needsUpdate = true;
         material.roughness = finish.roughness;
         material.metalness = finish.metalness;
         material.clearcoat = finish.clearcoat;

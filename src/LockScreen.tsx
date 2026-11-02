@@ -3,7 +3,7 @@ import { GraduationCap, LockKeyhole } from "lucide-react";
 import { getGuestName } from "../lib/guest";
 import { Clock } from "../components/Clock";
 import FloralCardFrame from "./FloralCardFrame";
-import { useNotificationSound } from "./useNotificationSound";
+import { useMusic } from "./music";
 
 interface LockScreenProps {
   y: MotionValue<number>;
@@ -15,7 +15,11 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
   const radius = useTransform(y, [-150, 0], [48, 0], { clamp: true });
   const reduceMotion = useReducedMotion();
   const notificationDelay = reduceMotion ? 0 : 0.5;
-  useNotificationSound(ready, notificationDelay);
+  const { playing, togglePlay } = useMusic();
+  const openInvitation = () => {
+    if (!playing) togglePlay();
+    onUnlock();
+  };
 
   return (
     <motion.div
@@ -32,20 +36,29 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
         <Clock showDate />
         <motion.button
           type="button"
-          onClick={onUnlock}
+          onClick={openInvitation}
           aria-label="Buka undangan wisuda"
           initial={{ opacity: 0, y: -180 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: reduceMotion ? 0 : -180 }}
           transition={{ delay: ready ? notificationDelay : 0, duration: reduceMotion ? 0 : 1.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-6 w-full cursor-pointer rounded-[26px] border border-white/70 bg-white/55 px-8 py-7 text-left text-[#1c1c1e] shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_12px_32px_rgba(0,0,0,0.15)] backdrop-blur-[6px] backdrop-saturate-125 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="relative mt-6 w-full cursor-pointer overflow-hidden rounded-[26px] border border-[#C6A36A]/70 bg-white px-8 pb-9 pt-24 text-left text-[#1c1c1e] shadow-[0_12px_32px_rgba(0,0,0,0.2)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
+          <svg aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-20 w-full" viewBox="0 0 420 80" preserveAspectRatio="none" fill="none">
+            <path d="M0 0H420L210 66Z" fill="#C6283E" />
+            <path d="M0 0L210 66L420 0" stroke="#C6A36A" strokeWidth="1.5" />
+            <path d="M14 0L210 56L406 0" stroke="#F7E4B9" strokeOpacity=".4" />
+          </svg>
+          <svg aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full" viewBox="0 0 420 96" preserveAspectRatio="none" fill="none">
+            <path d="M0 0L110 96M420 0L310 96M0 96L210 70L420 96" stroke="#C6A36A" strokeOpacity=".4" />
+          </svg>
+          <span aria-hidden="true" className="pointer-events-none absolute left-1/2 top-12 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border border-[#A78043] bg-[#C6A36A] font-serif text-lg text-white shadow-md">R</span>
           <FloralCardFrame />
           <div className="relative">
           <div className="flex items-center justify-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#007aff] text-white"><GraduationCap size={21} aria-hidden="true" /></span>
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#C6283E] text-white"><GraduationCap size={21} aria-hidden="true" /></span>
             <p className="text-xs font-semibold uppercase tracking-wide text-[#48484a]">Undangan Wisuda</p>
           </div>
-          <h1 className="mt-3 text-center text-xl font-semibold tracking-tight">Raka Dwi Pratama, S.Kom.</h1>
+          <h1 className="mt-3 text-center text-xl font-semibold tracking-tight">ini hanyalah demo</h1>
           <p className="mt-1 text-sm leading-relaxed text-[#48484a]">Sistem Informasi · Universitas Cakrawala Nusantara</p>
           <div className="my-4 h-px bg-black/10" />
           <p className="text-center text-xs text-[#48484a]">Kepada Yth. Bapak/Ibu/Saudara/i</p>
@@ -57,7 +70,7 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
         <div className="min-h-4 flex-1" />
         <motion.button
           type="button"
-          onClick={onUnlock}
+          onClick={openInvitation}
           initial={{ opacity: 0 }}
           animate={{ opacity: ready ? 1 : 0 }}
           transition={{ delay: ready && !reduceMotion ? notificationDelay + 0.6 : 0, duration: reduceMotion ? 0 : 0.6 }}

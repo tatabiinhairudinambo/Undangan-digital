@@ -29,7 +29,8 @@ export default function App() {
   return (
     <MusicProvider>
       <div inert={isLocked || booting}>
-        <IosAppFolder openInvitation={!isLocked} />
+        {/* Prepare the invitation behind the cover before the unlock animation. */}
+        <IosAppFolder openInvitation />
       </div>
       {/* <NotificationsStack /> */}
 

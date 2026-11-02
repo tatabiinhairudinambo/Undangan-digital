@@ -61,7 +61,7 @@ export default function NotesPage() {
         };
 
   return (
-    <div className="relative isolate h-full w-full overflow-hidden" style={{ background: CREAM }}>
+    <div className="relative isolate flex h-full w-full flex-col overflow-hidden" style={{ background: CREAM }}>
       <GraduationBackdrop />
       {/* Bingkai di atas header: header putih berada di bawahnya, jadi bingkai
           tidak lagi terlihat tertimpa/terpotong. */}
@@ -69,7 +69,7 @@ export default function NotesPage() {
         <FloralCardFrame graduation badge={false} />
       </div>
     <div
-      className="h-full w-full overflow-y-auto"
+      className="min-h-0 w-full flex-1 overflow-y-auto"
       style={{ fontFamily: SF_STACK }}
     >
       <div className="mx-auto w-full max-w-[420px] px-7 pb-14">
@@ -81,17 +81,28 @@ export default function NotesPage() {
               ? { position: "relative" as const }
               : { position: "sticky" as const, top: 0 }),
             paddingTop: "var(--safe-top, 0px)",
-            background: "rgba(242,242,247,0.82)",
+            background: "#C6283E",
             backdropFilter: "blur(18px) saturate(160%)",
             WebkitBackdropFilter: "blur(18px) saturate(160%)",
           }}
         >
+          <svg
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-full h-6 w-full overflow-visible"
+            viewBox="0 0 420 24"
+            preserveAspectRatio="none"
+            fill="none"
+          >
+            <path d="M0 0H420L210 24Z" fill="#C6283E" />
+            <path d="M0 0L210 24L420 0" stroke="#C6A36A" strokeWidth="1" />
+            <path d="M0 0L105 12M420 0L315 12" stroke="#F7E4B9" strokeOpacity=".5" />
+          </svg>
           <div className="text-center">
             {/* Badge topi di ujung teks, sejajar dengan label. */}
             <div className="flex items-center justify-center gap-2">
               <p
                 className="text-[10px] font-medium uppercase"
-                style={{ color: GOLD, letterSpacing: "0.34em" }}
+                style={{ color: GOLD_LIGHT, letterSpacing: "0.34em" }}
               >
                 Undangan Wisuda
               </p>
@@ -114,7 +125,7 @@ export default function NotesPage() {
               <div className="flex h-full items-center justify-center">
                 <img
                   src="/lanyard-front.jpg"
-                  alt="Kartu wisudawan Raka Dwi Pratama"
+                  alt="Kartu wisudawan — ini hanyalah demo"
                   className="h-[335px] rounded-[12px]"
                   style={{ boxShadow: "0 26px 40px -30px rgba(11,26,48,0.85)" }}
                   draggable={false}
@@ -128,7 +139,7 @@ export default function NotesPage() {
               strapImage="/lanyard-strap.jpg"
               strapColor="#102A4C"
               metal="gold"
-              finish="matte"
+              finish="flat"
               cornerRadius={0.17}
               size={0.22}
               strapLength={0.5}
@@ -311,12 +322,29 @@ export default function NotesPage() {
 
         </div>
 
+      </div>
+    </div>
+        <footer className="relative isolate z-30 w-full shrink-0 overflow-hidden bg-white px-7 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-10 shadow-[0_-6px_20px_rgba(31,42,36,0.08)]" style={{ fontFamily: SF_STACK }}>
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+          viewBox="0 0 420 150"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          <path d="M0 0H420L210 36Z" fill="#C6283E" />
+          <path d="M0 0L210 36L420 0" stroke="#C6A36A" strokeWidth="1" />
+          <path d="M0 150L105 57M420 150L315 57" stroke="#C6A36A" strokeOpacity=".4" />
+          <path d="M0 150L105 57L210 91L315 57L420 150Z" fill="#FFFFFF" />
+        </svg>
+        <span aria-hidden="true" className="pointer-events-none absolute left-1/2 top-4 flex h-6 w-6 -translate-x-1/2 items-center justify-center rounded-full border border-[#A78043] bg-[#C6A36A] text-[11px] text-white shadow-sm" style={{ fontFamily: SERIF }}>
+          R
+        </span>
         <p
-          className="mt-6 px-3 text-center text-[12px] italic leading-relaxed"
+          className="text-center text-[12px] italic leading-relaxed"
           style={{
             fontFamily: SERIF,
-            color: "rgba(255,255,255,0.86)",
-            textShadow: "0 1px 3px rgba(0,0,0,0.45)",
+            color: INK,
           }}
         >
           Terima kasih atas perhatian dan doa restu Bapak/Ibu/Saudara/i. Sampai
@@ -330,16 +358,14 @@ export default function NotesPage() {
             rel="noopener noreferrer"
             className="transition-opacity duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:opacity-70 active:opacity-50"
             style={{
-              color: "rgba(255,255,255,0.6)",
+              color: MUTED,
               letterSpacing: "0.06em",
-              textShadow: "0 1px 3px rgba(0,0,0,0.4)",
             }}
           >
             by attaambo.dev
           </a>
         </p>
-      </div>
-    </div>
+        </footer>
     </div>
   );
 }
