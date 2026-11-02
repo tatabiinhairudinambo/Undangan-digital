@@ -1,7 +1,11 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type CSSProperties } from "react";
+import { useReducedMotion } from "framer-motion";
 import { MAPS_URL, openMaps } from "../lib/maps";
 import { getGuestName } from "../lib/guest";
-import FloralCardFrame from "./FloralCardFrame";
+import FloralCardFrame, { GraduationBadge } from "./FloralCardFrame";
+import FloralCorners from "./FloralCorners";
+import Countdown from "./Countdown";
+import GraduationBackdrop from "./GraduationBackdrop";
 import {
   CREAM,
   GOLD,
@@ -38,52 +42,73 @@ const PinIcon = () => (
   </svg>
 );
 
-const CapIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-    <path
-      d="M2.5 9.5L12 5l9.5 4.5L12 14 2.5 9.5Z"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M6.5 11.5v4.2c0 1.3 2.5 2.6 5.5 2.6s5.5-1.3 5.5-2.6v-4.2"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
-    <path d="M21.5 9.5v4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-  </svg>
-);
+// Tumpukan kartu: kartu biru tertahan, lalu setiap kartu berikutnya naik dan
+// berhenti sedikit di bawah kartu sebelumnya — tepi tiap kartu tetap terlihat.
+// Kartu berhenti di bawah judul + hitung mundur yang ikut dipin.
+const STACK_TOP_PX = 100;
+const STACK_STEP_PX = 12;
 
 export default function NotesPage() {
+  const reduceMotion = useReducedMotion();
+
+  const stackStyle = (index: number): CSSProperties =>
+    reduceMotion
+      ? { position: "relative", zIndex: 10 + index }
+      : {
+          position: "sticky",
+          top: `calc(var(--safe-top, 0px) + ${STACK_TOP_PX + index * STACK_STEP_PX}px)`,
+          zIndex: 10 + index,
+        };
+
   return (
-    <div className="relative h-full w-full overflow-hidden" style={{ background: CREAM }}>
-      <div className="pointer-events-none absolute inset-0 z-10">
-        <FloralCardFrame graduation />
+    <div className="relative isolate h-full w-full overflow-hidden" style={{ background: CREAM }}>
+      <GraduationBackdrop />
+      {/* Bingkai di atas header: header putih berada di bawahnya, jadi bingkai
+          tidak lagi terlihat tertimpa/terpotong. */}
+      <div className="pointer-events-none absolute inset-0 z-40">
+        <FloralCardFrame graduation badge={false} />
       </div>
     <div
       className="h-full w-full overflow-y-auto"
-      style={{ background: CREAM, fontFamily: SF_STACK }}
+      style={{ fontFamily: SF_STACK }}
     >
-      <div
-        className="mx-auto w-full max-w-[420px] px-7 pb-14"
-        style={{ paddingTop: "calc(var(--safe-top) + 28px)" }}
-      >
-        {/* Kartu wisudawan */}
-        <div className="text-center">
-          <p
-            className="text-[10px] font-medium uppercase"
-            style={{ color: GOLD, letterSpacing: "0.34em" }}
-          >
-            Undangan Wisuda
-          </p>
-          <div className="mt-2.5">
-            <Divider />
+      <div className="mx-auto w-full max-w-[420px] px-7 pb-14">
+        {/* Judul bagian — dipin di atas saat kartu mulai menumpuk. */}
+        <div
+          className="-mx-7 sticky z-30 px-7 pb-2"
+          style={{
+            ...(reduceMotion
+              ? { position: "relative" as const }
+              : { position: "sticky" as const, top: 0 }),
+            paddingTop: "var(--safe-top, 0px)",
+            background: "rgba(242,242,247,0.82)",
+            backdropFilter: "blur(18px) saturate(160%)",
+            WebkitBackdropFilter: "blur(18px) saturate(160%)",
+          }}
+        >
+          <div className="text-center">
+            {/* Badge topi di ujung teks, sejajar dengan label. */}
+            <div className="flex items-center justify-center gap-2">
+              <p
+                className="text-[10px] font-medium uppercase"
+                style={{ color: GOLD, letterSpacing: "0.34em" }}
+              >
+                Undangan Wisuda
+              </p>
+              <GraduationBadge
+                size={18}
+                className="inline-flex shrink-0 items-center justify-center px-1.5 py-0.5"
+              />
+            </div>
+            <div className="mt-2.5">
+              <Divider />
+            </div>
           </div>
         </div>
 
-        <div className="-mx-3 mt-1 h-[500px]">
+        {/* Kanvas lebih tinggi dari ruang layout, lalu ditarik balik dengan
+            margin negatif: kartu bisa ditarik ke bawah menimpa isi berikutnya. */}
+        <div className="relative z-20 -mx-7 mt-1 h-[1400px] -mb-[900px]">
           <Suspense
             fallback={
               <div className="flex h-full items-center justify-center">
@@ -103,9 +128,9 @@ export default function NotesPage() {
               strapImage="/lanyard-strap.jpg"
               strapColor="#102A4C"
               metal="gold"
-              finish="glossy"
+              finish="matte"
               cornerRadius={0.17}
-              size={0.62}
+              size={0.22}
               strapLength={0.5}
               damping={0.6}
               elasticity={0.55}
@@ -114,21 +139,96 @@ export default function NotesPage() {
           </Suspense>
         </div>
 
-        <p className="mt-1 text-center text-[11px]" style={{ color: MUTED }}>
+        <p
+          className="mt-1 pb-3 text-center text-[11px]"
+          style={{
+            color: "rgba(255,255,255,0.92)",
+            textShadow: "0 1px 3px rgba(0,0,0,0.45)",
+          }}
+        >
           Geser atau ketuk kartu untuk melihat detail
         </p>
 
-        <section className="mt-5 rounded-[18px] px-5 py-6 text-center" style={{ background: GREEN, color: CREAM }}>
-          <p className="text-xs" style={{ color: GOLD_LIGHT }}>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-          <h2 className="mt-2 break-words text-2xl" style={{ fontFamily: SERIF }}>{getGuestName() || "Tamu Undangan"}</h2>
-          <p className="mt-3 text-sm leading-relaxed">Dengan penuh rasa syukur, kami mengundang Anda untuk merayakan kelulusan Raka Dwi Pratama bersama keluarga dan orang-orang terkasih.</p>
+        <Countdown
+          className={reduceMotion ? "" : "sticky z-[15]"}
+          style={
+            reduceMotion ? undefined : { top: "calc(var(--safe-top, 0px) + 24px)" }
+          }
+        />
+
+        <div className="mt-5 flow-root">
+        <section
+          className="isolate mb-4 overflow-hidden rounded-[18px] border border-white/25 px-5 py-6 text-center"
+          style={{
+            background: "rgba(0,91,191,0.78)",
+            backdropFilter: "blur(20px) saturate(170%)",
+            WebkitBackdropFilter: "blur(20px) saturate(170%)",
+            color: CREAM,
+            boxShadow:
+              "inset 0 1px 0 rgba(255,255,255,0.28), 0 18px 36px -26px rgba(11,26,48,0.7)",
+            ...stackStyle(0),
+          }}
+        >
+          <FloralCorners />
+          <p className="relative text-xs" style={{ color: GOLD_LIGHT }}>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+          <h2 className="relative mt-2 break-words text-2xl" style={{ fontFamily: SERIF }}>{getGuestName() || "Tamu Undangan"}</h2>
+          <p className="relative mt-3 text-sm leading-relaxed">Dengan penuh rasa syukur, kami mengundang Anda untuk merayakan kelulusan Raka Dwi Pratama bersama keluarga dan orang-orang terkasih.</p>
         </section>
+
+        {/* Isi undangan */}
+        <div
+          className="isolate mb-4 overflow-hidden rounded-[18px] border border-white/55 bg-white/55 px-5 py-6 backdrop-blur-xl backdrop-saturate-150"
+          style={{
+            boxShadow:
+              "inset 0 1px 0 rgba(255,255,255,0.75), 0 12px 28px -24px rgba(31,42,36,0.5)",
+            ...stackStyle(1),
+          }}
+        >
+          <FloralCorners size={56} tone="#B08D57" petal="#F3E4C8" />
+          <p
+            dir="rtl"
+            lang="ar"
+            aria-label="Bismillahirrahmanirrahim"
+            className="mb-4 text-center leading-[1.9]"
+            style={{
+              fontFamily:
+                '"Diwan Thuluth", "Diwan Mishafi", "Al Nile", "Traditional Arabic", "Scheherazade New", "Geeza Pro", serif',
+              fontSize: 30,
+              color: INK,
+            }}
+          >
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </p>
+          <p
+            className="text-center text-[15px] leading-[1.7]"
+            style={{ fontFamily: SERIF, color: INK }}
+          >
+            Dengan memohon rahmat Tuhan Yang Maha Esa, kami mengundang
+            Bapak/Ibu/Saudara/i untuk menghadiri acara Wisuda dan Syukuran
+            kelulusan putra kami.
+          </p>
+
+          <div className="my-5">
+            <Divider />
+          </div>
+
+          <p className="text-center text-[13px] leading-relaxed" style={{ color: MUTED }}>
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+            Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu bagi
+            kelancaran acara ini.
+          </p>
+        </div>
 
         {/* Save the date */}
         <div
-          className="mt-6 overflow-hidden rounded-[18px] bg-white"
-          style={{ boxShadow: "0 12px 28px -24px rgba(31,42,36,0.5)" }}
+          className="isolate mb-4 overflow-hidden rounded-[18px] border border-white/55 bg-white/55 backdrop-blur-xl backdrop-saturate-150"
+          style={{
+            boxShadow:
+              "inset 0 1px 0 rgba(255,255,255,0.75), 0 12px 28px -24px rgba(31,42,36,0.5)",
+            ...stackStyle(2),
+          }}
         >
+          <FloralCorners size={56} tone="#B08D57" petal="#F3E4C8" />
           <div className="flex items-center justify-center gap-5 py-5">
             <div className="text-center">
               <p
@@ -209,99 +309,35 @@ export default function NotesPage() {
           </div>
         </div>
 
-        {/* Isi undangan */}
-        <div
-          className="mt-4 rounded-[18px] bg-white px-5 py-6"
-          style={{ boxShadow: "0 12px 28px -24px rgba(31,42,36,0.5)" }}
-        >
-          <p
-            className="text-center text-[15px] leading-[1.7]"
-            style={{ fontFamily: SERIF, color: INK }}
-          >
-            Dengan memohon rahmat Tuhan Yang Maha Esa, kami mengundang
-            Bapak/Ibu/Saudara/i untuk menghadiri acara Wisuda dan Syukuran
-            kelulusan putra kami.
-          </p>
-
-          <div className="my-5">
-            <Divider />
-          </div>
-
-          <p className="text-center text-[13px] leading-relaxed" style={{ color: MUTED }}>
-            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
-            Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu bagi
-            kelancaran acara ini.
-          </p>
-        </div>
-
-        {/* Dress code & kontak */}
-        <div
-          className="mt-4 rounded-[18px] bg-white px-5 py-4"
-          style={{ boxShadow: "0 12px 28px -24px rgba(31,42,36,0.5)" }}
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p
-                className="text-[9px] font-semibold uppercase"
-                style={{ color: GOLD, letterSpacing: "0.2em" }}
-              >
-                Dress code
-              </p>
-              <p className="mt-1 text-[14px] font-semibold" style={{ color: INK }}>
-                Batik / pakaian formal
-              </p>
-            </div>
-            <span
-              className="flex h-9 w-9 items-center justify-center rounded-full"
-              style={{ background: "rgba(176,141,87,0.12)", color: GOLD }}
-              aria-hidden
-            >
-              <CapIcon />
-            </span>
-          </div>
-
-          <div
-            className="mt-3 flex items-center justify-between pt-3"
-            style={{ borderTop: `1px solid ${HAIRLINE}` }}
-          >
-            <div>
-              <p
-                className="text-[9px] font-semibold uppercase"
-                style={{ color: GOLD, letterSpacing: "0.2em" }}
-              >
-                Kontak
-              </p>
-              <a
-                href="tel:085712345678"
-                className="mt-1 block text-[14px] font-semibold active:opacity-60"
-                style={{ color: GREEN }}
-              >
-                Mama · 0857-1234-5678
-              </a>
-            </div>
-          </div>
         </div>
 
         <p
           className="mt-6 px-3 text-center text-[12px] italic leading-relaxed"
-          style={{ fontFamily: SERIF, color: "#8A968D" }}
+          style={{
+            fontFamily: SERIF,
+            color: "rgba(255,255,255,0.86)",
+            textShadow: "0 1px 3px rgba(0,0,0,0.45)",
+          }}
         >
           Terima kasih atas perhatian dan doa restu Bapak/Ibu/Saudara/i. Sampai
           jumpa di hari wisuda.
         </p>
 
-        <div className="mt-4 flex justify-center">
-          <span
-            className="flex h-9 w-9 items-center justify-center rounded-full text-[15px]"
+        <p className="mt-4 text-center text-[11px]">
+          <a
+            href="https://attaambo.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-opacity duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:opacity-70 active:opacity-50"
             style={{
-              border: "1px solid rgba(176,141,87,0.55)",
-              color: GOLD,
-              fontFamily: SERIF,
+              color: "rgba(255,255,255,0.6)",
+              letterSpacing: "0.06em",
+              textShadow: "0 1px 3px rgba(0,0,0,0.4)",
             }}
           >
-            R
-          </span>
-        </div>
+            by attaambo.dev
+          </a>
+        </p>
       </div>
     </div>
     </div>

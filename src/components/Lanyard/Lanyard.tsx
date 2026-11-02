@@ -935,7 +935,11 @@ const Lanyard = ({
       foilUniforms.foilTop.value.set(0.5, 4.5, 8).normalize().transformDirection(camera.matrixWorldInverse);
       const anchorX = ((ANCHORS[s.anchor] ?? 0.5) - 0.5) * viewWidth;
       const anchorY = viewHeight / 2 + 0.2;
-      const cardTop = viewHeight / 2 - viewHeight * mix(0.12, 0.42, clamp(s.strapLength, 0, 1));
+      // Posisi istirahat kartu dipatok dalam px dari atas kanvas, bukan relatif
+      // terhadap tinggi kanvas — jadi kanvas boleh sepanjang halaman tanpa
+      // menggeser kartu dari tempatnya.
+      const restTopPx = 175;
+      const cardTop = viewHeight / 2 - (restTopPx / view.height) * viewHeight;
       const hangTop = cardTop + (layout.hangY - layout.height / 2);
       sim.anchor.set(anchorX, anchorY, 0);
       configureSimulation(sim, layout, anchorY - hangTop);
@@ -1016,7 +1020,9 @@ const Lanyard = ({
         clampMesh.geometry.dispose();
         clampMesh.geometry = buildClampGeometry(strapScale);
       }
-      canvas.style.touchAction = s.interactive ? 'pan-y' : 'auto';
+      // 'none': tarikan pada kartu menggerakkan kartu (keluar ke depan),
+      // bukan menggulir halaman sehingga kartu tenggelam ke bawah layer.
+      canvas.style.touchAction = s.interactive ? 'none' : 'auto';
 
       applied = { layoutKey, framingKey, imageKey, faceKey, strapColor: s.strapColor, strapScale };
       start();
@@ -1207,7 +1213,6 @@ const Lanyard = ({
         target: hit.point.clone()
       };
       press = { x: event.clientX, y: event.clientY, time: performance.now(), point: hit.point.clone() };
-      canvas.setPointerCapture?.(event.pointerId);
       setCursor('grabbing');
       event.preventDefault();
       start();
@@ -1232,7 +1237,6 @@ const Lanyard = ({
       sim.grab = null;
       if (press && event.type === 'pointerup' && performance.now() - press.time < 450) flip(press.point);
       press = null;
-      canvas.releasePointerCapture?.(event.pointerId);
       setCursor(hovering && event.pointerType !== 'touch' ? 'grab' : '');
       start();
     };
@@ -1243,12 +1247,17 @@ const Lanyard = ({
       if (pickCard()) event.preventDefault();
     };
 
-    canvas.addEventListener('pointerdown', onPointerDown);
-    canvas.addEventListener('pointermove', onPointerMove);
-    canvas.addEventListener('pointerup', onPointerUp);
-    canvas.addEventListener('pointercancel', onPointerUp);
-    canvas.addEventListener('lostpointercapture', onPointerUp);
-    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    const onTouchMove = event => {
+      // Saat kartu sedang dipegang, cegah halaman ikut menggulir.
+      if (sim.grab) event.preventDefault();
+    };
+
+    window.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
+    window.addEventListener('touchstart', onTouchStart, { passive: false });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
 
     const resize = () => {
       view.width = Math.max(1, container.clientWidth);
@@ -1281,12 +1290,12 @@ const Lanyard = ({
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
-      canvas.removeEventListener('pointerdown', onPointerDown);
-      canvas.removeEventListener('pointermove', onPointerMove);
-      canvas.removeEventListener('pointerup', onPointerUp);
-      canvas.removeEventListener('pointercancel', onPointerUp);
-      canvas.removeEventListener('lostpointercapture', onPointerUp);
-      canvas.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
       [bodyMesh, frontMesh, backMesh, ring, clampMesh, eyelet, band].forEach(mesh => mesh.geometry?.dispose());
       [frontMaterial, backMaterial, edgeMaterial, metalMaterial, bandMaterial].forEach(material => material.dispose());
       [frontTexture, backTexture, strapTexture, grain, weave].forEach(texture => texture.dispose());
@@ -1296,7 +1305,15 @@ const Lanyard = ({
     };
   }, []);
 
-  return <div ref={containerRef} className={`lanyard ${className}`.trim()} style={style} />;
+  // Kanvas bisa menutupi seluruh halaman: jangan menangkap klik, supaya
+  // tombol/tautan di bawah kartu tetap bisa diklik. Gesture ditangani di window.
+  return (
+    <div
+      ref={containerRef}
+      className={`lanyard ${className}`.trim()}
+      style={{ ...style, pointerEvents: "none" }}
+    />
+  );
 };
 
 export default Lanyard;

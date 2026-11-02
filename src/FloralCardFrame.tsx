@@ -1,5 +1,41 @@
+/** Badge topi wisuda. Dipakai di bingkai, atau di belakang teks judul. */
+export function GraduationBadge({
+  className = "",
+  size = 28,
+}: {
+  className?: string;
+  /** Lebar ikon topi dalam px. */
+  size?: number;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`rounded-full bg-[#F2F2F7] ${className}`.trim()}
+    >
+      <svg
+        width={size}
+        height={Math.round((size * 22) / 28)}
+        viewBox="0 0 28 22"
+        fill="none"
+        className="block"
+      >
+        <path d="M2 8L14 2L26 8L14 14L2 8Z" fill="#8F2034" stroke="#C6A36A" />
+        <path d="M7 11V16C11 20 17 20 21 16V11" stroke="#8F2034" strokeWidth="2" />
+        <path d="M26 8V17M24.5 19L26 16L27.5 19" stroke="#C6A36A" strokeWidth="1.5" />
+      </svg>
+    </span>
+  );
+}
+
 /** Ornamen dekoratif kartu; tidak menutupi teks atau menangkap sentuhan. */
-export default function FloralCardFrame({ graduation = false }: { graduation?: boolean }) {
+export default function FloralCardFrame({
+  graduation = false,
+  badge = true,
+}: {
+  graduation?: boolean;
+  /** Tampilkan badge topi di tengah atas bingkai. */
+  badge?: boolean;
+}) {
   return (
     <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-[26px]" aria-hidden="true">
       <span className={`absolute inset-[7px] rounded-[20px] border ${graduation ? "border-[#AD3447]/50" : "border-white/50"}`} />
@@ -31,14 +67,8 @@ export default function FloralCardFrame({ graduation = false }: { graduation?: b
           <circle cx="14" cy="91" r="2" fill="#F5E3BE" />
         </svg>
       ))}
-      {graduation && (
-        <span className="absolute left-1/2 top-1 -translate-x-1/2 rounded-full bg-[#F2F2F7] px-3 py-1">
-          <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
-            <path d="M2 8L14 2L26 8L14 14L2 8Z" fill="#8F2034" stroke="#C6A36A" />
-            <path d="M7 11V16C11 20 17 20 21 16V11" stroke="#8F2034" strokeWidth="2" />
-            <path d="M26 8V17M24.5 19L26 16L27.5 19" stroke="#C6A36A" strokeWidth="1.5" />
-          </svg>
-        </span>
+      {graduation && badge && (
+        <GraduationBadge className="absolute left-1/2 top-1 -translate-x-1/2 px-3 py-1" />
       )}
     </span>
   );
