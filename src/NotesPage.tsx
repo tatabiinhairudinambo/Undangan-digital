@@ -45,7 +45,7 @@ const PinIcon = () => (
 // Tumpukan kartu: kartu biru tertahan, lalu setiap kartu berikutnya naik dan
 // berhenti sedikit di bawah kartu sebelumnya — tepi tiap kartu tetap terlihat.
 // Kartu berhenti di bawah judul + hitung mundur yang ikut dipin.
-const STACK_TOP_PX = 100;
+const STACK_TOP_PX = 132;
 const STACK_STEP_PX = 12;
 
 export default function NotesPage() {
@@ -163,7 +163,7 @@ export default function NotesPage() {
         <Countdown
           className={reduceMotion ? "" : "sticky z-[15]"}
           style={
-            reduceMotion ? undefined : { top: "calc(var(--safe-top, 0px) + 24px)" }
+            reduceMotion ? undefined : { top: "calc(var(--safe-top, 0px) + 56px)" }
           }
         />
 
