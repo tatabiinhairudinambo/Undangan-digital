@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from "react";
-import { HAIRLINE, INK, MUTED, SF_STACK } from "./invitationTheme";
+import { SF_STACK } from "./invitationTheme";
 
 // 11 November 2026, 11.00 WIB (UTC+7) — sama dengan jadwal di kalender.
 const TARGET = new Date("2026-11-11T11:00:00+07:00").getTime();
@@ -43,30 +43,29 @@ export default function Countdown({
 
   return (
     <div
-      className={`overflow-hidden rounded-[18px] border border-white/60 bg-white/55 px-2 py-4 backdrop-blur-xl backdrop-saturate-150 ${className}`.trim()}
+      className={`graduation-countdown ${className}`.trim()}
+      role="timer"
+      aria-label="Hitung mundur menuju wisuda"
       style={{
-        boxShadow:
-          "inset 0 1px 0 rgba(255,255,255,0.75), 0 12px 28px -24px rgba(31,42,36,0.5)",
         fontFamily: SF_STACK,
         ...style,
       }}
     >
-      <div className="flex items-stretch">
-        {units.map((unit, index) => (
+      <span className="countdown-corner countdown-corner-start" aria-hidden="true" />
+      <span className="countdown-corner countdown-corner-end" aria-hidden="true" />
+      <div className="relative grid grid-cols-4 gap-2">
+        {units.map((unit) => (
           <div
             key={unit.label}
-            className="flex flex-1 flex-col items-center"
-            style={{ borderLeft: index === 0 ? undefined : `1px solid ${HAIRLINE}` }}
+            className="countdown-unit flex min-w-0 flex-col items-center"
           >
             <span
-              className="text-[22px] font-bold tabular-nums leading-none"
-              style={{ color: INK }}
+              className="countdown-value text-[25px] font-semibold tabular-nums leading-none"
             >
               {String(unit.value).padStart(2, "0")}
             </span>
             <span
-              className="mt-1.5 text-[9px] font-semibold uppercase"
-              style={{ color: MUTED, letterSpacing: "0.18em" }}
+              className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#F6E3C3]"
             >
               {unit.label}
             </span>

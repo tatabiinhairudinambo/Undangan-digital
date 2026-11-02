@@ -2,7 +2,6 @@ import { motion, useReducedMotion, useTransform, type MotionValue } from "framer
 import { GraduationCap, LockKeyhole } from "lucide-react";
 import { getGuestName } from "../lib/guest";
 import { Clock } from "../components/Clock";
-import FloralCardFrame from "./FloralCardFrame";
 import { useMusic } from "./music";
 
 interface LockScreenProps {
@@ -41,44 +40,47 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
           initial={{ opacity: 0, y: -180 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: reduceMotion ? 0 : -180 }}
           transition={{ delay: ready ? notificationDelay : 0, duration: reduceMotion ? 0 : 1.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-6 w-full cursor-pointer overflow-hidden rounded-[26px] border border-[#C6A36A]/70 bg-white px-8 pb-9 pt-24 text-left text-[#1c1c1e] shadow-[0_12px_32px_rgba(0,0,0,0.2)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="invitation-envelope relative mt-6 w-full cursor-pointer text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
-          <svg aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-20 w-full" viewBox="0 0 420 80" preserveAspectRatio="none" fill="none">
-            <path d="M0 0H420L210 66Z" fill="#C6283E" />
-            <path d="M0 0L210 66L420 0" stroke="#C6A36A" strokeWidth="1.5" />
-            <path d="M14 0L210 56L406 0" stroke="#F7E4B9" strokeOpacity=".4" />
+          <svg aria-hidden="true" className="envelope-folds" viewBox="0 0 420 360" preserveAspectRatio="none" fill="none">
+            <path d="M0 0H420V360H0Z" fill="#E8D8BE" />
+            <path d="M0 0L236 197L0 360Z" fill="#F5E9D5" />
+            <path d="M420 0L184 197L420 360Z" fill="#EEDFC5" />
+            <path d="M0 360V350L210 159L420 350V360Z" fill="#FFFAEF" />
+            <path d="M0 350L210 159L420 350" stroke="#C6A36A" strokeOpacity=".6" />
+            <path d="M0 0L210 185L420 0" stroke="#A78043" strokeOpacity=".3" strokeWidth="3" />
           </svg>
-          <svg aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full" viewBox="0 0 420 96" preserveAspectRatio="none" fill="none">
-            <path d="M0 0L110 96M420 0L310 96M0 96L210 70L420 96" stroke="#C6A36A" strokeOpacity=".4" />
+          <svg aria-hidden="true" className="envelope-flap" viewBox="0 0 420 184" preserveAspectRatio="none" fill="none">
+            <path d="M0 0H420L222 174Q210 185 198 174Z" fill="#9E2036" />
+            <path d="M0 0H420L222 166Q210 177 198 166Z" fill="#BE2941" />
+            <path d="M9 7H411L219 163Q210 171 201 163Z" stroke="#E6C88F" strokeOpacity=".8" />
+            <path d="M22 13H398" stroke="#E6C88F" strokeOpacity=".45" />
           </svg>
-          <span aria-hidden="true" className="pointer-events-none absolute left-1/2 top-12 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border border-[#A78043] bg-[#C6A36A] font-serif text-lg text-white shadow-md">R</span>
-          <FloralCardFrame />
-          <div className="relative">
-          <div className="flex items-center justify-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#C6283E] text-white"><GraduationCap size={21} aria-hidden="true" /></span>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#48484a]">Undangan Wisuda</p>
+          <div className="envelope-heading">
+            <p className="text-xs font-medium uppercase tracking-[0.2em]">Undangan Wisuda</p>
+            <h1 className="mt-2 font-serif text-xl">ini hanyalah demo</h1>
+            <p className="mt-2 text-[11px] uppercase tracking-widest">11 November 2026</p>
           </div>
-          <h1 className="mt-3 text-center text-xl font-semibold tracking-tight">ini hanyalah demo</h1>
-          <p className="mt-1 text-sm leading-relaxed text-[#48484a]">Sistem Informasi · Universitas Cakrawala Nusantara</p>
-          <div className="my-4 h-px bg-black/10" />
-          <p className="text-center text-xs text-[#48484a]">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-          <p className="mt-1 break-words text-center text-lg font-semibold">{getGuestName() || "Tamu Undangan"}</p>
-          <p className="mt-2 text-sm leading-relaxed">Kami mengundang Anda untuk merayakan hari kelulusan bersama.</p>
-          <p className="mt-3 text-center text-xs font-medium text-[#48484a]">11 November 2026 · 11.00 WIB<br />Gedung Serbaguna Melati</p>
+          <span aria-hidden="true" className="envelope-seal"><GraduationCap size={26} strokeWidth={1.5} /></span>
+          <div className="envelope-recipient">
+            <p className="text-xs text-[#68563F]">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+            <p className="mt-2 break-words font-serif text-2xl text-[#463320]">{getGuestName() || "Tamu Undangan"}</p>
+            <span className="mx-auto my-4 block h-px w-12 bg-[#B89256]" aria-hidden="true" />
+            <p className="text-xs tracking-wide text-[#68563F]">Sebuah undangan istimewa untuk Anda</p>
           </div>
         </motion.button>
-        <div className="min-h-4 flex-1" />
         <motion.button
           type="button"
           onClick={openInvitation}
           initial={{ opacity: 0 }}
           animate={{ opacity: ready ? 1 : 0 }}
           transition={{ delay: ready && !reduceMotion ? notificationDelay + 0.6 : 0, duration: reduceMotion ? 0 : 0.6 }}
-          className="mt-3 flex min-h-11 cursor-pointer items-center justify-center gap-1 rounded-full border border-white/50 bg-white/65 px-4 py-2 text-xs font-semibold text-black shadow-sm backdrop-blur-xl transition-colors hover:bg-white/90 active:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="mt-6 flex min-h-11 cursor-pointer items-center justify-center gap-1 rounded-full border border-white/50 bg-white/65 px-4 py-2 text-xs font-semibold text-black shadow-sm backdrop-blur-xl transition-colors hover:bg-white/90 active:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
-          Lihat Selengkapnya
+          Buka Undangan
         </motion.button>
-        <p className="mt-3 text-xs text-white/90">Ketuk kartu notifikasi untuk melihat undangan Anda</p>
+        <div className="min-h-6 flex-1" />
+        <p className="text-xs text-white/90">Ketuk amplop untuk membuka undangan Anda</p>
       </div>
 
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-white/20" />

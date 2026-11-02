@@ -5,6 +5,7 @@ import { getGuestName } from "../lib/guest";
 import FloralCardFrame, { GraduationBadge } from "./FloralCardFrame";
 import FloralCorners from "./FloralCorners";
 import Countdown from "./Countdown";
+import VenueMapPreview from "./VenueMapPreview";
 import GraduationBackdrop from "./GraduationBackdrop";
 import {
   CREAM,
@@ -45,7 +46,8 @@ const PinIcon = () => (
 // Tumpukan kartu: kartu biru tertahan, lalu setiap kartu berikutnya naik dan
 // berhenti sedikit di bawah kartu sebelumnya — tepi tiap kartu tetap terlihat.
 // Kartu berhenti di bawah judul + hitung mundur yang ikut dipin.
-const STACK_TOP_PX = 132;
+// Countdown starts at 56px and is 80px tall; reserve a 16px gap below it.
+const STACK_TOP_PX = 152;
 const STACK_STEP_PX = 12;
 
 export default function NotesPage() {
@@ -119,7 +121,7 @@ export default function NotesPage() {
 
         {/* Kanvas lebih tinggi dari ruang layout, lalu ditarik balik dengan
             margin negatif: kartu bisa ditarik ke bawah menimpa isi berikutnya. */}
-        <div className="relative z-20 -mx-7 mt-1 h-[1400px] -mb-[900px]">
+        <div className="relative z-20 -mx-7 mt-1 h-[1400px] -mb-[924px]">
           <Suspense
             fallback={
               <div className="flex h-full items-center justify-center">
@@ -161,7 +163,7 @@ export default function NotesPage() {
         </p>
 
         <Countdown
-          className={reduceMotion ? "" : "sticky z-[15]"}
+          className={reduceMotion ? "relative" : "sticky z-[15]"}
           style={
             reduceMotion ? undefined : { top: "calc(var(--safe-top, 0px) + 56px)" }
           }
@@ -232,15 +234,15 @@ export default function NotesPage() {
 
         {/* Save the date */}
         <div
-          className="isolate mb-4 overflow-hidden rounded-[18px] border border-white/55 bg-white/55 backdrop-blur-xl backdrop-saturate-150"
+          className="isolate mb-4 overflow-hidden rounded-[18px] border border-[#D6BD90] bg-[#FFFBF3]"
           style={{
             boxShadow:
               "inset 0 1px 0 rgba(255,255,255,0.75), 0 12px 28px -24px rgba(31,42,36,0.5)",
             ...stackStyle(2),
           }}
         >
-          <FloralCorners size={56} tone="#B08D57" petal="#F3E4C8" />
-          <div className="flex items-center justify-center gap-5 py-5">
+          <VenueMapPreview />
+          <div className="flex items-center justify-center gap-5 bg-[#F5ECDD] py-4">
             <div className="text-center">
               <p
                 className="text-[9px] font-semibold uppercase"
@@ -312,8 +314,7 @@ export default function NotesPage() {
             <button
               type="button"
               onClick={() => openMaps(MAPS_URL)}
-              className="min-h-11 text-[13px] font-semibold underline-offset-4 active:opacity-60"
-              style={{ color: GREEN, textDecoration: "underline" }}
+              className="min-h-11 w-full cursor-pointer rounded-xl bg-[#9E2036] px-4 py-3 text-[13px] font-semibold text-[#FFF3D9] shadow-sm transition-colors hover:bg-[#811A2B] active:bg-[#691525] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9E2036]"
             >
               Buka lokasi di Google Maps
             </button>

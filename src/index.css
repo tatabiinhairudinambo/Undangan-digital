@@ -192,6 +192,100 @@ input, textarea, [contenteditable], [contenteditable="true"] {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.venue-map-preview {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at top, #f6f8ed, #dce8da);
+  border-bottom: 1px solid #c9d6c5;
+}
+
+.graduation-countdown {
+  overflow: hidden;
+  padding: 9px 12px;
+  border: 1px solid #d4b475;
+  border-radius: 16px;
+  background: radial-gradient(ellipse at 50% 0%, #b63a4d, transparent 75%), #76192c;
+  box-shadow: inset 0 0 0 3px #76192c, inset 0 0 0 4px #d4b47555, 0 6px 16px #24091030;
+}
+
+.countdown-unit {
+  position: relative;
+  padding: 7px 2px 6px;
+  border: 1px solid #efcd8d38;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff0e 49%, #35081526 50%);
+  box-shadow: inset 0 1px 0 #fff1d51a, 0 2px 3px #35081520;
+}
+
+.countdown-value {
+  color: #ffe3a5;
+  text-shadow: 0 2px 2px #35081566;
+}
+
+.countdown-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid #f0d399;
+  border-left: 2px solid #f0d399;
+  pointer-events: none;
+}
+
+.countdown-corner-start { top: 4px; left: 4px; border-top-left-radius: 10px; }
+.countdown-corner-end { bottom: 4px; right: 4px; transform: rotate(180deg); border-top-left-radius: 10px; }
+
+.invitation-envelope {
+  isolation: isolate;
+  border: 1px solid #c6a36a;
+  border-radius: 3px;
+  background: #fffaf0;
+  box-shadow: 0 18px 32px #0005, 0 3px 5px #0003;
+}
+
+.envelope-folds {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.envelope-flap {
+  position: absolute;
+  inset: 0 0 auto;
+  width: 100%;
+  height: 184px;
+  filter: drop-shadow(0 5px 3px #4a231e35);
+  pointer-events: none;
+}
+
+.envelope-heading {
+  position: relative;
+  min-height: 140px;
+  padding: 25px 24px 36px;
+  color: #fff3d9;
+}
+
+.envelope-seal {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto;
+  border: 4px double #f3d799;
+  border-radius: 46% 54% 49% 51% / 52% 46% 54% 48%;
+  color: #634016;
+  background: linear-gradient(135deg, #fae5ac, #c49950 55%, #e8ca85);
+  box-shadow: 0 4px 6px #4a231e40, inset 0 0 0 3px #b48a42;
+}
+
+.envelope-recipient {
+  position: relative;
+  padding: 25px 24px 32px;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
