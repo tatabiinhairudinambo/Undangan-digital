@@ -77,6 +77,7 @@ export default function NotesPage() {
       <div className="mx-auto w-full max-w-[420px] px-7 pb-14">
         {/* Judul bagian — dipin di atas saat kartu mulai menumpuk. */}
         <div
+          data-invitation-header
           className="-mx-7 sticky z-30 px-7 pb-2"
           style={{
             ...(reduceMotion
@@ -325,7 +326,7 @@ export default function NotesPage() {
 
       </div>
     </div>
-        <footer className="relative isolate z-30 w-full shrink-0 overflow-hidden bg-white px-7 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-10 shadow-[0_-6px_20px_rgba(31,42,36,0.08)]" style={{ fontFamily: SF_STACK }}>
+        <footer data-invitation-footer className="relative isolate z-30 w-full shrink-0 overflow-hidden bg-white px-7 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-10 shadow-[0_-6px_20px_rgba(31,42,36,0.08)]" style={{ fontFamily: SF_STACK }}>
         <svg
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 h-full w-full"

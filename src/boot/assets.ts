@@ -5,6 +5,7 @@ export const CRITICAL_ASSETS: readonly string[] = [
   // Wallpapers
   "/wallpaper-lock.jpeg", // lock screen
   "/wallpaper-home.jpeg", // home screen
+  "/background.png", // invitation background
 
   // Lock-screen controls
   "/icons/lock-flashlight.svg",

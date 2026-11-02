@@ -1,51 +1,37 @@
-import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-// Tiga foto bergantian di belakang halaman Undangan.
-const SLIDES = ["/wallpaper-lock.jpeg", "/wallpaper-home.jpeg", "/photos/12.jpeg"];
-const HOLD_MS = 9000; // lama tiap foto terlihat sebelum berganti
-
-/**
- * Latar bergantian lambat: crossfade 2 detik + zoom halus (Ken Burns).
- * Lapisan krem tipis menjaga teks tetap terbaca di atas foto.
- */
+/** Foto utuh di antara header dan footer, mengikuti ukuran keduanya. */
 export default function GraduationBackdrop() {
-  const reduceMotion = useReducedMotion();
-  const [active, setActive] = useState(0);
+  const backdrop = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (reduceMotion) return;
-    const id = window.setInterval(
-      () => setActive((index) => (index + 1) % SLIDES.length),
-      HOLD_MS
-    );
-    return () => window.clearInterval(id);
-  }, [reduceMotion]);
-
-  const current = reduceMotion ? 0 : active;
+    const element = backdrop.current;
+    const container = element?.parentElement;
+    if (!element || !container) return;
+    const header = container.querySelector<HTMLElement>("[data-invitation-header]");
+    const footer = container.querySelector<HTMLElement>("[data-invitation-footer]");
+    if (!header || !footer) return;
+    const resize = () => {
+      element.style.top = `${header.offsetHeight + 24}px`;
+      element.style.bottom = `${footer.offsetHeight}px`;
+    };
+    const observer = new ResizeObserver(resize);
+    observer.observe(header);
+    observer.observe(footer);
+    resize();
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
+      ref={backdrop}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-[#E8E6E1]"
     >
-      {SLIDES.map((src, index) => (
-        <div
-          key={src}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('${src}')`,
-            opacity: index === current ? 1 : 0,
-            transform: index === current ? "scale(1.08)" : "scale(1)",
-            transition: reduceMotion
-              ? undefined
-              : "opacity 2000ms cubic-bezier(0.4,0,0.2,1), transform 9000ms linear",
-            willChange: "opacity, transform",
-          }}
-        />
-      ))}
-
-      {/* Selubung gelap tipis: warna asli foto tetap, hanya diredupkan. */}
+      <div
+        className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/background.png')" }}
+      />
       <div
         className="absolute inset-0"
         style={{ background: "rgba(11,16,18,0.34)" }}

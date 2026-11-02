@@ -43,7 +43,6 @@ export default function VenueMapPreview() {
         <path d="M183 37C171 37 163 45 163 56C163 71 183 90 183 90S203 71 203 56C203 45 195 37 183 37Z" fill="#C6283E" stroke="#FFF4DD" strokeWidth="2" />
         <circle cx="183" cy="56" r="7" fill="#FFF5DE" />
       </svg>
-      <span className="absolute bottom-2 right-3 text-[9px] text-[#4C6252]">Ilustrasi peta 3D</span>
       <span aria-hidden="true" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[#9E2036] shadow-sm"><Navigation size={15} /></span>
       <button type="button" onClick={() => openMaps()} className="absolute inset-0 cursor-pointer rounded-t-[18px] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#9E2036]" aria-label="Buka Gedung Serbaguna Melati di Google Maps"><MapPin className="sr-only" /></button>
     </div>
