@@ -3,6 +3,7 @@ import { GraduationCap, LockKeyhole } from "lucide-react";
 import { getGuestName } from "../lib/guest";
 import { Clock } from "../components/Clock";
 import { useMusic } from "./music";
+import EnvelopeFloralFrame from "./EnvelopeFloralFrame";
 
 interface LockScreenProps {
   y: MotionValue<number>;
@@ -30,8 +31,8 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
       }}
       className="relative w-full h-full font-sans bg-cover bg-center bg-no-repeat overflow-y-auto"
     >
-      <div className="relative flex min-h-full flex-col items-center px-6 pb-10 pt-6 text-center">
-        <LockKeyhole size={22} strokeWidth={2.5} aria-hidden="true" />
+      <div className="relative flex min-h-full flex-col items-center px-4 pb-10 pt-6 text-center">
+        <LockKeyhole size={20} strokeWidth={2.5} aria-hidden="true" />
         <Clock showDate />
         <motion.button
           type="button"
@@ -40,7 +41,7 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
           initial={{ opacity: 0, y: -180 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: reduceMotion ? 0 : -180 }}
           transition={{ delay: ready ? notificationDelay : 0, duration: reduceMotion ? 0 : 1.8, ease: [0.16, 1, 0.3, 1] }}
-          className="invitation-envelope relative mt-6 w-full cursor-pointer text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="invitation-envelope relative mt-5 w-full cursor-pointer text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
           <svg aria-hidden="true" className="envelope-folds" viewBox="0 0 420 360" preserveAspectRatio="none" fill="none">
             <path d="M0 0H420V360H0Z" fill="#E8D8BE" />
@@ -56,17 +57,23 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
             <path d="M9 7H411L219 163Q210 171 201 163Z" stroke="#E6C88F" strokeOpacity=".8" />
             <path d="M22 13H398" stroke="#E6C88F" strokeOpacity=".45" />
           </svg>
+          <EnvelopeFloralFrame />
           <div className="envelope-heading">
             <p className="text-xs font-medium uppercase tracking-[0.2em]">Undangan Wisuda</p>
-            <h1 className="mt-2 font-serif text-xl">ini hanyalah demo</h1>
-            <p className="mt-2 text-[11px] uppercase tracking-widest">11 November 2026</p>
+            <h1 className="mt-2 leading-tight font-serif text-base">ini hanyalah demo</h1>
+            <p className="mt-1 text-[10px] uppercase tracking-widest">11 November 2026</p>
           </div>
-          <span aria-hidden="true" className="envelope-seal"><GraduationCap size={26} strokeWidth={1.5} /></span>
+          <span
+            aria-hidden="true"
+            className="envelope-seal relative flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-red-700 shadow-sm"
+          >
+            <GraduationCap size={22} strokeWidth={1.5} className="text-white" />
+          </span>
           <div className="envelope-recipient">
             <p className="text-xs text-[#68563F]">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-            <p className="mt-2 break-words font-serif text-2xl text-[#463320]">{getGuestName() || "Tamu Undangan"}</p>
-            <span className="mx-auto my-4 block h-px w-12 bg-[#B89256]" aria-hidden="true" />
-            <p className="text-xs tracking-wide text-[#68563F]">Sebuah undangan istimewa untuk Anda</p>
+            <p className="mt-1 break-words font-serif text-lg text-[#463320]">{getGuestName() || "Tamu Undangan"}</p>
+            <span className="mx-auto my-3 block h-px w-10 bg-[#B89256]" aria-hidden="true" />
+            <p className="text-[10px] tracking-wide text-[#68563F]">Sebuah undangan istimewa untuk Anda</p>
           </div>
         </motion.button>
         <motion.button

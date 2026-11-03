@@ -262,8 +262,8 @@ input, textarea, [contenteditable], [contenteditable="true"] {
 
 .envelope-heading {
   position: relative;
-  min-height: 140px;
-  padding: 25px 24px 36px;
+  min-height: 104px;
+  padding: 18px 20px 22px;
   color: #fff3d9;
 }
 
@@ -271,14 +271,13 @@ input, textarea, [contenteditable], [contenteditable="true"] {
   position: relative;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
+  width: 40px;
+  height: 40px;
   margin: 0 auto;
-  border: 4px double #f3d799;
-  border-radius: 46% 54% 49% 51% / 52% 46% 54% 48%;
-  color: #634016;
-  background: linear-gradient(135deg, #fae5ac, #c49950 55%, #e8ca85);
-  box-shadow: 0 4px 6px #4a231e40, inset 0 0 0 3px #b48a42;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, #b31b2c, #7d121f);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.30), inset 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
 .envelope-recipient {
