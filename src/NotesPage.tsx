@@ -1,4 +1,4 @@
-import { lazy, Suspense, type CSSProperties } from "react";
+import { lazy, Suspense, useSyncExternalStore, type CSSProperties } from "react";
 import { useReducedMotion } from "framer-motion";
 import { MAPS_URL, openMaps } from "../lib/maps";
 import { getGuestName } from "../lib/guest";
@@ -31,6 +31,21 @@ function Divider() {
 
 const Lanyard = lazy(() => import("./components/Lanyard/Lanyard"));
 
+// Kartu sedikit lebih kecil di layar ponsel agar tidak mendominasi layar.
+const COMPACT_QUERY = "(max-width: 480px)";
+
+const subscribeCompact = (onChange: () => void) => {
+  const query = window.matchMedia(COMPACT_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+};
+
+const getCompactSnapshot = () => window.matchMedia(COMPACT_QUERY).matches;
+
+function useCompactLanyard() {
+  return useSyncExternalStore(subscribeCompact, getCompactSnapshot, () => false);
+}
+
 const PinIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
     <path
@@ -52,6 +67,7 @@ const STACK_STEP_PX = 12;
 
 export default function NotesPage() {
   const reduceMotion = useReducedMotion();
+  const compactLanyard = useCompactLanyard();
 
   const stackStyle = (index: number): CSSProperties =>
     reduceMotion
@@ -129,7 +145,7 @@ export default function NotesPage() {
                 <img
                   src="/lanyard-front.jpg"
                   alt="Kartu wisudawan — ini hanyalah demo"
-                  className="h-[335px] rounded-[12px]"
+                  className="h-[266px] rounded-[12px] sm:h-[335px]"
                   style={{ boxShadow: "0 26px 40px -30px rgba(11,26,48,0.85)" }}
                   draggable={false}
                 />
@@ -144,7 +160,7 @@ export default function NotesPage() {
               metal="gold"
               finish="flat"
               cornerRadius={0.17}
-              size={0.22}
+              size={compactLanyard ? 0.19 : 0.22}
               strapLength={0.5}
               damping={0.6}
               elasticity={0.55}
