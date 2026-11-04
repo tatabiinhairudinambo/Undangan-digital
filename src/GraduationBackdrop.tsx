@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-/** Foto utuh di antara header dan footer, mengikuti ukuran keduanya. */
+/** Foto latar full-bleed di antara header dan footer, mengikuti ukuran keduanya. */
 export default function GraduationBackdrop() {
   const backdrop = useRef<HTMLDivElement>(null);
 
@@ -29,7 +29,7 @@ export default function GraduationBackdrop() {
       className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-[#E8E6E1]"
     >
       <div
-        className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/background.png')" }}
       />
       <div
