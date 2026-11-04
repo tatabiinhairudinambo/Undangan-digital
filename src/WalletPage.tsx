@@ -8,7 +8,7 @@ const SF_ROUNDED =
 
 // Cheesy one-liners that crossfade under the QR. Pure decoration.
 const SWEET_LINES = [
-  "Tanda kasih untuk wisudawan",
+  "Tanda kasih untuk wisudawati",
   "Terima kasih atas doa dan dukungannya",
   "Kehadiran Anda sudah menjadi hadiah",
   "Sedikit tanda sayang dari kami",
@@ -103,10 +103,10 @@ export default function WalletPage() {
               </span>
 
               <h1
-                className="mt-3 text-[34px] font-bold leading-none text-white"
+                className="mt-3 break-words text-[22px] font-bold leading-[1.15] text-balance text-white"
                 style={{ fontFamily: SF_ROUNDED, textShadow: "0 1px 8px rgba(0,0,0,0.12)" }}
               >
-                Raka Pratama
+                Febrianti Ayu Widianingsih, A.Md.Kep
               </h1>
               <p className="mt-1.5 text-[13px] font-semibold text-white/90">
                 21.11.2026 · Tanda kasih

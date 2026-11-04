@@ -222,11 +222,11 @@ export default function SettingsPage() {
             className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-[28px] font-semibold text-white"
             style={{ background: "linear-gradient(#a5abb9, #858b98)" }}
           >
-            R
+            F
           </div>
           <div className="flex-1">
-            <div className="text-[21px] font-semibold leading-tight text-black">
-              Raka Pratama
+            <div className="break-words text-[18px] font-semibold leading-tight text-black">
+              Febrianti Ayu Widianingsih, A.Md.Kep
             </div>
             <div className="mt-0.5 text-[14px]" style={{ color: GRAY }}>
               Akun Apple, iCloud+, dan lainnya

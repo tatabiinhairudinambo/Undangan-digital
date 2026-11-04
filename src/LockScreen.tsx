@@ -60,7 +60,10 @@ export default function LockScreen({ y, onUnlock, ready }: LockScreenProps) {
           <EnvelopeFloralFrame />
           <div className="envelope-heading">
             <p className="text-xs font-medium uppercase tracking-[0.2em]">Undangan Wisuda</p>
-            <h1 className="mt-2 leading-tight font-serif text-base">ini hanyalah demo</h1>
+            <h1 className="mt-2 leading-tight font-serif text-base">
+              Febrianti Ayu Widianingsih
+              <span className="mt-0.5 block text-[11px] tracking-[0.08em] text-[#F7E4B9]">A.Md.Kep</span>
+            </h1>
             <p className="mt-1 text-[10px] uppercase tracking-widest">11 November 2026</p>
           </div>
           <span

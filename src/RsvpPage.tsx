@@ -113,8 +113,8 @@ export default function RsvpPage() {
     ? [
         `Halo, saya ${submitted.name}.`,
         submitted.attendance === "hadir"
-          ? `InsyaAllah saya akan hadir di wisuda Raka${submitted.guests > 1 ? ` (${submitted.guests} orang)` : ""}.`
-          : "Mohon maaf, saya tidak dapat hadir di wisuda Raka.",
+          ? `InsyaAllah saya akan hadir di wisuda Febrianti${submitted.guests > 1 ? ` (${submitted.guests} orang)` : ""}.`
+          : "Mohon maaf, saya tidak dapat hadir di wisuda Febrianti.",
         submitted.message ? `Ucapan & doa: ${submitted.message}` : "",
       ]
         .filter(Boolean)
@@ -166,13 +166,13 @@ export default function RsvpPage() {
               className="mt-4 text-[27px] leading-[1.2]"
               style={{ fontFamily: SERIF, color: "#FBF6EA" }}
             >
-              Raka Dwi Pratama
+              Febrianti Ayu Widianingsih
             </h2>
             <p
               className="mt-1.5 text-[10px] uppercase"
               style={{ color: "rgba(231,211,163,0.85)", letterSpacing: "0.24em" }}
             >
-              S.Kom · Sistem Informasi
+              A.Md.Kep · Keperawatan
             </p>
             <p
               className="mt-1 text-[10px] uppercase"
@@ -425,7 +425,7 @@ export default function RsvpPage() {
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               rows={3}
-              placeholder="Tulis doa atau ucapan untuk Raka…"
+              placeholder="Tulis doa atau ucapan untuk Febrianti…"
               className="mt-2 w-full resize-none rounded-[11px] px-3 py-2.5 text-[14px] leading-relaxed outline-none placeholder:text-black/25"
               style={{ background: CREAM, color: INK }}
             />
@@ -467,7 +467,7 @@ export default function RsvpPage() {
               fontFamily: SERIF,
             }}
           >
-            R
+            F
           </span>
         </div>
       </div>

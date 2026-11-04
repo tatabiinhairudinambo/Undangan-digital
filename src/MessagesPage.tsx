@@ -8,10 +8,10 @@ type Entry =
   | { kind: "date"; text: string }
   | { kind: "text"; side: "sent" | "received"; text: string; tapback?: string };
 
-// "received" = Mama, "sent" = Raka. Contoh percakapan — ganti dengan milik Anda.
+// "received" = Mama, "sent" = Febrianti. Contoh percakapan — ganti dengan milik Anda.
 const THREAD: Entry[] = [
   { kind: "date", text: "Hari ini 09.41" },
-  { kind: "text", side: "received", text: "Rak, undangan wisudanya sudah jadi?" },
+  { kind: "text", side: "received", text: "Feb, undangan wisudanya sudah jadi?" },
   { kind: "text", side: "sent", text: "Sudah, Ma. Kubikin bentuknya kayak iPhone 😄" },
   { kind: "text", side: "received", text: "Dibuka di HP langsung bisa, ya?" },
   { kind: "text", side: "sent", text: "Bisa. Tinggal scroll, semua informasinya muncul satu per satu" },

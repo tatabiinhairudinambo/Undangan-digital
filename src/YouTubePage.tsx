@@ -3,7 +3,7 @@ const SF_STACK =
 
 // ID video YouTube contoh. Ganti dengan video wisuda Anda sendiri.
 const VIDEO_ID = "XqgyD0yadH0";
-const VIDEO_TITLE = "Video Wisuda — Raka Dwi Pratama";
+const VIDEO_TITLE = "Video Wisuda — Febrianti Ayu Widianingsih, A.Md.Kep";
 const VIDEO_ARTIST = "Universitas Cakrawala Nusantara";
 
 // Warm pink used for the stat chips and the description card (matches the mock).

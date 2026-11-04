@@ -769,7 +769,7 @@ const Lanyard = ({
       const fallback = document.createElement('img');
       fallback.className = 'lanyard-fallback';
       fallback.src = '/lanyard-front.jpg';
-      fallback.alt = 'Kartu wisudawan — ini hanyalah demo';
+      fallback.alt = 'Kartu wisudawati — ini hanyalah demo';
       container.appendChild(fallback);
       return undefined;
     }

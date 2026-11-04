@@ -144,7 +144,7 @@ export default function NotesPage() {
               <div className="flex h-full items-center justify-center">
                 <img
                   src="/lanyard-front.jpg"
-                  alt="Kartu wisudawan — ini hanyalah demo"
+                  alt="Kartu wisudawati — ini hanyalah demo"
                   className="h-[266px] rounded-[12px] sm:h-[335px]"
                   style={{ boxShadow: "0 26px 40px -30px rgba(11,26,48,0.85)" }}
                   draggable={false}
@@ -202,7 +202,7 @@ export default function NotesPage() {
           <FloralCorners />
           <p className="relative text-xs" style={{ color: GOLD_LIGHT }}>Kepada Yth. Bapak/Ibu/Saudara/i</p>
           <h2 className="relative mt-2 break-words text-2xl" style={{ fontFamily: SERIF }}>{getGuestName() || "Tamu Undangan"}</h2>
-          <p className="relative mt-3 text-sm leading-relaxed">Dengan penuh rasa syukur, kami mengundang Anda untuk merayakan kelulusan Raka Dwi Pratama bersama keluarga dan orang-orang terkasih.</p>
+          <p className="relative mt-3 text-sm leading-relaxed">Dengan penuh rasa syukur, kami mengundang Anda untuk merayakan kelulusan Febrianti Ayu Widianingsih, A.Md.Kep bersama keluarga dan orang-orang terkasih.</p>
         </section>
 
         {/* Isi undangan */}
@@ -235,7 +235,7 @@ export default function NotesPage() {
           >
             Dengan memohon rahmat Tuhan Yang Maha Esa, kami mengundang
             Bapak/Ibu/Saudara/i untuk menghadiri acara Wisuda dan Syukuran
-            kelulusan putra kami.
+            kelulusan putri kami.
           </p>
 
           <div className="my-5">
@@ -356,7 +356,7 @@ export default function NotesPage() {
           <path d="M0 150L105 57L210 91L315 57L420 150Z" fill="#FFFFFF" />
         </svg>
         <span aria-hidden="true" className="pointer-events-none absolute left-1/2 top-4 flex h-6 w-6 -translate-x-1/2 items-center justify-center rounded-full border border-[#A78043] bg-[#C6A36A] text-[11px] text-white shadow-sm" style={{ fontFamily: SERIF }}>
-          R
+          F
         </span>
         <p
           className="text-center text-[12px] italic leading-relaxed"
