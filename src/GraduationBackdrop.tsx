@@ -12,7 +12,7 @@ export default function GraduationBackdrop() {
     const footer = container.querySelector<HTMLElement>("[data-invitation-footer]");
     if (!header || !footer) return;
     const resize = () => {
-      element.style.top = `${header.offsetHeight + 24}px`;
+      element.style.top = `${header.offsetHeight}px`;
       element.style.bottom = `${footer.offsetHeight}px`;
     };
     const observer = new ResizeObserver(resize);
