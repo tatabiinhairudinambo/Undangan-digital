@@ -342,7 +342,9 @@ export default function NotesPage() {
 
       </div>
     </div>
-        <footer data-invitation-footer className="relative isolate z-30 w-full shrink-0 overflow-hidden bg-white px-7 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-10 shadow-[0_-6px_20px_rgba(31,42,36,0.08)]" style={{ fontFamily: SF_STACK }}>
+        {/* Footer kaca: warna foto tetap tembus di balik teks, dengan blur
+            supaya tulisan tetap nyaman dibaca. */}
+        <footer data-invitation-footer className="relative isolate z-30 w-full shrink-0 overflow-hidden px-7 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-10 shadow-[0_-6px_20px_rgba(31,42,36,0.08)]" style={{ fontFamily: SF_STACK, backgroundColor: "rgba(255,253,248,0.62)", backdropFilter: "blur(24px) saturate(140%)", WebkitBackdropFilter: "blur(24px) saturate(140%)" }}>
         <svg
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
@@ -353,7 +355,6 @@ export default function NotesPage() {
           <path d="M0 0H420L210 36Z" fill="#C6283E" />
           <path d="M0 0L210 36L420 0" stroke="#C6A36A" strokeWidth="1" />
           <path d="M0 150L105 57M420 150L315 57" stroke="#C6A36A" strokeOpacity=".4" />
-          <path d="M0 150L105 57L210 91L315 57L420 150Z" fill="#FFFFFF" />
         </svg>
         <span aria-hidden="true" className="pointer-events-none absolute left-1/2 top-4 flex h-6 w-6 -translate-x-1/2 items-center justify-center rounded-full border border-[#A78043] bg-[#C6A36A] text-[11px] text-white shadow-sm" style={{ fontFamily: SERIF }}>
           F

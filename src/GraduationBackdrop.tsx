@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-/** Foto latar full-bleed di antara header dan footer, mengikuti ukuran keduanya. */
+/** Foto latar full-bleed dari bawah header sampai dasar kartu, termasuk di balik footer kaca. */
 export default function GraduationBackdrop() {
   const backdrop = useRef<HTMLDivElement>(null);
 
@@ -9,15 +9,15 @@ export default function GraduationBackdrop() {
     const container = element?.parentElement;
     if (!element || !container) return;
     const header = container.querySelector<HTMLElement>("[data-invitation-header]");
-    const footer = container.querySelector<HTMLElement>("[data-invitation-footer]");
-    if (!header || !footer) return;
+    if (!header) return;
     const resize = () => {
       element.style.top = `${header.offsetHeight}px`;
-      element.style.bottom = `${footer.offsetHeight}px`;
+      // Foto ikut turun sampai dasar kartu supaya footer kaca tetap
+      // memperlihatkan warna foto, bukan warna kosong di belakangnya.
+      element.style.bottom = "0px";
     };
     const observer = new ResizeObserver(resize);
     observer.observe(header);
-    observer.observe(footer);
     resize();
     return () => observer.disconnect();
   }, []);
