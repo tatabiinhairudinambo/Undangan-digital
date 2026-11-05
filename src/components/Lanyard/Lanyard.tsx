@@ -768,8 +768,8 @@ const Lanyard = ({
     } catch {
       const fallback = document.createElement('img');
       fallback.className = 'lanyard-fallback';
-      fallback.src = '/lanyard-front.jpg';
-      fallback.alt = 'Kartu wisudawati — ini hanyalah demo';
+      fallback.src = '/lanyard-front.jpg?v=febrianti';
+      fallback.alt = 'Kartu wisudawati Febrianti Ayu Widianingsih, A.Md.Kep';
       container.appendChild(fallback);
       return undefined;
     }

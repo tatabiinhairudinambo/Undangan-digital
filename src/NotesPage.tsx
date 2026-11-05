@@ -143,8 +143,8 @@ export default function NotesPage() {
             fallback={
               <div className="flex h-full items-center justify-center">
                 <img
-                  src="/lanyard-front.jpg"
-                  alt="Kartu wisudawati — ini hanyalah demo"
+                  src="/lanyard-front.jpg?v=febrianti"
+                  alt="Kartu wisudawati Febrianti Ayu Widianingsih, A.Md.Kep"
                   className="h-[266px] rounded-[12px] sm:h-[335px]"
                   style={{ boxShadow: "0 26px 40px -30px rgba(11,26,48,0.85)" }}
                   draggable={false}
@@ -153,8 +153,8 @@ export default function NotesPage() {
             }
           >
             <Lanyard
-              frontImage="/lanyard-front.jpg"
-              backImage="/lanyard-back.jpg"
+              frontImage="/lanyard-front.jpg?v=febrianti"
+              backImage="/lanyard-back.jpg?v=febrianti"
               strapImage="/lanyard-strap.jpg"
               strapColor="#102A4C"
               metal="gold"
